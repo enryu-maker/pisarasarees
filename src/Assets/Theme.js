@@ -1,0 +1,15 @@
+export const colors = {
+    Primary1: "#ffffff",
+    Primary2: "#ce0a76",
+    Primary3:"#cca8af",
+    green: '#5BB264',
+    darkGrey: '#393937',
+    blue: '#085DAD',
+    grey: '#f5f5f5',
+    lightGreen: '#EEF7E1',
+    lightPink: '#f7e1e1',
+    iconColor: '#E53988',
+    white: '#FBFBFF',
+    black: '#2B303A',
+    logoPink: '#bc3061',
+  };
