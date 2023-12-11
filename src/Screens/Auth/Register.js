@@ -6,12 +6,18 @@ import { Link } from 'react-router-dom';
 export default function Register() {
   const { handleSubmit, control, formState: { errors } } = useForm();
   const mobile = useMediaQuery('(max-width: 768px)');
+  React.useEffect(() => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+}, [])
   return (
     <div style={{
       display: "flex",
       flexDirection: "column",
       height: 600,
-      width: "50%",
+      width:mobile?"90%" : "50%",
       marginBlock: 50,
       borderRadius: 10,
       boxShadow: "5px 5px 10px #88888850",

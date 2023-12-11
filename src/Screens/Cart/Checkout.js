@@ -2,14 +2,16 @@ import React from 'react'
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
+import useMediaQuery from '../../Components/useMediaQuery';
 export default function Checkout() {
     const navigate = useNavigate()
+    const mobile = useMediaQuery('(max-width: 768px)');
     return (
         <div style={{
             display: "flex",
             flexDirection: "column",
             height: 550,
-            width: "50%",
+            width: mobile?"90%" : "50%",
             marginBlock: 50,
             borderRadius: 10,
             boxShadow: "5px 5px 10px #88888850",
@@ -26,7 +28,7 @@ export default function Checkout() {
             </p>
             <div style={{
                 display: "flex",
-                width: "75%",
+                width: mobile?"95%":"75%",
                 height: 50,
                 justifyContent: "space-between",
                 alignItems: "center"
@@ -50,7 +52,7 @@ export default function Checkout() {
             </div>
             <div style={{
                 display: "flex",
-                width: "75%",
+                width: mobile?"95%":"75%",
                 height: 50,
                 justifyContent: "space-between",
                 alignItems: "center"

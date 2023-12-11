@@ -4,6 +4,12 @@ import { colors } from '../../Assets/Theme';
 import CircularCard from '../../Components/CircularCard';
 import FlatList from 'flatlist-react/lib';
 export default function Cat() {
+    React.useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }, [])
     return (
         <div style={{
             display: "flex",

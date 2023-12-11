@@ -3,7 +3,9 @@ import ProductCard from '../../Components/ProductCard'
 import FlatList from 'flatlist-react/lib'
 import { Link, useNavigate } from 'react-router-dom'
 import { colors } from '../../Assets/Theme'
+import useMediaQuery from '../../Components/useMediaQuery'
 export default function CatInfo() {
+    const mobile = useMediaQuery('(max-width: 768px)');
     const navigate = useNavigate()
     return (
         <div style={{
@@ -58,7 +60,7 @@ export default function CatInfo() {
                 <p style={{
                     textDecoration: "none",
                     color: colors.darkGrey,
-                    cursor:"pointer"
+                    cursor: "pointer"
                 }}
                     onMouseEnter={(e) => {
                         e.target.style.color = colors.Primary2;
@@ -76,6 +78,7 @@ export default function CatInfo() {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
+                flexDirection: mobile ? "column" : "row",
                 marginBlock: 50
             }}
             >
@@ -113,11 +116,11 @@ export default function CatInfo() {
                     </p>
                 </div>
                 <div style={{
-                    width: "65vw",
+                    width: mobile ? "90vw" : "65vw",
                     display: "flex",
                     flexWrap: "wrap",
-                    borderRadius: 10,
-                    justifyContent: "normal"
+                    alignSelf: "center",
+                    justifyContent: mobile ? "space-evenly" : "normal"
                 }}>
                     <FlatList
                         list={[0, 1, 2, 3, 4, 5]}
@@ -127,7 +130,6 @@ export default function CatInfo() {
                         renderWhenEmpty={() => <div>List is empty!</div>}
                     />
                 </div>
-
             </div>
         </div>
     )

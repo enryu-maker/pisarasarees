@@ -1,7 +1,9 @@
 import React from 'react'
 import { colors } from '../Assets/Theme'
-
+import useMediaQuery from './useMediaQuery';
 export default function ImageCard() {
+    const mobile = useMediaQuery('(max-width: 768px)');
+
     return (
         <div
             style={{
@@ -9,7 +11,7 @@ export default function ImageCard() {
                 flexDirection: "column",
                 justifyContent: "space-evenly",
                 alignItems: "center",
-                height: "300px",
+                height:mobile?"auto" : "300px",
                 width: 220,
                 backgroundColor: "white",
                 margin: 10,
@@ -18,11 +20,11 @@ export default function ImageCard() {
                 fontFamily: "Bold"
             }}
         >
+
             <div style={{
                 width: "95%",
                 height: "85%",
                 backgroundColor: "ButtonFace",
-                marginBlockStart: 10,
                 borderRadius: 10
             }} />
             <p style={{

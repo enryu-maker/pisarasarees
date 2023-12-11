@@ -3,15 +3,22 @@ import { useForm, Controller } from "react-hook-form";
 import { colors } from '../../Assets/Theme';
 import useMediaQuery from '../../Components/useMediaQuery';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 export default function Login() {
     const { handleSubmit, control, formState: { errors } } = useForm();
     const mobile = useMediaQuery('(max-width: 768px)');
+    React.useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }, [])
     return (
         <div style={{
             display: "flex",
             flexDirection: "column",
             height: 450,
-            width: "50%",
+            width:mobile?"90%" : "50%",
             marginBlock: 50,
             borderRadius: 10,
             boxShadow: "5px 5px 10px #88888850",
@@ -123,7 +130,8 @@ export default function Login() {
                     )}
                 />
                 <button
-                    onClick={() => { }}
+                    onClick={() => {
+                     }}
                     style={{
                         border: "none",
                         backgroundColor: colors.Primary2,

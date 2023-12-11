@@ -2,6 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
 export default function Blog() {
+    React.useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }, [])
     return (
         <div
             style={{

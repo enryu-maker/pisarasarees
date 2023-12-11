@@ -1,6 +1,7 @@
 import React from 'react'
 import { MdAddShoppingCart } from "react-icons/md";
 import { colors } from '../Assets/Theme';
+import useMediaQuery from './useMediaQuery';
 export default function ProductCard({
     img,
     name,
@@ -8,6 +9,7 @@ export default function ProductCard({
     discount,
     desc,
 }) {
+    const mobile = useMediaQuery('(max-width: 768px)');
     return (
         <div
             style={{
@@ -15,11 +17,11 @@ export default function ProductCard({
                 flexDirection: "column",
                 justifyContent: "space-between",
                 alignItems: "center",
-                height: "380px",
-                width: 300,
+                height:mobile? "200px" : "380px",
+                width:mobile?150 : 300,
                 backgroundColor: "white",
-                marginBlockEnd: 10,
-                marginInline:5,
+                marginBlockEnd:10,
+                marginInline:mobile?0 :5,
                 borderRadius: 10,
                 boxShadow: "5px 5px 10px #88888850",
                 cursor:"pointer"
@@ -44,7 +46,7 @@ export default function ProductCard({
             >
                 <p style={{
                     fontFamily:"Regular",
-                    fontSize:18,
+                    fontSize:mobile?12 :18,
                     marginBlock:0
                 }}>
                     Saree
@@ -59,7 +61,7 @@ export default function ProductCard({
 
                 <p style={{
                     fontFamily:"Bold",
-                    fontSize:20,
+                    fontSize:mobile?14 : 20,
                     marginBlock:0,
                     textAlign:"center",
                     color:colors.Primary2
@@ -67,7 +69,7 @@ export default function ProductCard({
                     ₹ 1200 <span style={{
                         textDecorationLine: "line-through",
                         fontFamily:"Regular",
-                        fontSize:18,
+                        fontSize:mobile?12 :18,
                         color:colors.darkGrey
                     }}>
                         ₹ 1500
@@ -77,9 +79,9 @@ export default function ProductCard({
                 color={colors.white}
                 style={{
                     backgroundColor:colors.Primary2,
-                    padding:5,
+                    padding:mobile?2:5,
                     borderRadius:5
-                }} size={22} />
+                }} size={mobile?18:22} />
                 </div>
             </div>
         </div>

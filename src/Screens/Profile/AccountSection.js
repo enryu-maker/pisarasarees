@@ -7,7 +7,7 @@ export const AccountDetails = () => {
     const { handleSubmit, control, formState: { errors } } = useForm();
     const mobile = useMediaQuery('(max-width: 768px)');
     const [disabled, setDisabled] = React.useState(true)
-
+    
     return (
         <div style={{
             display: "flex",

@@ -1,6 +1,7 @@
 import React from 'react'
 import { MdDeleteOutline } from "react-icons/md";
 import { colors } from '../../Assets/Theme';
+import useMediaQuery from '../../Components/useMediaQuery';
 export default function CartCard({
     img,
     name,
@@ -8,29 +9,38 @@ export default function CartCard({
     discount,
     desc,
 }) {
+    const mobile = useMediaQuery('(max-width: 768px)');
+
     return (
         <div
             style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: mobile?"center" : "space-between",
                 alignItems: "center",
-                height: "380px",
-                width: 300,
+                height: mobile?"100px" : "380px",
+                width: mobile?"100%" : 300,
                 backgroundColor: "white",
                 marginBlockEnd: 10,
-                marginInline: 5,
+                marginInline:mobile?0 : 5,
                 borderRadius: 10,
+                alignSelf:"center",
                 boxShadow: "5px 5px 10px #88888850",
             }}
         >
-            <div style={{
-                width: "95%",
-                height: "75%",
-                backgroundColor: "ButtonFace",
-                marginBlockStart: 10,
-                borderRadius: 10
-            }} />
+            {
+                mobile ?
+                    null
+                    :
+                    <div style={{
+                        width: "95%",
+                        height: "75%",
+                        backgroundColor: "ButtonFace",
+                        marginBlockStart: 10,
+                        borderRadius: 10
+                    }} />
+            }
+
             <div
                 style={{
                     display: "flex",
