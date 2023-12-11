@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseURL } from "../Helper/Helper";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export const Init = () => {
     return async dispatch => {

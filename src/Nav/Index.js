@@ -15,6 +15,7 @@ import Cancle from '../Constants/Cancle'
 import About from '../Constants/About'
 import Shipping from '../Constants/Shipping'
 import More from '../Components/More'
+import Info from '../Screens/Cateogry/Info'
 
 export default function Index() {
   return (
@@ -32,6 +33,7 @@ export default function Index() {
       <Route path='/cancellation&return' element={<Cancle />} />
       <Route path='/about' element={<About />} />
       <Route path='/more' element={<More />} />
+      <Route path='/info' element={<Info />} />
       <Route path='/shipping-policy' element={<Shipping />} />
       <Route path='/categories/catinfo' element={<CatInfo />} />
     </Routes>

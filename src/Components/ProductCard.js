@@ -2,6 +2,7 @@ import React from 'react'
 import { MdAddShoppingCart } from "react-icons/md";
 import { colors } from '../Assets/Theme';
 import useMediaQuery from './useMediaQuery';
+import { useNavigate } from 'react-router-dom';
 export default function ProductCard({
     img,
     name,
@@ -9,6 +10,7 @@ export default function ProductCard({
     discount,
     desc,
 }) {
+    const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     return (
         <div
@@ -25,6 +27,9 @@ export default function ProductCard({
                 borderRadius: 10,
                 boxShadow: "5px 5px 10px #88888850",
                 cursor:"pointer"
+            }}
+            onClick={()=>{
+                navigate("/info")
             }}
         >
             <div style={{

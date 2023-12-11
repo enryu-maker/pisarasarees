@@ -4,6 +4,9 @@ import FlatList from 'flatlist-react/lib'
 import ImageCard from '../../Components/ImageCard'
 import Textra from 'react-textra'
 import useMediaQuery from '../../Components/useMediaQuery'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import { images } from '../../Assets/Image'
 export default function Home() {
     const mobile = useMediaQuery('(max-width: 768px)');
 
@@ -20,11 +23,45 @@ export default function Home() {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <div style={{
-                width: "100vw",
-                height: 250,
-                backgroundColor: "ActiveBorder"
-            }} />
+            <Carousel
+                selectedItem={1}
+                showThumbs={false}
+                showStatus={false}
+                infiniteLoop={true}
+                autoPlay={true}
+                interval={3000}
+                stopOnHover={false}
+                showIndicators={false}
+            >
+                <div style={{
+                    width: "100%",
+                    height: "100%",
+                }}>
+                    <img alt='B1' style={{
+                        height: "100%",
+                        objectFit: "contain",
+                    }} src={images.B1} />
+                </div>
+                <div style={{
+                    width: "100%",
+                    height: "100%",
+                }}>
+                    <img alt='B2' style={{
+                        height: "100%",
+                        objectFit: "contain",
+                    }} src={images.B2} />
+                </div>
+                <div style={{
+                    width: "100%",
+                    height: "100%",
+                }}>
+                    <img alt='B3' style={{
+                        height: "100%",
+                        objectFit: "contain",
+                    }} src={images.B3} />
+                </div>
+            </Carousel>
+
             {
                 mobile ?
                     <>
@@ -207,20 +244,6 @@ export default function Home() {
                             }}>
                                 Exclusive Sarees .
                             </p>
-                            <div style={{
-                                width: "100%",
-                                display: "flex",
-                                flexWrap: "wrap",
-                                justifyContent: "space-evenly",
-                            }}>
-                                <FlatList
-                                    list={[0, 1, 2, 3]}
-                                    renderItem={(item) => (
-                                        <ProductCard />
-                                    )}
-                                    renderWhenEmpty={() => <div>List is empty!</div>}
-                                />
-                            </div>
                         </div>
                         <div style={{
                             display: "flex",
