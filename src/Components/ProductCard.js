@@ -17,8 +17,8 @@ export default function ProductCard({
                 flexDirection: "column",
                 justifyContent: "space-between",
                 alignItems: "center",
-                height: mobile ? "200px" : "380px",
-                width: mobile ? 150 : 300,
+                height: mobile ? "220px" : "380px",
+                width: mobile ? 170 : 300,
                 backgroundColor: "white",
                 marginBlockEnd: 10,
                 marginInline: mobile ? 0 : 5,
@@ -84,13 +84,6 @@ export default function ProductCard({
                             ₹ {item?.mrp}
                         </span>
                     </p>
-                    <MdAddShoppingCart
-                        color={colors.white}
-                        style={{
-                            backgroundColor: colors.Primary2,
-                            padding: mobile ? 2 : 5,
-                            borderRadius: 5
-                        }} size={mobile ? 18 : 22} />
                 </div>
             </div>
         </div>

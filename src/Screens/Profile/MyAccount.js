@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
 import { AccountDetails, Address, OrderHistory } from './AccountSection';
+import { useDispatch } from 'react-redux';
+import { Logout } from '../../Store/actions';
 export default function MyAccount() {
     const [active, setActive] = React.useState(0)
     function switchActive(active) {
@@ -16,6 +18,7 @@ export default function MyAccount() {
                 break;
         }
     }
+    const dispatch = useDispatch()
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -111,8 +114,13 @@ export default function MyAccount() {
                     </p>
                     <p style={{
                         fontFamily: "Bold",
-                        color: "red"
-                    }}>
+                        color: "red",
+                        cursor:"pointer"
+                    }}
+                    onClick={()=>{
+                        dispatch(Logout())
+                    }}
+                    >
                         Logout
                     </p>
                 </div>

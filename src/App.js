@@ -21,25 +21,34 @@ export default function App() {
     await dispatch(getBannerAction())
     await dispatch(getFeatured())
     await dispatch(getProduct())
-    setLoading(false)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
   }
   React.useEffect(() => {
     init()
   }, [])
   if (loading) {
     return (
-      <Oval
-        height={80}
-        width={80}
-        color={colors.Primary2}
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-        ariaLabel='oval-loading'
-        secondaryColor={colors.Primary2}
-        strokeWidth={2}
-        strokeWidthSecondary={2}
-      />
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height:"100vh"
+      }}>
+        <Oval
+          height={mobile?50:80}
+          width={mobile?50:80}
+          color={colors.Primary1}
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel='oval-loading'
+          secondaryColor={colors.Primary1}
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
+      </div>
     )
   }
   else {

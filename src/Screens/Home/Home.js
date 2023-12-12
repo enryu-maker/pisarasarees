@@ -13,7 +13,6 @@ export default function Home() {
     const Banner = useSelector(state => state.Reducers.banner)
     const Features = useSelector(state => state.Reducers.featured)
     const homebanner = useSelector(state => state.Reducers.homebanner)
-    console.log(homebanner)
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -82,7 +81,7 @@ export default function Home() {
                             <FlatList
                                 list={Features.bs.slice(0,4)}
                                 renderItem={(item) => (
-                                    <ProductCard item={item} />
+                                    <ProductCard cat={null} item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
@@ -104,7 +103,7 @@ export default function Home() {
                             <FlatList
                                 list={Features.ms.slice(0,4)}
                                 renderItem={(item) => (
-                                    <ProductCard item={item} />
+                                    <ProductCard cat={null} item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
@@ -131,7 +130,7 @@ export default function Home() {
                             <FlatList
                                 list={Features.ms.slice(0,4)}
                                 renderItem={(item) => (
-                                    <ProductCard item={item} />
+                                    <ProductCard cat={null} item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />

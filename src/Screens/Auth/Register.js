@@ -10,27 +10,27 @@ import { RegisterAction } from '../../Store/actions';
 export default function Register() {
   const { handleSubmit, control, formState: { errors } } = useForm();
   const mobile = useMediaQuery('(max-width: 768px)');
-  const [loading,setLoading] = React.useState(false)
-  const dispatch =useDispatch()
+  const [loading, setLoading] = React.useState(false)
+  const dispatch = useDispatch()
   React.useEffect(() => {
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+      top: 0,
+      behavior: "smooth"
     })
-}, [])
+  }, [])
   return (
     <div style={{
       display: "flex",
       flexDirection: "column",
       height: 600,
-      width:mobile?"90%" : "50%",
+      width: mobile ? "90%" : "50%",
       marginBlock: 50,
       borderRadius: 10,
       boxShadow: "5px 5px 10px #88888850",
       justifyContent: "space-evenly",
       alignItems: "center",
     }}>
-      
+
       <p style={{
         fontFamily: "Black",
         fontSize: 30,
@@ -87,7 +87,9 @@ export default function Register() {
               />
               {errors?.name && (
                 <p style={{
-
+                  color: "red",
+                  fontSize: 10,
+                  fontFamily: "Regular"
                 }}>
                   {errors?.name?.message}
                 </p>
@@ -103,7 +105,7 @@ export default function Register() {
             required: {
               value: true,
               message:
-                'Name Cannot be Empty',
+                'Email Cannot be Empty',
             },
           }}
           render={({ field: { onChange, value } }) => (
@@ -128,7 +130,9 @@ export default function Register() {
               />
               {errors?.email && (
                 <p style={{
-
+                  color: "red",
+                  fontSize: 10,
+                  fontFamily: "Regular"
                 }}>
                   {errors?.email?.message}
                 </p>
@@ -144,7 +148,7 @@ export default function Register() {
             required: {
               value: true,
               message:
-                'Name Cannot be Empty',
+                'Phone Number Cannot be Empty',
             },
           }}
           render={({ field: { onChange, value } }) => (
@@ -169,7 +173,9 @@ export default function Register() {
               />
               {errors?.phone && (
                 <p style={{
-
+                  color: "red",
+                  fontSize: 10,
+                  fontFamily: "Regular"
                 }}>
                   {errors?.phone?.message}
                 </p>
@@ -185,7 +191,7 @@ export default function Register() {
             required: {
               value: true,
               message:
-                'Name Cannot be Empty',
+                'password Cannot be Empty',
             },
           }}
           render={({ field: { onChange, value } }) => (
@@ -206,51 +212,59 @@ export default function Register() {
                 placeholder='Your Password*'
                 value={value}
                 onChange={onChange}
+                type="password"
               />
-              {errors?.name && (
+              {errors?.password && (
                 <p style={{
-
+                  color: "red",
+                  fontSize: 10,
+                  fontFamily: "Regular"
                 }}>
-                  {errors?.name?.message}
+                  {errors?.password?.message}
                 </p>
               )}
             </>
           )}
         />
         <button
-                    style={{
-                        // border: "none",
-                        backgroundColor: colors.Primary2,
-                        padding: 10,
-                        fontFamily: "Bold",
-                        fontSize: 18,
-                        color: colors.white,
-                        width: 200,
-                        borderRadius: 8
-                    }}
-                    onClick={
-                        handleSubmit((data) => {
-                            dispatch(RegisterAction(setLoading, data))
-                        })
-                    }
-                >
-                    {
-                        loading ?
-                            <Oval
-                                height={40}
-                                width={40}
-                                color={colors.Primary1}
-                                wrapperStyle={{}}
-                                wrapperClass=""
-                                visible={true}
-                                ariaLabel='oval-loading'
-                                secondaryColor={colors.Primary1}
-                                strokeWidth={2}
-                                strokeWidthSecondary={2}
+          style={{
+            // border: "none",
+            backgroundColor: colors.Primary2,
+            padding: 10,
+            fontFamily: "Bold",
+            fontSize: 18,
+            color: colors.white,
+            width: 200,
+            borderRadius: 8,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer"
+          }}
+          onClick={
+            handleSubmit((data) => {
+              dispatch(RegisterAction(setLoading, data))
+              window.location.reload("/")
+            })
+          }
+        >
+          {
+            loading ?
+              <Oval
+                height={40}
+                width={40}
+                color={colors.Primary1}
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel='oval-loading'
+                secondaryColor={colors.Primary1}
+                strokeWidth={2}
+                strokeWidthSecondary={2}
 
-                            /> : "REGISTER"
-                    }
-                </button>
+              /> : "REGISTER"
+          }
+        </button>
       </div>
       <p style={{
         fontFamily: "Regular",
@@ -260,7 +274,7 @@ export default function Register() {
         Already have an account? <Link to={"/login"} style={{
           color: colors.Primary2,
           fontFamily: "Bold",
-          textDecoration:"none"
+          textDecoration: "none"
         }}> Login </Link>
       </p>
     </div>

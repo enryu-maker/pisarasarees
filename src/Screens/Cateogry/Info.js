@@ -5,6 +5,8 @@ import { colors } from '../../Assets/Theme'
 import { Rating } from 'react-simple-star-rating'
 import { useDispatch } from 'react-redux'
 import { getProductInfo } from '../../Store/actions'
+import { baseURL } from '../../Helper/Helper'
+import useMediaQuery from '../../Components/useMediaQuery'
 
 export default function Info() {
     const { state } = useLocation()
@@ -14,6 +16,7 @@ export default function Info() {
             behavior: "smooth"
         })
     }, [])
+    const mobile = useMediaQuery('(max-width: 768px)');
     const [product, setProduct] = React.useState({})
     const [loading, setLoading] = React.useState(false)
     const navigate = useNavigate()
@@ -22,7 +25,6 @@ export default function Info() {
     React.useEffect(() => {
         dispatch(getProductInfo(state?.item?.id, setProduct, setLoading))
     }, [])
-    console.log(product)
     return (
         <div style={{
             display: "flex",
@@ -101,29 +103,41 @@ export default function Info() {
             </div>
             <div style={{
                 display: "flex",
+                flexDirection:mobile?"column":"row",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
                 width: "90vw",
-                marginBlock: 50
+                marginBlock:mobile?0 : 50
             }}>
-                <div style={{
+                <img 
+                src={baseURL + product?.image}
+                style={{
                     height: 550,
-                    width: "35%",
+                    width: mobile?"100%" : "35%",
                     borderRadius: 10,
-                    backgroundColor: "ActiveBorder"
+                    objectFit:"contain"
                 }} />
                 <div style={{
                     height: 550,
-                    width: "60%",
+                    width:mobile?"95%" :"60%",
                     borderRadius: 10,
+                    alignSelf:"center"
                 }}>
                     <p style={{
                         fontFamily: "Regular",
                         fontSize: 20,
                         marginBlock: 0
                     }}>
-                        Yellow Draped Saree in Georgette with Gota Patti Work Blouse and Multi Colored Cape
+                        {product?.name}
                     </p>
+                    {
+                        product?.description?.split('|').map(str => <p style={{
+                            fontFamily: "Regular",
+                            fontSize: 14,
+                            marginBlock: 0,
+                            textAlign: "justify"
+                        }}>{str.trim()}</p>)
+                    }
                     <div style={{
                         display: "flex",
                         marginBlock: 5
@@ -158,7 +172,7 @@ export default function Info() {
                         }}>
                             <span style={{
                                 color: "red"
-                            }}>-10%</span> &nbsp; ₹ 199.99 /-
+                            }}>-10%</span> &nbsp; ₹ {product?.discounted_price} /-
                         </p>
 
                     </div>
@@ -168,7 +182,7 @@ export default function Info() {
                         marginBlock: 0
                     }}>
                         MRP  : <span style={{ textDecorationLine: "line-through" }}>
-                            ₹ 500
+                            ₹ {product?.mrp}
                         </span>
                     </p>
                     <p style={{
@@ -182,19 +196,19 @@ export default function Info() {
                     <p style={{
                         fontFamily: "Regular",
                     }}>
-                        Available Quantities :
+                        Available Quantities : {product?.quantity}
                     </p>
                     <p style={{
                         fontFamily: "Regular",
                     }}>
-                        Products Code :
+                        Products Code : {product?.product_code}
                     </p>
                     <div style={{ height: 1, width: "100%", backgroundColor: "lightgrey" }} />
                     <div style={{
                         display: "flex",
                         marginBlockStart: 20,
-                        width: "60%",
-                        justifyContent: "space-between"
+                        width:mobile?"80%" : "60%",
+                        justifyContent:"space-between"
                     }}>
                         <button
                             style={{
@@ -202,10 +216,10 @@ export default function Info() {
                                 backgroundColor: colors.Primary2,
                                 border: "none",
                                 height: 50,
-                                width: 200,
+                                width: mobile?120 : 200,
                                 color: colors.Primary1,
                                 fontFamily: "Bold",
-                                fontSize: 20,
+                                fontSize:mobile?16 : 20,
                                 borderRadius: 10
                             }}
                         >
@@ -217,10 +231,10 @@ export default function Info() {
                                 backgroundColor: colors.Primary2,
                                 border: "none",
                                 height: 50,
-                                width: 200,
+                                width: mobile?120 : 200,
                                 color: colors.Primary1,
                                 fontFamily: "Bold",
-                                fontSize: 20,
+                                fontSize:mobile?16 : 20,
                                 borderRadius: 10
                             }}
                         >

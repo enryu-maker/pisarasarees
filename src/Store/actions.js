@@ -19,7 +19,6 @@ export const Init = () => {
         }
     }
 }
-
 export const getBannerAction = () => {
     const data = []
     return async dispatch => {
@@ -35,7 +34,6 @@ export const getBannerAction = () => {
                 })
             }
             )
-            console.log(data)
             dispatch({
                 type: 'GET_BANNER',
                 payload: data,
@@ -51,14 +49,13 @@ export const LoginAction = (setLoading, data) => {
         setLoading(true);
         try {
             let response = await axios.post(baseURL + '/login/', data);
-            console.log(response.data);
             await localStorage.setItem('access', response.data.access);
             dispatch({
                 type: 'LOGIN',
                 payload: response.data.access,
             })
             setLoading(false);
-            window.reload("/")
+            window.location.replace("/")
         } catch (error) {
             toast.error(error, {
                 position: "top-center",
@@ -79,7 +76,7 @@ export const RegisterAction = (setLoading, data) => {
     return async dispatch => {
         setLoading(true);
         try {
-            let response = await axios.post(baseURL + 'register/', data);
+            let response = await axios.post(baseURL + '/register/', data);
             if (response.status === 201) {
                 toast.success('Account Created Sucessfully', {
                     position: "top-center",
@@ -205,6 +202,8 @@ export const getProductInfo = (id, setProduct, setLoading) => {
 
 export const Logout = () => {
     return async dispatch => {
+        localStorage.clear()
+        window.location.replace("/")
         dispatch({
             type: 'LOGOUT',
             payload: null,

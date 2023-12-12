@@ -137,14 +137,17 @@ export default function Login() {
                 />
                 <button
                     style={{
-                        // border: "none",
                         backgroundColor: colors.Primary2,
                         padding: 10,
                         fontFamily: "Bold",
                         fontSize: 18,
                         color: colors.white,
                         width: 200,
-                        borderRadius: 8
+                        borderRadius: 8,
+                        display:"flex",
+                        justifyContent:"center",
+                        alignItems:"center",
+                        cursor:"pointer"
                     }}
                     onClick={
                         handleSubmit((data) => {

@@ -42,7 +42,7 @@ export default function ImageCard({
                     height: "85%",
                     borderRadius: 10,
                     borderRight: 10,
-                    // objectFit:"contain"
+                    objectFit:"contain"
                 }} />
             <p style={{
                 fontSize: 18,

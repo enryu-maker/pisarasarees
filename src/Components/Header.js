@@ -4,10 +4,12 @@ import { CiShoppingCart, CiUser,CiSearch } from "react-icons/ci";
 import { colors } from '../Assets/Theme';
 import { images } from '../Assets/Image';
 import useMediaQuery from './useMediaQuery';
+import { useSelector } from 'react-redux';
 export default function Header() {
     const mobile = useMediaQuery('(max-width: 768px)');
     const navigate = useNavigate()
     const location = useLocation()
+    const access = useSelector(state => state.Reducers.access)
     return (
         <div style={{
             display: "flex",
@@ -111,7 +113,7 @@ export default function Header() {
                                         borderBlockEnd: location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/account" ? `3px solid ${colors.Primary2}` : null
                                     }}
                                     onClick={() => {
-                                        navigate("/login")
+                                        access===null?navigate("/login"):navigate("/account")
                                     }}
                                     size={30} />
                                 <CiShoppingCart
