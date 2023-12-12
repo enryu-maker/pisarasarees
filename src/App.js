@@ -7,7 +7,7 @@ import { colors } from './Assets/Theme'
 import Tab from './Components/Tab'
 import useMediaQuery from './Components/useMediaQuery'
 import { useDispatch } from 'react-redux'
-import { Init } from './Store/actions'
+import { Init, getBannerAction, getFeatured, getHomeBanner, getProduct } from './Store/actions'
 import { Oval } from 'react-loader-spinner'
 import { ToastContainer } from 'react-toastify'
 export default function App() {
@@ -17,6 +17,10 @@ export default function App() {
   const init = async () => {
     setLoading(true)
     await dispatch(Init())
+    await dispatch(getHomeBanner())
+    await dispatch(getBannerAction())
+    await dispatch(getFeatured())
+    await dispatch(getProduct())
     setLoading(false)
   }
   React.useEffect(() => {
@@ -35,7 +39,6 @@ export default function App() {
         secondaryColor={colors.Primary2}
         strokeWidth={2}
         strokeWidthSecondary={2}
-
       />
     )
   }

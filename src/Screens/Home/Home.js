@@ -6,10 +6,14 @@ import Textra from 'react-textra'
 import useMediaQuery from '../../Components/useMediaQuery'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { images } from '../../Assets/Image'
+import { useSelector } from 'react-redux'
+import { baseURL } from '../../Helper/Helper'
 export default function Home() {
     const mobile = useMediaQuery('(max-width: 768px)');
-
+    const Banner = useSelector(state => state.Reducers.banner)
+    const Features = useSelector(state => state.Reducers.featured)
+    const homebanner = useSelector(state => state.Reducers.homebanner)
+    console.log(homebanner)
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -23,6 +27,9 @@ export default function Home() {
             justifyContent: "center",
             alignItems: "center"
         }}>
+            <div style={{
+                marginBlock:50
+            }}>
             <Carousel
                 selectedItem={1}
                 showThumbs={false}
@@ -33,34 +40,22 @@ export default function Home() {
                 stopOnHover={false}
                 showIndicators={false}
             >
-                <div style={{
-                    width: "100%",
-                    height: "100%",
-                }}>
-                    <img alt='B1' style={{
-                        height: "100%",
-                        objectFit: "contain",
-                    }} src={images.B1} />
-                </div>
-                <div style={{
-                    width: "100%",
-                    height: "100%",
-                }}>
-                    <img alt='B2' style={{
-                        height: "100%",
-                        objectFit: "contain",
-                    }} src={images.B2} />
-                </div>
-                <div style={{
-                    width: "100%",
-                    height: "100%",
-                }}>
-                    <img alt='B3' style={{
-                        height: "100%",
-                        objectFit: "contain",
-                    }} src={images.B3} />
-                </div>
+                {
+                    Banner.map((item) => (
+                        <div style={{
+                            width: "100%",
+                            height: "100%",
+                        }}>
+                            <img alt='B1' style={{
+                                height: "100%",
+                                objectFit: "contain",
+                            }} src={item.img.uri} />
+                        </div>
+                    ))
+                }
+
             </Carousel>
+            </div>
 
             {
                 mobile ?
@@ -85,9 +80,9 @@ export default function Home() {
                             justifyContent: mobile ? "space-evenly" : "normal"
                         }}>
                             <FlatList
-                                list={[0, 1, 2, 3]}
+                                list={Features.bs.slice(0,4)}
                                 renderItem={(item) => (
-                                    <ProductCard />
+                                    <ProductCard item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
@@ -107,9 +102,9 @@ export default function Home() {
                             justifyContent: mobile ? "space-evenly" : "normal"
                         }}>
                             <FlatList
-                                list={[0, 1, 2, 3]}
+                                list={Features.ms.slice(0,4)}
                                 renderItem={(item) => (
-                                    <ProductCard />
+                                    <ProductCard item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
@@ -134,9 +129,9 @@ export default function Home() {
                             justifyContent: mobile ? "space-evenly" : "normal"
                         }}>
                             <FlatList
-                                list={[0, 1, 2, 3]}
+                                list={Features.ms.slice(0,4)}
                                 renderItem={(item) => (
-                                    <ProductCard />
+                                    <ProductCard item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
@@ -147,17 +142,18 @@ export default function Home() {
                         <div style={{
                             display: "flex",
                             flexDirection: "row",
-                            width: "90%",
+                            width: "95%",
                             justifyContent: "space-evenly",
                             alignItems: "flex-end",
                             marginBlock: 50,
                             height: 650,
                         }}>
 
-                            <div style={{
+                            <img 
+                            src={baseURL + homebanner[0]?.image}
+                            style={{
                                 height: 600,
                                 width: 400,
-                                backgroundColor: "ActiveBorder",
                                 borderRadius: 10
                             }} />
 
@@ -175,9 +171,9 @@ export default function Home() {
                                     justifyContent: "center",
                                 }}>
                                     <FlatList
-                                        list={[0, 1]}
+                                        list={Features.bs.slice(0,2)}
                                         renderItem={(item) => (
-                                            <ImageCard />
+                                            <ImageCard item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
                                     />
@@ -203,9 +199,9 @@ export default function Home() {
                                         stopDuration={2000}
                                     />
                                     <FlatList
-                                        list={[0, 1]}
+                                        list={Features.bs.slice(2,4)}
                                         renderItem={(item) => (
-                                            <ImageCard />
+                                            <ImageCard item={item}  />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
                                     />
@@ -217,13 +213,13 @@ export default function Home() {
                         <div style={{
                             display: "flex",
                             flexDirection: "column",
-                            width: "90%",
+                            width: "100%",
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
 
                             <div style={{
-                                width: "100%",
+                                width: "90%",
                                 display: "flex",
                                 flexWrap: "wrap",
                                 justifyContent: "space-evenly",
@@ -231,7 +227,7 @@ export default function Home() {
                                 <FlatList
                                     list={[0, 1, 2, 3]}
                                     renderItem={(item) => (
-                                        <ProductCard />
+                                        <ImageCard />
                                     )}
                                     renderWhenEmpty={() => <div>List is empty!</div>}
                                 />
@@ -248,20 +244,19 @@ export default function Home() {
                         <div style={{
                             display: "flex",
                             flexDirection: "row-reverse",
-                            width: "90%",
+                            width: "95%",
                             justifyContent: "space-evenly",
                             alignItems: "flex-end",
                             marginBlock: 50,
                             height: 650,
                         }}>
-
-                            <div style={{
+                            <img 
+                            src={baseURL + homebanner[1]?.image}
+                            style={{
                                 height: 600,
                                 width: 400,
-                                backgroundColor: "ActiveBorder",
                                 borderRadius: 10
                             }} />
-
                             <div style={{
                                 width: "60%",
                                 display: "flex",
@@ -276,9 +271,9 @@ export default function Home() {
                                     justifyContent: "center",
                                 }}>
                                     <FlatList
-                                        list={[0, 1]}
+                                        list={Features.ms.slice(0,2)}
                                         renderItem={(item) => (
-                                            <ImageCard />
+                                            <ImageCard item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
                                     />
@@ -306,14 +301,13 @@ export default function Home() {
                                         stopDuration={1500}
                                     />
                                     <FlatList
-                                        list={[0, 1]}
+                                        list={Features.ms.slice(2,4)}
                                         renderItem={(item) => (
-                                            <ImageCard />
+                                            <ImageCard item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
                                     />
                                 </div>
-
                             </div>
                         </div>
                     </>

@@ -3,9 +3,15 @@ import { useForm, Controller } from "react-hook-form";
 import { colors } from '../../Assets/Theme';
 import useMediaQuery from '../../Components/useMediaQuery';
 import { Link } from 'react-router-dom';
+import { Oval } from "react-loader-spinner"
+import { useDispatch } from 'react-redux';
+import { RegisterAction } from '../../Store/actions';
+
 export default function Register() {
   const { handleSubmit, control, formState: { errors } } = useForm();
   const mobile = useMediaQuery('(max-width: 768px)');
+  const [loading,setLoading] = React.useState(false)
+  const dispatch =useDispatch()
   React.useEffect(() => {
     window.scrollTo({
         top: 0,
@@ -115,22 +121,23 @@ export default function Register() {
                   color: colors.darkGrey,
                   outline: "none"
                 }}
+                type="email"
                 placeholder='Your Email (Login ID)*'
                 value={value}
                 onChange={onChange}
               />
-              {errors?.name && (
+              {errors?.email && (
                 <p style={{
 
                 }}>
-                  {errors?.name?.message}
+                  {errors?.email?.message}
                 </p>
               )}
             </>
           )}
         />
         <Controller
-          name='Phone'
+          name='phone'
           control={control}
           defaultValue=''
           rules={{
@@ -157,53 +164,14 @@ export default function Register() {
                 }}
                 placeholder='Your Phone Number*'
                 value={value}
+                type="number"
                 onChange={onChange}
               />
-              {errors?.name && (
+              {errors?.phone && (
                 <p style={{
 
                 }}>
-                  {errors?.name?.message}
-                </p>
-              )}
-            </>
-          )}
-        />
-        <Controller
-          name='password'
-          control={control}
-          defaultValue=''
-          rules={{
-            required: {
-              value: true,
-              message:
-                'Name Cannot be Empty',
-            },
-          }}
-          render={({ field: { onChange, value } }) => (
-            <>
-              <input
-                style={{
-                  height: mobile ? 50 : 35,
-                  marginBlock: mobile ? 10 : 0,
-                  width: mobile ? "90%" : "55%",
-                  border: "2px solid lightGray",
-                  borderRadius: 6,
-                  fontFamily: "Regular",
-                  fontSize: 18,
-                  paddingInline: 10,
-                  color: colors.darkGrey,
-                  outline: "none"
-                }}
-                placeholder='Your Password*'
-                value={value}
-                onChange={onChange}
-              />
-              {errors?.name && (
-                <p style={{
-
-                }}>
-                  {errors?.name?.message}
+                  {errors?.phone?.message}
                 </p>
               )}
             </>
@@ -250,19 +218,39 @@ export default function Register() {
           )}
         />
         <button
-          onClick={() => { }}
-          style={{
-            border: "none",
-            backgroundColor: colors.Primary2,
-            padding: 10,
-            fontFamily: "Bold",
-            fontSize: 18,
-            color: colors.white,
-            width: 200,
-            borderRadius: 8
-          }}>
-          Submit
-        </button>
+                    style={{
+                        // border: "none",
+                        backgroundColor: colors.Primary2,
+                        padding: 10,
+                        fontFamily: "Bold",
+                        fontSize: 18,
+                        color: colors.white,
+                        width: 200,
+                        borderRadius: 8
+                    }}
+                    onClick={
+                        handleSubmit((data) => {
+                            dispatch(RegisterAction(setLoading, data))
+                        })
+                    }
+                >
+                    {
+                        loading ?
+                            <Oval
+                                height={40}
+                                width={40}
+                                color={colors.Primary1}
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                                visible={true}
+                                ariaLabel='oval-loading'
+                                secondaryColor={colors.Primary1}
+                                strokeWidth={2}
+                                strokeWidthSecondary={2}
+
+                            /> : "REGISTER"
+                    }
+                </button>
       </div>
       <p style={{
         fontFamily: "Regular",

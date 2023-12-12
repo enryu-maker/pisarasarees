@@ -16,6 +16,7 @@ export default function HeadBanner() {
         fontFamily: "Bold",
         color: colors.Primary1,
         position: "sticky",
+        zIndex: 100,
         top: 0
       }}
     >

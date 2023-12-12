@@ -3,7 +3,10 @@ const initialState = {
     cart: [],
     address: [],
     activeAddress: null,
-    banner: []
+    banner: [],
+    homebanner: [],
+    featured: {},
+    cat: []
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +20,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 banner: action.payload,
+            };
+        case "HOME_BANNER":
+            return {
+                ...state,
+                homebanner: action.payload,
             };
         case "ADD_TO_CART":
             return {
@@ -32,6 +40,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 cart: action.payload,
+            };
+        case "FEATURED":
+            return {
+                ...state,
+                featured: action.payload,
+            };
+        case "CAT":
+            return {
+                ...state,
+                cat: action.payload,
             };
         case "LOGOUT":
             return {

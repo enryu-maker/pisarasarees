@@ -16,26 +16,31 @@ import About from '../Constants/About'
 import Shipping from '../Constants/Shipping'
 import More from '../Components/More'
 import Info from '../Screens/Cateogry/Info'
+import { useSelector } from 'react-redux'
+import ErrorPage from '../Constants/ErrorPage'
 
 export default function Index() {
+  const access = useSelector(state => state.Reducers.access)
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
+      <Route path='/login' element={access === null ? <Login /> : <ErrorPage />} />
+      <Route path='/register' element={access === null ? <Register /> : <ErrorPage />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/blog' element={<Blog />} />
-      <Route path='/account' element={<MyAccount />} />
-      <Route path='/cart/checkout' element={<Checkout />} />
+      <Route path='/account' element={access === null ? <Login /> : <MyAccount />} />
+      <Route path='/cart/checkout' element={access === null ? <Login /> : <Checkout />} />
       <Route path='/categories' element={<Cat />} />
       <Route path='/terms&condition' element={<Terms />} />
       <Route path='/privacy-policy' element={<Privacy />} />
       <Route path='/cancellation&return' element={<Cancle />} />
       <Route path='/about' element={<About />} />
       <Route path='/more' element={<More />} />
-      <Route path='/info' element={<Info />} />
+      <Route path='/categories/catinfo/info/:pid' element={<Info />} />
+      <Route path='/info/:pid' element={<Info />} />
       <Route path='/shipping-policy' element={<Shipping />} />
       <Route path='/categories/catinfo' element={<CatInfo />} />
+      <Route path='/*' element={<ErrorPage />} />
     </Routes>
   )
 }

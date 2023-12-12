@@ -1,12 +1,19 @@
 import React from 'react'
 import ProductCard from '../../Components/ProductCard'
 import FlatList from 'flatlist-react/lib'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { colors } from '../../Assets/Theme'
 import useMediaQuery from '../../Components/useMediaQuery'
 export default function CatInfo() {
     const mobile = useMediaQuery('(max-width: 768px)');
     const navigate = useNavigate()
+    const { state } = useLocation()
+    React.useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }, [])
     return (
         <div style={{
             display: "flex",
@@ -28,7 +35,7 @@ export default function CatInfo() {
                     fontSize: 50,
                     letterSpacing: 2,
                 }}>
-                    Sarees .
+                    {state?.item?.name} .
                 </p>
             </div>
             <div style={{
@@ -71,65 +78,22 @@ export default function CatInfo() {
                         navigate(-1)
                     }}>Categories</p>
                 <p>/</p>
-                <p>Sarees</p>
+                <p>{state?.item?.name}</p>
             </div>
             <div style={{
-                width: "95vw",
+                width: mobile ? "95%" : "90%",
                 display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                flexDirection: mobile ? "column" : "row",
-                marginBlock: 50
-            }}
-            >
-                <div style={{
-                    display: "flex",
-                    flexFlow: "column",
-                    height: "550px",
-                    width: "25vw",
-                    borderRadius: 10,
-                    boxShadow: "5px 5px 10px #88888850",
-                    justifyContent: "space-evenly",
-                    alignItems: "flex-start",
-                    paddingInlineStart: 10
-                }}>
-                    <p style={{
-                        fontFamily: "Black",
-                        fontSize: 30,
-                        letterSpacing: 2,
-                    }}>
-                        Filters .
-                    </p>
-                    <p style={{
-                        fontFamily: "Bold",
-                        fontSize: 20,
-                        letterSpacing: 2,
-                    }}>
-                        SubCategory .
-                    </p>
-                    <p style={{
-                        fontFamily: "Bold",
-                        fontSize: 20,
-                        letterSpacing: 2,
-                    }}>
-                        Price Range .
-                    </p>
-                </div>
-                <div style={{
-                    width: mobile ? "90vw" : "65vw",
-                    display: "flex",
-                    flexWrap: "wrap",
-                    alignSelf: "center",
-                    justifyContent: mobile ? "space-evenly" : "normal"
-                }}>
-                    <FlatList
-                        list={[0, 1, 2, 3, 4, 5]}
-                        renderItem={(item) => (
-                            <ProductCard />
-                        )}
-                        renderWhenEmpty={() => <div>List is empty!</div>}
-                    />
-                </div>
+                flexWrap: "wrap",
+                alignSelf: "center",
+                justifyContent: mobile ? "space-evenly" : "center",
+            }}>
+                <FlatList
+                    list={state?.item?.value?.data}
+                    renderItem={(item) => (
+                        <ProductCard item={item} cat={state?.item?.name} />
+                    )}
+                    renderWhenEmpty={() => <div>List is empty!</div>}
+                />
             </div>
         </div>
     )

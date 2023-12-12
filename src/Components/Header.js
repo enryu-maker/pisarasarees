@@ -18,6 +18,7 @@ export default function Header() {
             alignItems: "center",
             boxShadow: "5px 5px 10px #88888850",
             position: "sticky",
+            zIndex: 100,
             top: 30
         }}>
             <div style={{

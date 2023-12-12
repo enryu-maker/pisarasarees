@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
 import CircularCard from '../../Components/CircularCard';
 import FlatList from 'flatlist-react/lib';
+import { useSelector } from 'react-redux';
 export default function Cat() {
     React.useEffect(() => {
         window.scrollTo({
@@ -10,6 +11,8 @@ export default function Cat() {
             behavior: "smooth"
         })
     }, [])
+    const categories = useSelector(state => state.Reducers.cat)
+
     return (
         <div style={{
             display: "flex",
@@ -66,9 +69,9 @@ export default function Cat() {
                 marginBlockEnd:50
             }}>
                 <FlatList
-                    list={[0, 1]}
+                    list={categories}
                     renderItem={(item) => (
-                        <CircularCard />
+                        <CircularCard item={item} />
                     )}
                     renderWhenEmpty={() => <div>List is empty!</div>}
                 />
