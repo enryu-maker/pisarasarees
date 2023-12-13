@@ -6,15 +6,25 @@ export const Init = () => {
     return async dispatch => {
         try {
             const token = localStorage.getItem("access");
+            const cart = JSON.parse(localStorage.getItem("cart"))
             dispatch({
                 type: 'LOGIN',
                 payload: token,
             })
+            dispatch({
+                type: 'CART',
+                payload: cart!=null?cart:[],
+            })
         }
         catch {
+            const cart =JSON.parse(localStorage.getItem("cart"))
             dispatch({
                 type: 'LOGIN',
                 payload: null,
+            })
+            dispatch({
+                type: 'CART',
+                payload: cart!=null?cart:[],
             })
         }
     }
@@ -44,7 +54,7 @@ export const getBannerAction = () => {
     }
 }
 
-export const LoginAction = (setLoading, data) => {
+export const LoginAction = (setLoading, data,navigate) => {
     return async dispatch => {
         setLoading(true);
         try {
@@ -55,7 +65,7 @@ export const LoginAction = (setLoading, data) => {
                 payload: response.data.access,
             })
             setLoading(false);
-            window.location.replace("/")
+            navigate("/")
         } catch (error) {
             toast.error(error, {
                 position: "top-center",
@@ -142,6 +152,64 @@ export const getFeatured = () => {
             payload: data,
         })
 
+    }
+}
+
+export const addCart = (cart,data) => {
+    return async dispatch => {
+        console.log("cart",cart)
+        if (cart.length>0){
+            cart?.map((item)=>{
+                if(item.product_code===data.product_code){
+                    toast.success('Added to Cart', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
+                else{
+                    cart.push(data)
+                    dispatch({
+                        type: 'ADD_TO_CART',
+                        payload: cart,
+                    })
+                    localStorage.setItem("cart",JSON.stringify(cart))
+                    toast.success('Added to Cart', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
+            })
+        }
+        else{
+            cart.push(data)
+            dispatch({
+                type: 'ADD_TO_CART',
+                payload: cart,
+            })
+            localStorage.setItem("cart",JSON.stringify(cart))
+            toast.success('Added to Cart', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
 }
 

@@ -3,11 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { colors } from '../../Assets/Theme'
 import { Rating } from 'react-simple-star-rating'
-import { useDispatch } from 'react-redux'
-import { getProductInfo } from '../../Store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { addCart, getProductInfo } from '../../Store/actions'
 import { baseURL } from '../../Helper/Helper'
 import useMediaQuery from '../../Components/useMediaQuery'
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Info() {
     const { state } = useLocation()
     React.useEffect(() => {
@@ -22,6 +23,8 @@ export default function Info() {
     const navigate = useNavigate()
     const [rating, setRating] = React.useState(4)
     const dispatch = useDispatch()
+    const cart = useSelector(state => state.Reducers.cart)
+    console.log(cart)
     React.useEffect(() => {
         dispatch(getProductInfo(state?.item?.id, setProduct, setLoading))
     }, [])
@@ -97,31 +100,31 @@ export default function Info() {
                             <p>/</p>
                         </>
                 }
-                <p>{product?.name}</p>
+                <p>{product?.product_code}</p>
 
 
             </div>
             <div style={{
                 display: "flex",
-                flexDirection:mobile?"column":"row",
+                flexDirection: mobile ? "column" : "row",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
                 width: "90vw",
-                marginBlock:mobile?0 : 50
+                marginBlock: mobile ? 0 : 50
             }}>
-                <img 
-                src={baseURL + product?.image}
-                style={{
-                    height: 550,
-                    width: mobile?"100%" : "35%",
-                    borderRadius: 10,
-                    objectFit:"contain"
-                }} />
+                <img
+                    src={baseURL + product?.image}
+                    style={{
+                        height: 550,
+                        width: mobile ? "100%" : "35%",
+                        borderRadius: 10,
+                        objectFit: "contain"
+                    }} />
                 <div style={{
                     height: 550,
-                    width:mobile?"95%" :"60%",
+                    width: mobile ? "95%" : "60%",
                     borderRadius: 10,
-                    alignSelf:"center"
+                    alignSelf: "center"
                 }}>
                     <p style={{
                         fontFamily: "Regular",
@@ -151,7 +154,7 @@ export default function Info() {
                         </p>
                         <Rating style={{
                             marginInline: 10
-                        }} size={20} initialValue={rating} />
+                        }} size={20} readonly initialValue={4} />
                         <p style={{
                             fontFamily: "Regular",
                             letterSpacing: 2,
@@ -196,7 +199,12 @@ export default function Info() {
                     <p style={{
                         fontFamily: "Regular",
                     }}>
-                        Available Quantities : {product?.quantity}
+                        Available Quantities : <span
+                        style={{
+                            fontFamily: "Bold",
+                            color: product?.quantity <= 0 ? "red" : colors.darkGrey,
+                        }}
+                        >{product?.quantity <= 0 ? "Out Of Stock" : product?.quantity}</span> 
                     </p>
                     <p style={{
                         fontFamily: "Regular",
@@ -204,43 +212,53 @@ export default function Info() {
                         Products Code : {product?.product_code}
                     </p>
                     <div style={{ height: 1, width: "100%", backgroundColor: "lightgrey" }} />
-                    <div style={{
-                        display: "flex",
-                        marginBlockStart: 20,
-                        width:mobile?"80%" : "60%",
-                        justifyContent:"space-between"
-                    }}>
-                        <button
-                            style={{
-                                outline: "none",
-                                backgroundColor: colors.Primary2,
-                                border: "none",
-                                height: 50,
-                                width: mobile?120 : 200,
-                                color: colors.Primary1,
-                                fontFamily: "Bold",
-                                fontSize:mobile?16 : 20,
-                                borderRadius: 10
-                            }}
-                        >
-                            Buy Now
-                        </button>
-                        <button
-                            style={{
-                                outline: "none",
-                                backgroundColor: colors.Primary2,
-                                border: "none",
-                                height: 50,
-                                width: mobile?120 : 200,
-                                color: colors.Primary1,
-                                fontFamily: "Bold",
-                                fontSize:mobile?16 : 20,
-                                borderRadius: 10
-                            }}
-                        >
-                            Add to Cart
-                        </button>
-                    </div>
+                            <div style={{
+                                display: "flex",
+                                marginBlockStart: 20,
+                                width: mobile ? "80%" : "70%",
+                                justifyContent: "space-between"
+                            }}>
+                                <button
+                                    disabled={product?.quantity <= 0?true:false}
+                                    onClick={() => {
+                                        navigate('/checkout', {
+                                            state: {
+                                                item: product
+                                            }
+                                        })
+                                    }}
+                                    style={{
+                                        backgroundColor:product?.quantity <= 0?colors.Primary3 : colors.Primary2,
+                                        height: 50,
+                                        width: mobile ? 120 : 250,
+                                        color: colors.Primary1,
+                                        fontFamily: "Bold",
+                                        fontSize: mobile ? 16 : 20,
+                                        borderRadius: 10,
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    Buy Now
+                                </button>
+                                <button
+                                    disabled={product?.quantity <= 0?true:false}
+                                    onClick={() => {
+                                        dispatch(addCart(cart, product))
+                                    }}
+                                    style={{
+                                        backgroundColor: product?.quantity <= 0?colors.Primary3 : colors.Primary2,
+                                        height: 50,
+                                        width: mobile ? 120 : 250,
+                                        color: colors.Primary1,
+                                        fontFamily: "Bold",
+                                        fontSize: mobile ? 16 : 20,
+                                        borderRadius: 10,
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                 </div>
             </div>
         </div>

@@ -4,8 +4,10 @@ import { TfiMore } from "react-icons/tfi";
 import { Link, useLocation } from 'react-router-dom';
 import { IoIosMore } from "react-icons/io";
 import { CiShoppingCart, CiHome, CiMenuBurger } from "react-icons/ci";
+import { useSelector } from 'react-redux';
 export default function Tab() {
     const location = useLocation()
+    const cart = useSelector(state => state.Reducers.cart)
     return (
         <div
             style={{
@@ -13,7 +15,7 @@ export default function Tab() {
                 justifyContent: "space-evenly",
                 alignItems: "center",
                 backgroundColor: colors.Primary2,
-                height: "70px",
+                height: "75px",
                 width: "100vw",
                 position: "sticky",
                 bottom: 0
@@ -66,6 +68,17 @@ export default function Tab() {
                     textDecoration: "none"
                 }}
             >
+                <p style={{
+                    fontFamily: "Bold",
+                    color: colors.Primary1,
+                    cursor: "pointer",
+                    marginBlock: 0,
+                    position: "absolute",
+                    top: 0,
+                }}
+                >
+                    {cart.length}
+                </p>
                 <CiShoppingCart size={32} color={colors.Primary1} />
                 <p
                     style={{

@@ -18,6 +18,7 @@ import More from '../Components/More'
 import Info from '../Screens/Cateogry/Info'
 import { useSelector } from 'react-redux'
 import ErrorPage from '../Constants/ErrorPage'
+import MoreInfo from '../Components/MoreInfo'
 
 export default function Index() {
   const access = useSelector(state => state.Reducers.access)
@@ -30,6 +31,7 @@ export default function Index() {
       <Route path='/blog' element={<Blog />} />
       <Route path='/account' element={access === null ? <Login /> : <MyAccount />} />
       <Route path='/cart/checkout' element={access === null ? <Login /> : <Checkout />} />
+      <Route path='/checkout' element={access === null ? <Login /> : <Checkout />} />
       <Route path='/categories' element={<Cat />} />
       <Route path='/terms&condition' element={<Terms />} />
       <Route path='/privacy-policy' element={<Privacy />} />
@@ -40,7 +42,9 @@ export default function Index() {
       <Route path='/info/:pid' element={<Info />} />
       <Route path='/shipping-policy' element={<Shipping />} />
       <Route path='/categories/catinfo' element={<CatInfo />} />
+      <Route path='/moreinfo' element={<MoreInfo />} />
       <Route path='/*' element={<ErrorPage />} />
+
     </Routes>
   )
 }

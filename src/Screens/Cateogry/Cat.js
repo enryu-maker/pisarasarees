@@ -4,7 +4,9 @@ import { colors } from '../../Assets/Theme';
 import CircularCard from '../../Components/CircularCard';
 import FlatList from 'flatlist-react/lib';
 import { useSelector } from 'react-redux';
+import useMediaQuery from '../../Components/useMediaQuery';
 export default function Cat() {
+    const mobile = useMediaQuery('(max-width: 768px)');
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -12,19 +14,14 @@ export default function Cat() {
         })
     }, [])
     const categories = useSelector(state => state.Reducers.cat)
-
     return (
         <div style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            width:"100vw"
         }}>
-            <div style={{
-                width: "100vw",
-                height: 350,
-                backgroundColor: "ActiveBorder"
-            }} />
             <div style={{
                 width: "88%",
                 display: "flex",
@@ -33,7 +30,7 @@ export default function Cat() {
                 justifyContent: "flex-start",
                 color: colors.darkGrey,
                 fontFamily: "Bold",
-                fontSize: 16
+                fontSize: mobile ? 12 : 16
             }}>
                 <Link
                     to="/"
@@ -55,8 +52,9 @@ export default function Cat() {
             </div>
             <p style={{
                 fontFamily: "Black",
-                fontSize: 40,
+                fontSize: mobile ? 25 : 40,
                 letterSpacing: 2,
+                marginBlockStart: 0
             }}>
                 Categories .
             </p>

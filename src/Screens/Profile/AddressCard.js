@@ -2,7 +2,8 @@ import React from 'react'
 import { colors } from '../../Assets/Theme'
 
 export default function AddressCard({
-    item
+    item,
+    containerStyle
 }) {
     return (
         <div
@@ -16,7 +17,8 @@ export default function AddressCard({
                 justifyContent: "center",
                 alignItems: "center",
                 paddingInline: 10,
-                flexDirection:"column"
+                flexDirection:"column",
+                ...containerStyle
             }}
         >
             <p

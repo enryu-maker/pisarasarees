@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm, Controller } from "react-hook-form";
 import { colors } from '../../Assets/Theme';
 import useMediaQuery from '../../Components/useMediaQuery';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Oval } from "react-loader-spinner"
 import { useDispatch } from 'react-redux';
 import { LoginAction } from '../../Store/actions';
@@ -11,6 +11,7 @@ export default function Login() {
     const mobile = useMediaQuery('(max-width: 768px)');
     const [loading, setLoading] = React.useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -151,7 +152,7 @@ export default function Login() {
                     }}
                     onClick={
                         handleSubmit((data) => {
-                            dispatch(LoginAction(setLoading, data))
+                            dispatch(LoginAction(setLoading, data, navigate))
                         })
                     }
                 >

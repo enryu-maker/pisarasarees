@@ -8,7 +8,6 @@ const initialState = {
     featured: {},
     cat: []
 };
-
 export default (state = initialState, action) => {
     switch (action.type) {
         case "LOGIN":
@@ -27,9 +26,15 @@ export default (state = initialState, action) => {
                 homebanner: action.payload,
             };
         case "ADD_TO_CART":
+                return {
+                    ...state,
+                    cart:action.payload,
+                };
+            // }
+        case "CART":
             return {
                 ...state,
-                cart: state.cart.filter((item) => item.id !== action.payload.id).concat(action.payload),
+                cart: action.payload,
             };
         case "REMOVE_FROM_CART":
             return {

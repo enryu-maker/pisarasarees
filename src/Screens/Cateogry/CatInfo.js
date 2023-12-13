@@ -24,7 +24,7 @@ export default function CatInfo() {
             <div style={{
                 width: "100vw",
                 height: 200,
-                backgroundColor: "ActiveBorder",
+                backgroundColor: colors.Primary2,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
@@ -34,6 +34,7 @@ export default function CatInfo() {
                     fontFamily: "Black",
                     fontSize: 50,
                     letterSpacing: 2,
+                    color:colors.Primary1,
                 }}>
                     {state?.item?.name} .
                 </p>

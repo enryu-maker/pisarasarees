@@ -26,18 +26,16 @@ export default function Home() {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <div style={{
-                marginBlock:50
-            }}>
             <Carousel
-                selectedItem={1}
+                autoPlay
+                swipeable={true}
                 showThumbs={false}
-                showStatus={false}
-                infiniteLoop={true}
-                autoPlay={true}
-                interval={3000}
-                stopOnHover={false}
                 showIndicators={false}
+                showArrows={false}
+                showStatus={false}
+                interval={3500}
+                transitionTime={2500}
+
             >
                 {
                     Banner.map((item) => (
@@ -54,7 +52,6 @@ export default function Home() {
                 }
 
             </Carousel>
-            </div>
 
             {
                 mobile ?
@@ -64,9 +61,10 @@ export default function Home() {
                                 width: "90%",
                                 fontFamily: "Black",
                                 fontSize: 25,
-                                marginBlockStart: 10
+                                marginBlockStart: 10,
+                                letterSpacing: 2,
                             }}
-                            data={["Best Selling Sarees", "श्रेष्ठ विक्रीसाठी साड़ींचं", "सर्वश्रेष्ठ बिक्री वाली साड़ियाँ"]}
+                            data={["Best Selling Sarees", "सर्वश्रेष्ठ बिक्री वाली साड़ियाँ"]}
                             effect="leftRight"
                             duration={3000}
                             stopDuration={2000}
@@ -79,7 +77,7 @@ export default function Home() {
                             justifyContent: mobile ? "space-evenly" : "normal"
                         }}>
                             <FlatList
-                                list={Features.bs.slice(0,4)}
+                                list={Features.bs.slice(0, 4)}
                                 renderItem={(item) => (
                                     <ProductCard cat={null} item={item} />
                                 )}
@@ -101,7 +99,7 @@ export default function Home() {
                             justifyContent: mobile ? "space-evenly" : "normal"
                         }}>
                             <FlatList
-                                list={Features.ms.slice(0,4)}
+                                list={Features.ms.slice(0, 4)}
                                 renderItem={(item) => (
                                     <ProductCard cat={null} item={item} />
                                 )}
@@ -113,9 +111,11 @@ export default function Home() {
                                 width: "90%",
                                 fontFamily: "Black",
                                 fontSize: 25,
-                                marginBlockStart: 10
+                                marginBlockStart: 10,
+                                letterSpacing: 2,
+
                             }}
-                            data={["Best Value Sarees", "श्रेष्ठ मूल्य साड़ींचं", "सर्वोत्तम मूल्य वाली साड़ियाँ"]}
+                            data={["Best Value Sarees", "सर्वोत्तम मूल्य वाली साड़ियाँ"]}
                             effect="leftRight"
                             duration={3000}
                             stopDuration={1500}
@@ -128,7 +128,7 @@ export default function Home() {
                             justifyContent: mobile ? "space-evenly" : "normal"
                         }}>
                             <FlatList
-                                list={Features.ms.slice(0,4)}
+                                list={Features.ms.slice(0, 4)}
                                 renderItem={(item) => (
                                     <ProductCard cat={null} item={item} />
                                 )}
@@ -148,13 +148,13 @@ export default function Home() {
                             height: 650,
                         }}>
 
-                            <img 
-                            src={baseURL + homebanner[0]?.image}
-                            style={{
-                                height: 600,
-                                width: 400,
-                                borderRadius: 10
-                            }} />
+                            <img
+                                src={baseURL + homebanner[0]?.image}
+                                style={{
+                                    height: 600,
+                                    width: 400,
+                                    borderRadius: 10
+                                }} />
 
                             <div style={{
                                 width: "60%",
@@ -170,7 +170,7 @@ export default function Home() {
                                     justifyContent: "center",
                                 }}>
                                     <FlatList
-                                        list={Features.bs.slice(0,2)}
+                                        list={Features.bs.slice(0, 2)}
                                         renderItem={(item) => (
                                             <ImageCard item={item} />
                                         )}
@@ -190,17 +190,19 @@ export default function Home() {
                                             width: "30%",
                                             fontFamily: "Black",
                                             fontSize: 35,
-                                            marginBlockStart: 10
+                                            marginBlockStart: 10,
+                                            letterSpacing: 2,
+
                                         }}
-                                        data={["Best Selling Sarees", "श्रेष्ठ विक्रीसाठी साड़ींचं", "सर्वश्रेष्ठ बिक्री वाली साड़ियाँ"]}
+                                        data={["Best Selling Sarees", "सर्वश्रेष्ठ बिक्री वाली साड़ियाँ"]}
                                         effect="leftRight"
                                         duration={3000}
                                         stopDuration={2000}
                                     />
                                     <FlatList
-                                        list={Features.bs.slice(2,4)}
+                                        list={Features.bs.slice(2, 4)}
                                         renderItem={(item) => (
-                                            <ImageCard item={item}  />
+                                            <ImageCard item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
                                     />
@@ -249,13 +251,13 @@ export default function Home() {
                             marginBlock: 50,
                             height: 650,
                         }}>
-                            <img 
-                            src={baseURL + homebanner[1]?.image}
-                            style={{
-                                height: 600,
-                                width: 400,
-                                borderRadius: 10
-                            }} />
+                            <img
+                                src={baseURL + homebanner[1]?.image}
+                                style={{
+                                    height: 600,
+                                    width: 400,
+                                    borderRadius: 10
+                                }} />
                             <div style={{
                                 width: "60%",
                                 display: "flex",
@@ -270,7 +272,7 @@ export default function Home() {
                                     justifyContent: "center",
                                 }}>
                                     <FlatList
-                                        list={Features.ms.slice(0,2)}
+                                        list={Features.ms.slice(0, 2)}
                                         renderItem={(item) => (
                                             <ImageCard item={item} />
                                         )}
@@ -292,15 +294,17 @@ export default function Home() {
                                             width: "30%",
                                             fontFamily: "Black",
                                             fontSize: 35,
-                                            marginBlockStart: 10
+                                            marginBlockStart: 10,
+                                            letterSpacing: 2,
+
                                         }}
-                                        data={["Best Value Sarees", "श्रेष्ठ मूल्य साड़ींचं", "सर्वोत्तम मूल्य वाली साड़ियाँ"]}
+                                        data={["Best Value Sarees", "सर्वोत्तम मूल्य वाली साड़ियाँ"]}
                                         effect="leftRight"
                                         duration={3000}
                                         stopDuration={1500}
                                     />
                                     <FlatList
-                                        list={Features.ms.slice(2,4)}
+                                        list={Features.ms.slice(2, 4)}
                                         renderItem={(item) => (
                                             <ImageCard item={item} />
                                         )}

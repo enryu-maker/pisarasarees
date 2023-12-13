@@ -6,15 +6,37 @@ import FlatList from 'flatlist-react/lib';
 import CartCard from './CartCard';
 import { FaArrowRight } from "react-icons/fa";
 import useMediaQuery from '../../Components/useMediaQuery';
+import { useSelector } from 'react-redux';
+import { images } from '../../Assets/Image';
 export default function Cart() {
   const navigate = useNavigate()
   const mobile = useMediaQuery('(max-width: 768px)');
+  const cart = useSelector(state => state.Reducers.cart)
+  const [price, setPrice] = React.useState(0)
+  const [qty, setQty] = React.useState(0)
+  const [id, setId] = React.useState([])
+  const [subtotal, setSubtotal] = React.useState({})
 
+
+  function getTotal(data) {
+    let p = 0
+    let q = 0
+    data.map((item) => {
+      p = p + parseInt(item?.discounted_price)
+      q = q + parseInt(item?.quantity)
+      id.push(item?.product_code)
+      subtotal[item?.product_code] = item?.discounted_price
+    })
+    setPrice(p)
+    setQty(q)
+
+  }
   React.useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     })
+    getTotal(cart)
   }, [])
   return (
     <div style={{
@@ -65,145 +87,191 @@ export default function Cart() {
         width: "95vw",
         display: "flex",
         flexDirection: mobile ? "column-reverse" : "row-reverse",
-        justifyContent: "space-between",
+        justifyContent: cart.length > 0 ? "space-between" : "center",
         alignItems: "flex-start",
-        marginBlockEnd:mobile?50 : 0,
-        marginBlock:mobile?0 : 50
-
+        marginBlockEnd: mobile ? 50 : 0,
+        marginBlock: mobile ? 0 : 50,
       }}
       >
-        <div style={{
-          display: "flex",
-          flexFlow: "column",
-          // width: "25vw",
-          borderRadius: 10,
-          boxShadow: "5px 5px 10px #88888850",
-          justifyContent: "space-evenly",
-          alignItems: "flex-start",
-          paddingInline: mobile ? 10 : 50,
-          alignSelf: "center",
-          paddingBlock: mobile ? 0 : 20,
-          backgroundColor: colors.Primary1
-        }}>
-          {
-            mobile ?
+        {
+          cart.length > 0 ?
+            <>
               <div style={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                height: 100,
-                width: "85vw"
+                flexFlow: "column",
+                borderRadius: 10,
+                boxShadow: "5px 5px 10px #88888850",
+                justifyContent: "space-evenly",
+                alignItems: "flex-start",
+                paddingInline: mobile ? 10 : 50,
+                alignSelf: "center",
+                paddingBlock: mobile ? 0 : 20,
+                backgroundColor: colors.Primary1,
+                marginBlockEnd:50
               }}>
-                <div style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                }}>
-                  <p style={{
-                    fontFamily: "Regular",
-                    fontSize: 18,
-                    marginBlock: 0
-                  }}>
-                    Qty : 3 Pieces
-                  </p>
-                  <p style={{
-                    fontFamily: "Regular",
-                    fontSize: 18,
-                    marginBlock: 0
-                  }}>
-                    Delivery : Free
-                  </p>
-                  <p style={{
-                    fontFamily: "Regular",
-                    fontSize: 18,
-                    marginBlock: 0
-                  }}>
-                    Total : $1500
-                  </p>
-                </div>
-                <div style={{
-                  backgroundColor: colors.Primary2,
-                  height: 55,
-                  width: 55,
-                  borderRadius: "50%",
-                  display:"flex",
-                  justifyContent:"center",
-                  alignItems:"center"
-                }}
-                onClick={() => {
-                  navigate("checkout")
-                }}
-                >
-                  <FaArrowRight size={25} color={colors.Primary1} />
-                </div>
-              </div> :
-              <>
-                <p style={{
-                  fontFamily: "Black",
-                  fontSize: 30,
-                  letterSpacing: 2,
-                }}>
-                  Cart Overview
-                </p>
-                <p style={{
-                  fontFamily: "Bold",
-                  fontSize: 20,
-                }}>
-                  Subtotal :
-                </p>
-                <p style={{
-                  fontFamily: "Bold",
-                  fontSize: 20,
-                  textAlign: "justify"
-                }}>
-                  Delivery Charges : <span style={{
-                    color: colors.green
-                  }}> Free</span>
-                </p>
-                <p style={{
-                  fontFamily: "Bold",
-                  fontSize: 20,
-                  textAlign: "justify"
-                }}>
-                  Total :
-                </p>
-                <button
-                  onClick={() => {
-                    navigate("checkout")
-                  }}
-                  style={{
-                    border: "none",
-                    backgroundColor: colors.Primary2,
-                    padding: 10,
-                    fontFamily: "Bold",
-                    fontSize: 18,
-                    color: colors.white,
-                    width: 200,
-                    borderRadius: 8,
-                    cursor: "pointer"
-                  }}>
-                  Checkout
-                </button>
-              </>
-          }
-        </div>
+                {
+                  mobile ?
+                    <div style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      // height: 100,
+                      paddingBlock:10,
+                      width: "85vw",
+                    }}>
+                      <div style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                      }}>
+                        <p style={{
+                          fontFamily: "Regular",
+                          fontSize: 18,
+                          marginBlock: 0
+                        }}>
+                          {` Qty : ${qty} Pieces`}
+                        </p>
+                        <p style={{
+                          fontFamily: "Regular",
+                          fontSize: 18,
+                          marginBlock: 0
+                        }}>
+                          Delivery : Free
+                        </p>
+                        <p style={{
+                          fontFamily: "Regular",
+                          fontSize: 18,
+                          marginBlock: 0
+                        }}>
+                          {`Total : ₹ ${price}`}
+                        </p>
+                      </div>
+                      <div style={{
+                        backgroundColor: colors.Primary2,
+                        height: 55,
+                        width: 55,
+                        borderRadius: "50%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                        onClick={() => {
+                          navigate("checkout",{
+                            state:{
+                              
+                            }
+                          })
+                        }}
+                      >
+                        <FaArrowRight size={25} color={colors.Primary1} />
+                      </div>
+                    </div> :
+                    <>
+                      <p style={{
+                        fontFamily: "Black",
+                        fontSize: 30,
+                        letterSpacing: 2,
+                      }}>
+                        Cart Overview
+                      </p>
+                      <p style={{
+                        fontFamily: "Bold",
+                        fontSize: 20,
+                      }}>
+                        {`Subtotal : ₹ ${price}`}
+                      </p>
+                      <p style={{
+                        fontFamily: "Bold",
+                        fontSize: 20,
+                        textAlign: "justify"
+                      }}>
+                        Delivery Charges : <span style={{
+                          color: colors.green
+                        }}> Free</span>
+                      </p>
+                      <p style={{
+                        fontFamily: "Bold",
+                        fontSize: 20,
+                        textAlign: "justify"
+                      }}>
+                        {`Total : ₹ ${price}`}
+                      </p>
+                      <button
+                        onClick={() => {
+                          navigate("checkout",{
+                            state:{
+                              "amount":price,
+                              "qty":qty,
+                              "id":id,
+                              "subtotal":subtotal
+                            }
+                          })
+                        }}
+                        style={{
+                          border: "none",
+                          backgroundColor: colors.Primary2,
+                          padding: 10,
+                          fontFamily: "Bold",
+                          fontSize: 18,
+                          color: colors.white,
+                          width: 200,
+                          borderRadius: 8,
+                          cursor: "pointer"
+                        }}>
+                        Checkout
+                      </button>
+                    </>
+                }
+              </div>
+            </>
+            :
+            null
+        }
         <div style={{
-          width: mobile ? "90vw" : "65vw",
+          width: mobile || cart.length <= 0 ? "90vw" : "65vw",
           display: "flex",
           flexWrap: "wrap",
           borderRadius: 10,
-          justifyContent: "normal",
+          justifyContent: "center",
           alignItems: "center",
-          alignSelf: "center"
+          alignSelf: "center",
+          // backgroundColor:"ActiveCaption"
         }}>
           <FlatList
-            list={[0, 1, 2]}
+            list={cart}
             renderItem={(item) => (
-              <CartCard />
+              <CartCard item={item} />
             )}
-            renderWhenEmpty={() => <div>List is empty!</div>}
+            renderWhenEmpty={() =>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  width: "100%",
+                  alignSelf: "center",
+                }}
+              >
+                <img
+                  src={images.cart}
+                  style={{
+                    height: 100,
+                    width: 100
+                  }} />
+                <p style={{
+                  fontFamily: "Bold",
+                  fontSize: mobile ? 25 : 35,
+                  letterSpacing: 2,
+                  marginBlockStart: 0,
+                  alignSelf: "center",
+                  color: colors.Primary2
+                }}>
+                  Cart is Empty
+                </p>
+              </div>}
           />
         </div>
 

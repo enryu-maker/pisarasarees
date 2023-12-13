@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { CiShoppingCart, CiUser,CiSearch } from "react-icons/ci";
+import { CiShoppingCart, CiUser, CiSearch } from "react-icons/ci";
 import { colors } from '../Assets/Theme';
 import { images } from '../Assets/Image';
 import useMediaQuery from './useMediaQuery';
@@ -10,6 +10,7 @@ export default function Header() {
     const navigate = useNavigate()
     const location = useLocation()
     const access = useSelector(state => state.Reducers.access)
+    const cart = useSelector(state => state.Reducers.cart)
     return (
         <div style={{
             display: "flex",
@@ -113,18 +114,36 @@ export default function Header() {
                                         borderBlockEnd: location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/account" ? `3px solid ${colors.Primary2}` : null
                                     }}
                                     onClick={() => {
-                                        access===null?navigate("/login"):navigate("/account")
+                                        access === null ? navigate("/login") : navigate("/account")
                                     }}
                                     size={30} />
-                                <CiShoppingCart
-                                    style={{
+                                <div style={{
+                                    display:"flex",
+                                    flexDirection:"column",
+                                    justifyContent:"center",
+                                    alignItems:"center"
+                                }}>
+                                    <p style={{
+                                        fontFamily: "Bold",
+                                        color:colors.Primary2,
                                         cursor: "pointer",
-                                        borderBlockEnd: location.pathname === "/cart" ? `3px solid ${colors.Primary2}` : null
+                                        marginBlock:0,
+                                        position:"absolute",
+                                        top:10,
                                     }}
-                                    onClick={() => {
-                                        navigate("/cart")
-                                    }} size={30}
-                                />
+                                    >
+                                        {cart.length}
+                                    </p>
+                                    <CiShoppingCart
+                                        style={{
+                                            cursor: "pointer",
+                                            borderBlockEnd: location.pathname === "/cart" ? `3px solid ${colors.Primary2}` : null
+                                        }}
+                                        onClick={() => {
+                                            navigate("/cart")
+                                        }} size={30}
+                                    />
+                                </div>
                             </div>
                         </>
                 }

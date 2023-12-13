@@ -38,11 +38,11 @@ export default function ProductCard({
             <img
                 src={baseURL + item?.image}
                 style={{
-                    width: "95%",
+                    width: "100%",
                     height: "75%",
                     marginBlockStart: 10,
-                    borderRadius: 10,
-                    objectFit:"contain"
+                    objectFit:"fill",
+
                 }} />
             <div
                 style={{

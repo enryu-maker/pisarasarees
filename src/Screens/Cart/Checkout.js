@@ -1,11 +1,15 @@
 import React from 'react'
 import { FaArrowRight } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
 import useMediaQuery from '../../Components/useMediaQuery';
+import AddressCard from '../Profile/AddressCard';
 export default function Checkout() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
+    const {state} = useLocation()
+    const toFindDuplicates = arry => arry.filter((item, index) => arry.indexOf(item) !== index)
+    const id = toFindDuplicates(state.id)
     return (
         <div style={{
             display: "flex",
@@ -47,7 +51,7 @@ export default function Checkout() {
                     letterSpacing: 1,
                     marginBlock: 0
                 }}>
-                    ₹ 200
+                    ₹ {state?.amount}
                 </p>
             </div>
             <div style={{
@@ -70,11 +74,14 @@ export default function Checkout() {
                 }} 
                 color={colors.Primary2}
                 size={25} />
-
             </div>
+            <AddressCard
+                containerStyle={{
+                    width:"88%"
+                }}
+            />
             <button
             onClick={() => { 
-              navigate("checkout")
             }}
             style={{
               border: "none",

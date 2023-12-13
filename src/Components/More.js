@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import useMediaQuery from './useMediaQuery';
 import { Link } from 'react-router-dom';
 import { colors } from '../Assets/Theme';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Logout } from '../Store/actions';
 export default function More() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     const access = useSelector(state => state.Reducers.access)
+    const dispatch = useDispatch();
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -67,6 +69,79 @@ export default function More() {
                 {
                     access ?
                         <>
+                            <p
+                                style={{
+                                    fontFamily: "Bold",
+                                    fontSize: 20,
+                                    letterSpacing: 2,
+                                    marginBlockStart: 0,
+                                    textDecoration: "none",
+                                    color: colors.darkGrey,
+                                    cursor: "pointer"
+                                }}
+                                onClick={() => {
+                                    navigate("/moreinfo", {
+                                        state: {
+                                            id: 0
+                                        }
+                                    })
+                                }}
+                            >
+                                My Account
+                            </p>
+                            <p
+                                onClick={() => {
+                                    navigate("/moreinfo", {
+                                        state: {
+                                            id: 1
+                                        }
+                                    })
+                                }}
+                                style={{
+                                    fontFamily: "Bold",
+                                    fontSize: 20,
+                                    letterSpacing: 2,
+                                    marginBlockStart: 0,
+                                    textDecoration: "none",
+                                    color: colors.darkGrey,
+                                    cursor: "pointer"
+                                }}>
+                                Address
+                            </p>
+                            <p
+                                onClick={() => {
+                                    navigate("/moreinfo", {
+                                        state: {
+                                            id: 2
+                                        }
+                                    })
+                                }}
+                                style={{
+                                    fontFamily: "Bold",
+                                    fontSize: 20,
+                                    letterSpacing: 2,
+                                    marginBlockStart: 0,
+                                    textDecoration: "none",
+                                    color: colors.darkGrey,
+                                    cursor: "pointer"
+                                }}>
+                                Orders
+                            </p>
+                            <p
+                                onClick={() => {
+                                    dispatch(Logout())
+                                }}
+                                style={{
+                                    fontFamily: "Bold",
+                                    fontSize: 20,
+                                    letterSpacing: 2,
+                                    marginBlockStart: 0,
+                                    textDecoration: "none",
+                                    color: "red",
+                                    cursor: "pointer"
+                                }}>
+                                Logout
+                            </p>
                         </>
                         :
                         <>
