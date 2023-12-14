@@ -22,9 +22,7 @@ export default function App() {
     await dispatch(getFeatured())
     await dispatch(getProduct())
     await dispatch(getLocation())
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000)
+    setLoading(false)
   }
   React.useEffect(() => {
     init()
@@ -35,11 +33,11 @@ export default function App() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height:"100vh"
+        height: "100vh"
       }}>
         <Oval
-          height={mobile?50:80}
-          width={mobile?50:80}
+          height={mobile ? 50 : 80}
+          width={mobile ? 50 : 80}
           color={colors.Primary1}
           wrapperStyle={{}}
           wrapperClass=""

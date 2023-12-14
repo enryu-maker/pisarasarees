@@ -246,6 +246,7 @@ export default function Info() {
                                     onClick={() => {
                                         product["id"] = state?.item?.id
                                         dispatch(addCart(cart, product))
+                                        window.location.reload()
                                     }}
                                     style={{
                                         backgroundColor: product?.quantity <= 0?colors.Primary3 : colors.Primary2,

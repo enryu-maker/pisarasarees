@@ -96,7 +96,7 @@ export const getTempAddress = (setLoading, setAddress) => {
 }
 
 export const postAddressAction = (setLoading, data, setShow) => {
-
+    console.log(data)
     return async dispatch => {
         setLoading(true);
         try {
@@ -114,11 +114,23 @@ export const postAddressAction = (setLoading, data, setShow) => {
                 });
                 setShow(false)
             }
+            else {
+                toast.error(response.data.msg, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setShow(false)
+            }
             setLoading(false);
         } catch (error) {
-            console.log(error);
             setLoading(false);
-            toast.error("Something Went Wrong", {
+            toast.error(error.response.data.msg, {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -377,6 +389,45 @@ export const addCart = (cart, data) => {
     }
 }
 
+export const removeCart = (cart, data, setLoading) => {
+    setLoading(true)
+    return async dispatch => {
+        const new_cart = cart.filter(function (item) {
+            return item.product_code !== data.product_code
+        })
+        await localStorage.setItem("cart", JSON.stringify(new_cart))
+        toast.success('Updated from Cart', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        dispatch({
+            type: 'CART',
+            payload: new_cart,
+        })
+        setLoading(false)
+        // cart?.map((item) => {
+        //     if (item.product_code === data.product_code) {
+        //         toast.success('Added to Cart', {
+        //             position: "top-center",
+        //             autoClose: 5000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             progress: undefined,
+        //             theme: "light",
+        //         });
+        //     }
+        // })
+    }
+}
+
 export const getHomeBanner = () => {
     return async dispatch => {
         let response = await axios.get(baseURL + '/getbanners/', {
@@ -446,10 +497,10 @@ export const OrderStart = (data, setLoading) => {
                         'X-VERIFY': resp?.data?.payload,
                     }
                 }
-            ).then((res)=>{
+            ).then((res) => {
                 window.open(res?.data?.instrumentResponse?.redirectInfo?.url)
                 console.log(res)
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err)
             })
             setLoading(false)

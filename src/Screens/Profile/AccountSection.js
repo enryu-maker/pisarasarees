@@ -400,7 +400,7 @@ export const Address = () => {
                             required: {
                                 value: true,
                                 message:
-                                    'Name Cannot be Empty',
+                                    'address_line_1 Cannot be Empty',
                             },
                         }}
                         render={({ field: { onChange, value } }) => (
