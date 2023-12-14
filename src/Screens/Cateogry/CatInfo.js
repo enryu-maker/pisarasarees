@@ -90,8 +90,8 @@ export default function CatInfo() {
             }}>
                 <FlatList
                     list={state?.item?.value?.data}
-                    renderItem={(item) => (
-                        <ProductCard item={item} cat={state?.item?.name} />
+                    renderItem={(item,index) => (
+                        <ProductCard item={item} key={index} cat={state?.item?.name} />
                     )}
                     renderWhenEmpty={() => <div>List is empty!</div>}
                 />

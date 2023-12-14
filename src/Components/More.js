@@ -80,9 +80,10 @@ export default function More() {
                                     cursor: "pointer"
                                 }}
                                 onClick={() => {
-                                    navigate("/moreinfo", {
+                                    navigate("moreinfo", {
                                         state: {
-                                            id: 0
+                                            id: 0,
+                                            name:"Accounts"
                                         }
                                     })
                                 }}
@@ -91,9 +92,10 @@ export default function More() {
                             </p>
                             <p
                                 onClick={() => {
-                                    navigate("/moreinfo", {
+                                    navigate("moreinfo", {
                                         state: {
-                                            id: 1
+                                            id: 1,
+                                            name:"Address"
                                         }
                                     })
                                 }}
@@ -110,9 +112,10 @@ export default function More() {
                             </p>
                             <p
                                 onClick={() => {
-                                    navigate("/moreinfo", {
+                                    navigate("moreinfo", {
                                         state: {
-                                            id: 2
+                                            id: 2,
+                                            name:"Orders"
                                         }
                                     })
                                 }}

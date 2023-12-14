@@ -266,7 +266,7 @@ export const setActiveAddress = (id, setLoading) => {
             "address_id": id
         })
         if (response.status === 200) {
-            toast.success('Active Address Chnaged Sucessfully', {
+            toast.success('Active Address Changed Sucessfully', {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -431,28 +431,54 @@ export const getProductInfo = (id, setProduct, setLoading) => {
     }
 }
 
-export const OrderStart = () => {
+export const OrderStart = (data, setLoading) => {
+    setLoading(true)
     return async dispatch => {
-        const options = {
-            method: 'post',
-            url: 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay',
-            headers: {
-                accept: 'text/plain',
-                'Content-Type': 'application/json',
-                'X-VERIFY': 'd7a8e4458caa6fcd781166bbdc85fec76740c18cb9baa9a4c48cf2387d554180###1',
-            },
-            data: {
-                request: 'ewogICJtZXJjaGFudElkIjogIlBHVEVTVFBBWVVBVCIsCiAgIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6ICJNVDc4NTA1OTAwNjgxODgxMDQiLAogICJtZXJjaGFudFVzZXJJZCI6ICJNVUlEMTIzIiwKICAiYW1vdW50IjogMTAwMDAsCiAgInJlZGlyZWN0VXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL3JlZGlyZWN0LXVybCIsCiAgInJlZGlyZWN0TW9kZSI6ICJSRURJUkVDVCIsCiAgImNhbGxiYWNrVXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL2NhbGxiYWNrLXVybCIsCiAgIm1vYmlsZU51bWJlciI6ICI5OTk5OTk5OTk5IiwKICAicGF5bWVudEluc3RydW1lbnQiOiB7CiAgICAidHlwZSI6ICJQQVlfUEFHRSIKICB9Cn0='
+        await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
+            console.log(resp)
+            axios.post('https://api.phonepe.com/apis/hermes/pg/v1/pay', {
+                request: resp?.data?.payload
             }
-        }
-        axios
-            .request(options)
-            .then(function (response) {
-                window.open(response?.data?.instrumentResponse)
+                , {
+                    headers: {
+                        accept: 'text/plain',
+                        'Content-Type': 'application/json',
+                        'X-VERIFY': resp?.data?.payload,
+                    }
+                }
+            ).then((res)=>{
+                window.open(res?.data?.instrumentResponse?.redirectInfo?.url)
+                console.log(res)
+            }).catch((err)=>{
+                console.log(err)
             })
-            .catch(function (error) {
-                console.error(error);
-            });
+            setLoading(false)
+
+        }).catch((error) => {
+            console.log(error)
+            setLoading(false)
+
+        })
+        // const options = {
+        //     method: 'post',
+        //     url: 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay',
+        //     headers: {
+        //         accept: 'text/plain',
+        //         'Content-Type': 'application/json',
+        //         'X-VERIFY': 'd7a8e4458caa6fcd781166bbdc85fec76740c18cb9baa9a4c48cf2387d554180###1',
+        //     },
+        //     data: {
+        //         request: 'ewogICJtZXJjaGFudElkIjogIlBHVEVTVFBBWVVBVCIsCiAgIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6ICJNVDc4NTA1OTAwNjgxODgxMDQiLAogICJtZXJjaGFudFVzZXJJZCI6ICJNVUlEMTIzIiwKICAiYW1vdW50IjogMTAwMDAsCiAgInJlZGlyZWN0VXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL3JlZGlyZWN0LXVybCIsCiAgInJlZGlyZWN0TW9kZSI6ICJSRURJUkVDVCIsCiAgImNhbGxiYWNrVXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL2NhbGxiYWNrLXVybCIsCiAgIm1vYmlsZU51bWJlciI6ICI5OTk5OTk5OTk5IiwKICAicGF5bWVudEluc3RydW1lbnQiOiB7CiAgICAidHlwZSI6ICJQQVlfUEFHRSIKICB9Cn0='
+        //     }
+        // }
+        // axios
+        //     .request(options)
+        //     .then(function (response) {
+        //         window.open(response?.data?.instrumentResponse)
+        //     })
+        //     .catch(function (error) {
+        //         console.error(error);
+        //     });
     }
 }
 

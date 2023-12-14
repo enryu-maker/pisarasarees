@@ -16,6 +16,7 @@ export default function Cart() {
   const [qty, setQty] = React.useState(0)
   const [id, setId] = React.useState([])
   const [subtotal, setSubtotal] = React.useState({})
+  const toFindDuplicates = arry => arry?.filter((item, index) => arry?.indexOf(item) !== index)
 
 
   function getTotal(data) {
@@ -24,12 +25,12 @@ export default function Cart() {
     data.map((item) => {
       p = p + parseInt(item?.discounted_price)
       q = q + parseInt(item?.quantity)
-      id.push(item?.product_code)
-      subtotal[item?.product_code] = item?.discounted_price
+      console.log(item)
+      id.push(item?.id)
+      subtotal[item?.id] = item?.discounted_price
     })
     setPrice(p)
     setQty(q)
-
   }
   React.useEffect(() => {
     window.scrollTo({
@@ -37,7 +38,8 @@ export default function Cart() {
       behavior: "smooth"
     })
     getTotal(cart)
-  }, [])
+  }, [cart])
+  console.log(id)
   return (
     <div style={{
       display: "flex",
@@ -160,7 +162,9 @@ export default function Cart() {
                         onClick={() => {
                           navigate("checkout",{
                             state:{
-                              
+                              "total":price,
+                              "items":toFindDuplicates(id),
+                              "subtotal":JSON.stringify(subtotal)
                             }
                           })
                         }}
@@ -202,10 +206,9 @@ export default function Cart() {
                         onClick={() => {
                           navigate("checkout",{
                             state:{
-                              "amount":price,
-                              "qty":qty,
-                              "id":id,
-                              "subtotal":subtotal
+                              "total":price,
+                              "items":toFindDuplicates(id),
+                              "subtotal":JSON.stringify(subtotal)
                             }
                           })
                         }}
@@ -241,8 +244,8 @@ export default function Cart() {
         }}>
           <FlatList
             list={cart}
-            renderItem={(item) => (
-              <CartCard item={item} />
+            renderItem={(item,index) => (
+              <CartCard key={index} item={item} />
             )}
             renderWhenEmpty={() =>
               <div

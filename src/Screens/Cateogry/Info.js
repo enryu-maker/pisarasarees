@@ -222,7 +222,9 @@ export default function Info() {
                                     onClick={() => {
                                         navigate('/checkout', {
                                             state: {
-                                                item: product
+                                                    items:[state?.item?.id],
+                                                    total:product?.discounted_price,
+                                                    subtotal:JSON.stringify(state?.item?.id + `:` + product?.discounted_price )
                                             }
                                         })
                                     }}
@@ -242,6 +244,7 @@ export default function Info() {
                                 <button
                                     disabled={product?.quantity <= 0?true:false}
                                     onClick={() => {
+                                        product["id"] = state?.item?.id
                                         dispatch(addCart(cart, product))
                                     }}
                                     style={{

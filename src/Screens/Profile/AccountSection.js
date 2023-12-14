@@ -23,7 +23,7 @@ export const AccountDetails = () => {
             flexDirection: "column",
             width: "100%",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
         }}>
             <div style={{
                 display: "flex",
@@ -744,8 +744,8 @@ export const Address = () => {
             }}>
                 <FlatList
                     list={address}
-                    renderItem={(item) => (
-                        <AddressCard activeAddress={activeAddress} item={item} />
+                    renderItem={(item,index) => (
+                        <AddressCard key={index} activeAddress={activeAddress} item={item} />
                     )}
                     renderWhenEmpty={() => <div
                         style={{
@@ -778,19 +778,20 @@ export const OrderHistory = () => {
             flexDirection: "column",
             width: "100%",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
         }}>
             <div style={{
                 display: "flex",
                 width: "90%",
-                justifyContent: "space-between"
+                justifyContent: "flex-start",
+                alignItems:"center"
             }}>
                 <p style={{
                     fontFamily: "Bold",
                     marginBlockStart: 0,
                     fontSize: 25
                 }}>
-                    Order History
+                    Orders
                 </p>
             </div>
         </div>

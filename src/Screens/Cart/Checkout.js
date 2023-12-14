@@ -5,21 +5,26 @@ import { colors } from '../../Assets/Theme';
 import useMediaQuery from '../../Components/useMediaQuery';
 import AddressCard from '../Profile/AddressCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { OrderStart } from '../../Store/actions';
+import { OrderStart, getActiveAddress } from '../../Store/actions';
+import { Oval } from 'react-loader-spinner';
 export default function Checkout() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
-    const {state} = useLocation()
-    const toFindDuplicates = arry => arry.filter((item, index) => arry.indexOf(item) !== index)
-    const id = toFindDuplicates(state.id)
+    const { state } = useLocation()
+    const toFindDuplicates = arry => arry?.filter((item, index) => arry?.indexOf(item) !== index)
+    const [data, setData] = React.useState(state)
+    const [loading, setLoading] = React.useState(false)
     const activeAddress = useSelector(state => state.Reducers.activeAddress)
     const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(getActiveAddress())
+    }, [])
     return (
         <div style={{
             display: "flex",
             flexDirection: "column",
             height: 550,
-            width: mobile?"90%" : "50%",
+            width: mobile ? "90%" : "50%",
             marginBlock: 50,
             borderRadius: 10,
             boxShadow: "5px 5px 10px #88888850",
@@ -36,7 +41,7 @@ export default function Checkout() {
             </p>
             <div style={{
                 display: "flex",
-                width: mobile?"95%":"75%",
+                width: mobile ? "95%" : "75%",
                 height: 50,
                 justifyContent: "space-between",
                 alignItems: "center"
@@ -55,12 +60,12 @@ export default function Checkout() {
                     letterSpacing: 1,
                     marginBlock: 0
                 }}>
-                    ₹ {state?.amount}
+                    ₹ {state?.total}
                 </p>
             </div>
             <div style={{
                 display: "flex",
-                width: mobile?"95%":"75%",
+                width: mobile ? "95%" : "75%",
                 height: 50,
                 justifyContent: "space-between",
                 alignItems: "center"
@@ -73,40 +78,58 @@ export default function Checkout() {
                 }}>
                     Address
                 </p>
-                <FaArrowRight onClick={()=>{
-                    navigate("/account",{
-                        state:{
-                            id:1
+                <FaArrowRight onClick={() => {
+                    navigate("/more/moreinfo", {
+                        state: {
+                            id: 1,
+                            name:"Address"
                         }
                     })
-                }} 
-                color={colors.Primary2}
-                size={25} />
+                }}
+                    color={colors.Primary2}
+                    size={25} />
             </div>
             <AddressCard
                 containerStyle={{
-                    width:"88%"
+                    width: mobile ? "88%" : "75%"
                 }}
                 activeAddress={activeAddress}
                 item={activeAddress}
             />
             <button
-            onClick={() => { 
-                dispatch(OrderStart())
-            }}
-            style={{
-              border: "none",
-              backgroundColor: colors.Primary2,
-              padding: 10,
-              fontFamily: "Bold",
-              fontSize: 18,
-              color: colors.white,
-              width: 200,
-              borderRadius: 8,
-              cursor:"pointer"
-            }}>
-            Pay Now
-          </button>
+                onClick={() => {
+                    data["address_id"] = activeAddress?.id
+                    data["payment_mode"] = "ONLINE"
+                    data["delivery_mode"] = 1
+                    // console.log(data)
+                    dispatch(OrderStart(data, setLoading))
+                }}
+                style={{
+                    display:"flex",
+                    justifyContent:"center",
+                    alignItems:"center",
+                    border: "none",
+                    backgroundColor: colors.Primary2,
+                    padding: 10,
+                    fontFamily: "Bold",
+                    fontSize: 18,
+                    color: colors.white,
+                    width: 200,
+                    borderRadius: 8,
+                    cursor: "pointer"
+                }}>
+                {
+                    loading ?
+                        <Oval
+                            height={30}
+                            width={30}
+                            color={colors.Primary1}
+                        />
+                        :
+                        "Pay Now"
+                }
+
+            </button>
         </div>
     )
 }

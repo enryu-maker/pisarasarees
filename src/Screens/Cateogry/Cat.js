@@ -68,8 +68,8 @@ export default function Cat() {
             }}>
                 <FlatList
                     list={categories}
-                    renderItem={(item) => (
-                        <CircularCard item={item} />
+                    renderItem={(item,index) => (
+                        <CircularCard key={index} item={item} />
                     )}
                     renderWhenEmpty={() => <div>List is empty!</div>}
                 />

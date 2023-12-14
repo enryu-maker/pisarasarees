@@ -43,7 +43,7 @@ export default function Index() {
       <Route path='/info/:pid' element={<Info />} />
       <Route path='/shipping-policy' element={<Shipping />} />
       <Route path='/categories/catinfo' element={<CatInfo />} />
-      <Route path='/moreinfo' element={<MoreInfo />} />
+      <Route path='/more/moreinfo' element={<MoreInfo />} />
       <Route path='/*' element={<ErrorPage />} />
 
     </Routes>
