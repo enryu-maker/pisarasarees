@@ -30,6 +30,7 @@ export default function Index() {
       <Route path='/cart' element={<Cart />} />
       <Route path='/blog' element={<Blog />} />
       <Route path='/account' element={access === null ? <Login /> : <MyAccount />} />
+      <Route path='/account/more/:pid' element={access === null ? <Login /> : <MyAccount />} />
       <Route path='/cart/checkout' element={access === null ? <Login /> : <Checkout />} />
       <Route path='/checkout' element={access === null ? <Login /> : <Checkout />} />
       <Route path='/categories' element={<Cat />} />

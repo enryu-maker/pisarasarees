@@ -1,11 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
 import { AccountDetails, Address, OrderHistory } from './AccountSection';
 import { useDispatch } from 'react-redux';
-import { Logout } from '../../Store/actions';
+import { Logout, getActiveAddress, getAddress, getProfile } from '../../Store/actions';
 export default function MyAccount() {
-    const [active, setActive] = React.useState(0)
+    const {state}=useLocation()
+    const [active, setActive] = React.useState(state?.id)
+    const navigate = useNavigate()
     function switchActive(active) {
         switch (active) {
             case 0:
@@ -24,6 +26,9 @@ export default function MyAccount() {
             top: 0,
             behavior: "smooth"
         })
+        dispatch(getProfile())
+        dispatch(getAddress())
+        dispatch(getActiveAddress())
     }, [])
     return (
         <div style={{
@@ -82,44 +87,44 @@ export default function MyAccount() {
                 }}>
                     <p style={{
                         fontFamily: "Bold",
-                        marginBlockStart:0,
-                        cursor:"pointer"
+                        marginBlockStart: 0,
+                        cursor: "pointer"
                     }}
-                    onClick={()=>{
-                        setActive(0)
-                    }}
+                        onClick={() => {
+                            setActive(0)
+                        }}
                     >
                         User Details
                     </p>
-                    <p 
-                    onClick={()=>{
-                        setActive(1)
-                    }}
-                    style={{
-                        fontFamily: "Bold",
-                        cursor:"pointer"
+                    <p
+                        onClick={() => {
+                            setActive(1)
+                        }}
+                        style={{
+                            fontFamily: "Bold",
+                            cursor: "pointer"
 
-                    }}>
+                        }}>
                         Address
                     </p>
-                    <p 
-                    onClick={()=>{
-                        setActive(2)
-                    }}
-                    style={{
-                        fontFamily: "Bold",
-                        cursor:"pointer"
-                    }}>
+                    <p
+                        onClick={() => {
+                            setActive(2)
+                        }}
+                        style={{
+                            fontFamily: "Bold",
+                            cursor: "pointer"
+                        }}>
                         Order History
                     </p>
                     <p style={{
                         fontFamily: "Bold",
                         color: "red",
-                        cursor:"pointer"
+                        cursor: "pointer"
                     }}
-                    onClick={()=>{
-                        dispatch(Logout())
-                    }}
+                        onClick={() => {
+                            dispatch(Logout())
+                        }}
                     >
                         Logout
                     </p>

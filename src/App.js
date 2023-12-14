@@ -7,7 +7,7 @@ import { colors } from './Assets/Theme'
 import Tab from './Components/Tab'
 import useMediaQuery from './Components/useMediaQuery'
 import { useDispatch } from 'react-redux'
-import { Init, getBannerAction, getFeatured, getHomeBanner, getProduct } from './Store/actions'
+import { Init, getBannerAction, getFeatured, getHomeBanner, getLocation, getProduct } from './Store/actions'
 import { Oval } from 'react-loader-spinner'
 import { ToastContainer } from 'react-toastify'
 export default function App() {
@@ -21,13 +21,14 @@ export default function App() {
     await dispatch(getBannerAction())
     await dispatch(getFeatured())
     await dispatch(getProduct())
+    await dispatch(getLocation())
     setTimeout(() => {
       setLoading(false)
     }, 2000)
   }
   React.useEffect(() => {
     init()
-  }, [])
+  }, []);
   if (loading) {
     return (
       <div style={{

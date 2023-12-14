@@ -24,7 +24,6 @@ export default function Info() {
     const [rating, setRating] = React.useState(4)
     const dispatch = useDispatch()
     const cart = useSelector(state => state.Reducers.cart)
-    console.log(cart)
     React.useEffect(() => {
         dispatch(getProductInfo(state?.item?.id, setProduct, setLoading))
     }, [])

@@ -4,12 +4,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
 import useMediaQuery from '../../Components/useMediaQuery';
 import AddressCard from '../Profile/AddressCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { OrderStart } from '../../Store/actions';
 export default function Checkout() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     const {state} = useLocation()
     const toFindDuplicates = arry => arry.filter((item, index) => arry.indexOf(item) !== index)
     const id = toFindDuplicates(state.id)
+    const activeAddress = useSelector(state => state.Reducers.activeAddress)
+    const dispatch = useDispatch()
     return (
         <div style={{
             display: "flex",
@@ -70,7 +74,11 @@ export default function Checkout() {
                     Address
                 </p>
                 <FaArrowRight onClick={()=>{
-                    navigate("/address")
+                    navigate("/account",{
+                        state:{
+                            id:1
+                        }
+                    })
                 }} 
                 color={colors.Primary2}
                 size={25} />
@@ -79,9 +87,12 @@ export default function Checkout() {
                 containerStyle={{
                     width:"88%"
                 }}
+                activeAddress={activeAddress}
+                item={activeAddress}
             />
             <button
             onClick={() => { 
+                dispatch(OrderStart())
             }}
             style={{
               border: "none",

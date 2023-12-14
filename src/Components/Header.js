@@ -114,7 +114,11 @@ export default function Header() {
                                         borderBlockEnd: location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/account" ? `3px solid ${colors.Primary2}` : null
                                     }}
                                     onClick={() => {
-                                        access === null ? navigate("/login") : navigate("/account")
+                                        access === null ? navigate("/login") : navigate("/account",{
+                                            state:{
+                                                id:0
+                                            }
+                                        })
                                     }}
                                     size={30} />
                                 <div style={{
