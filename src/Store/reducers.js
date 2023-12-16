@@ -9,7 +9,8 @@ const initialState = {
     cat: [],
     profile: {},
     location: {},
-    tempaddress: {}
+    tempaddress: {},
+    blogs: []
 };
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -22,6 +23,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 banner: action.payload,
+            };
+        case "GET_BLOGS":
+            return {
+                ...state,
+                blogs: action.payload,
             };
         case "GET_LOCATION":
             return {

@@ -64,7 +64,7 @@ export default function Home() {
                                 marginBlockStart: 10,
                                 letterSpacing: 2,
                             }}
-                            data={["Best Selling Sarees", "सर्वश्रेष्ठ बिक्री वाली साड़ियाँ"]}
+                            data={["Best Selling Sarees"]}
                             effect="leftRight"
                             duration={3000}
                             stopDuration={2000}
@@ -115,7 +115,7 @@ export default function Home() {
                                 letterSpacing: 2,
 
                             }}
-                            data={["Best Value Sarees", "सर्वोत्तम मूल्य वाली साड़ियाँ"]}
+                            data={["Best Value Sarees"]}
                             effect="leftRight"
                             duration={3000}
                             stopDuration={1500}
@@ -194,7 +194,7 @@ export default function Home() {
                                             letterSpacing: 2,
 
                                         }}
-                                        data={["Best Selling Sarees", "सर्वश्रेष्ठ बिक्री वाली साड़ियाँ"]}
+                                        data={["Best Selling Sarees ."]}
                                         effect="leftRight"
                                         duration={3000}
                                         stopDuration={2000}
@@ -298,7 +298,7 @@ export default function Home() {
                                             letterSpacing: 2,
 
                                         }}
-                                        data={["Best Value Sarees", "सर्वोत्तम मूल्य वाली साड़ियाँ"]}
+                                        data={["Best Value Sarees ."]}
                                         effect="leftRight"
                                         duration={3000}
                                         stopDuration={1500}

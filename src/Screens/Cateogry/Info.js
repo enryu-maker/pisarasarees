@@ -27,6 +27,9 @@ export default function Info() {
     React.useEffect(() => {
         dispatch(getProductInfo(state?.item?.id, setProduct, setLoading))
     }, [])
+    function calcPercentage(x, y) {
+        return ((x - y) / y) * 100;
+      }
     return (
         <div style={{
             display: "flex",
@@ -174,7 +177,7 @@ export default function Info() {
                         }}>
                             <span style={{
                                 color: "red"
-                            }}>-10%</span> &nbsp; ₹ {product?.discounted_price} /-
+                            }}>{`-${calcPercentage(product?.mrp,product?.discounted_price)}%`}</span> &nbsp; ₹ {product?.discounted_price} /-
                         </p>
 
                     </div>

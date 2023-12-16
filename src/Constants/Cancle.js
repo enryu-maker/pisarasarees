@@ -112,7 +112,8 @@ export default function Cancle() {
                 fontSize:mobile?25 : 40,
                 letterSpacing: 2,
                 marginBlock: 0,
-                textAlign:"center"
+                textAlign:"center",
+                color:colors.Primary2
             }}>
                 Cancellation & Returns Policies .
             </p>
@@ -120,7 +121,8 @@ export default function Cancle() {
                 fontFamily: "Bold",
                 fontSize: 12,
                 marginBlockStart: 0,
-                width:"90%"
+                width:"90%",
+                textAlign:"center",
             }}>
                 Disclaimer: <span style={{
                     fontFamily: "Italic",

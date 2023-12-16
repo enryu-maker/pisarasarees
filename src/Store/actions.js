@@ -182,7 +182,7 @@ export const LoginAction = (setLoading, data, navigate) => {
             setLoading(false);
             navigate("/")
         } catch (error) {
-            toast.error(error, {
+            toast.error(error.response.data, {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -213,6 +213,7 @@ export const RegisterAction = (setLoading, data) => {
                     progress: undefined,
                     theme: "light",
                 });
+                window.location.reload("/login")
             }
             else {
                 toast.error(response?.data?.msg, {
@@ -228,7 +229,7 @@ export const RegisterAction = (setLoading, data) => {
             }
             setLoading(false);
         } catch (error) {
-            toast.error("Something Went Wrong", {
+            toast.error(error?.response?.data?.msg, {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -261,12 +262,23 @@ export const getAddress = () => {
         })
     }
 }
+
 export const getActiveAddress = () => {
     return async dispatch => {
         let response = await axiosIns.get(baseURL + '/getsetactiveaddress/')
         dispatch({
             type: 'ACTIVE_ADDRESS',
             payload: response.data,
+        })
+    }
+}
+
+export const getBlogs = () => {
+    return async dispatch => {
+        let response = await axios.get(baseURL + '/getblogs/')
+        dispatch({
+            type: 'GET_BLOGS',
+            payload: response?.data?.results,
         })
     }
 }
@@ -494,7 +506,7 @@ export const OrderStart = (data, setLoading) => {
                     headers: {
                         accept: 'text/plain',
                         'Content-Type': 'application/json',
-                        'X-VERIFY': resp?.data?.payload,
+                        'X-VERIFY': resp?.data?.header,
                     }
                 }
             ).then((res) => {
@@ -510,26 +522,6 @@ export const OrderStart = (data, setLoading) => {
             setLoading(false)
 
         })
-        // const options = {
-        //     method: 'post',
-        //     url: 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay',
-        //     headers: {
-        //         accept: 'text/plain',
-        //         'Content-Type': 'application/json',
-        //         'X-VERIFY': 'd7a8e4458caa6fcd781166bbdc85fec76740c18cb9baa9a4c48cf2387d554180###1',
-        //     },
-        //     data: {
-        //         request: 'ewogICJtZXJjaGFudElkIjogIlBHVEVTVFBBWVVBVCIsCiAgIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6ICJNVDc4NTA1OTAwNjgxODgxMDQiLAogICJtZXJjaGFudFVzZXJJZCI6ICJNVUlEMTIzIiwKICAiYW1vdW50IjogMTAwMDAsCiAgInJlZGlyZWN0VXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL3JlZGlyZWN0LXVybCIsCiAgInJlZGlyZWN0TW9kZSI6ICJSRURJUkVDVCIsCiAgImNhbGxiYWNrVXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL2NhbGxiYWNrLXVybCIsCiAgIm1vYmlsZU51bWJlciI6ICI5OTk5OTk5OTk5IiwKICAicGF5bWVudEluc3RydW1lbnQiOiB7CiAgICAidHlwZSI6ICJQQVlfUEFHRSIKICB9Cn0='
-        //     }
-        // }
-        // axios
-        //     .request(options)
-        //     .then(function (response) {
-        //         window.open(response?.data?.instrumentResponse)
-        //     })
-        //     .catch(function (error) {
-        //         console.error(error);
-        //     });
     }
 }
 

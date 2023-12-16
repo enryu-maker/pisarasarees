@@ -97,7 +97,8 @@ export default function Privacy() {
                 fontFamily: "Black",
                 fontSize: mobile ? 25 : 40,
                 letterSpacing: 2,
-                marginBlock: 0
+                marginBlock: 0,
+                color:colors.Primary2
             }}>
                 Privacy Policy .
             </p>
@@ -105,7 +106,8 @@ export default function Privacy() {
                 fontFamily: "Bold",
                 fontSize: 12,
                 marginBlockStart: 0,
-                width: "90%"
+                width: "90%",
+                textAlign:"center",
             }}>
                 Disclaimer: <span style={{
                     fontFamily: "Italic",

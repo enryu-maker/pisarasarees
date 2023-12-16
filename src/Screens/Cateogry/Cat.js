@@ -54,7 +54,8 @@ export default function Cat() {
                 fontFamily: "Black",
                 fontSize: mobile ? 25 : 40,
                 letterSpacing: 2,
-                marginBlockStart: 0
+                marginBlockStart: 0,
+                color:colors.Primary2
             }}>
                 Categories .
             </p>

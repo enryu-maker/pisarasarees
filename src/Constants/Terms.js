@@ -131,7 +131,8 @@ export default function Terms() {
                 fontFamily: "Black",
                 fontSize: mobile?25: 40,
                 letterSpacing: 2,
-                marginBlock: 0
+                marginBlock: 0,
+                color:colors.Primary2
             }}>
                 Terms and Conditions .
             </p>
@@ -140,7 +141,9 @@ export default function Terms() {
                 fontSize: 12,
                 marginBlockStart: 0,
                 textAlign:"justify",
-                width:"90%"
+                width:"90%",
+                textAlign:"center",
+
             }}>
                 Disclaimer: <span style={{
                     fontFamily: "Italic",

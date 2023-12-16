@@ -243,8 +243,8 @@ export default function Register() {
           }}
           onClick={
             handleSubmit((data) => {
+              // console.log(data)
               dispatch(RegisterAction(setLoading, data))
-              window.location.reload("/")
             })
           }
         >

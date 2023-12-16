@@ -140,7 +140,8 @@ export default function Shipping() {
                 fontFamily: "Black",
                 fontSize: mobile?25 : 40,
                 letterSpacing: 2,
-                marginBlock: 0
+                marginBlock: 0,
+                color:colors.Primary2
             }}>
                 Shipping Policy .
             </p>
@@ -148,7 +149,8 @@ export default function Shipping() {
                 fontFamily: "Bold",
                 fontSize: 12,
                 marginBlockStart: 0,
-                width:"90%"
+                width:"90%",
+                textAlign:"center",
             }}>
                 Disclaimer: <span style={{
                     fontFamily: "Italic",
