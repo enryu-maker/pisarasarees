@@ -22,15 +22,22 @@ export default function Cart() {
   function getTotal(data) {
     let p = 0
     let q = 0
+    let tid = []
     data.map((item) => {
       p = p + parseInt(item?.discounted_price)
       q = q + parseInt(item?.quantity)
       console.log(item)
-      id.push(item?.id)
+      if (item?.id in id){
+      }
+      else{
+        tid.push(item?.id)
+      }
       subtotal[item?.id] = item?.discounted_price
     })
+    console.log(tid)
     setPrice(p)
     setQty(q)
+    setId(tid)
   }
   React.useEffect(() => {
     window.scrollTo({
@@ -38,7 +45,7 @@ export default function Cart() {
       behavior: "smooth"
     })
     getTotal(cart)
-  }, [cart])
+  }, [])
   console.log(id)
   return (
     <div style={{
@@ -163,7 +170,7 @@ export default function Cart() {
                           navigate("checkout",{
                             state:{
                               "total":price,
-                              "items":toFindDuplicates(id),
+                              "items":id,
                               "subtotal":JSON.stringify(subtotal)
                             }
                           })
@@ -207,8 +214,9 @@ export default function Cart() {
                           navigate("checkout",{
                             state:{
                               "total":price,
-                              "items":toFindDuplicates(id),
-                              "subtotal":JSON.stringify(subtotal)
+                              "items":id,
+                              "subtotal":JSON.stringify(subtotal),
+                              "single":false
                             }
                           })
                         }}

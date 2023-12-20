@@ -19,6 +19,10 @@ import Info from '../Screens/Cateogry/Info'
 import { useSelector } from 'react-redux'
 import ErrorPage from '../Constants/ErrorPage'
 import MoreInfo from '../Components/MoreInfo'
+import Success from '../Screens/Cart/Success'
+import Fail from '../Screens/Cart/Fail'
+import Faild from '../Screens/Cart/Faild'
+import Pending from '../Screens/Cart/Pending'
 
 export default function Index() {
   const access = useSelector(state => state.Reducers.access)
@@ -39,13 +43,17 @@ export default function Index() {
       <Route path='/cancellation&return' element={<Cancle />} />
       <Route path='/about' element={<About />} />
       <Route path='/more' element={<More />} />
+      <Route path='/success' element={access === null ? <Login /> : <Success />} />
+      <Route path='/failed' element={access === null ? <Login /> : <Fail />} />
+      <Route path='/error' element={access === null ? <Login /> : <Faild />} />
+      <Route path='/pending' element={access === null ? <Login /> : <Pending />} />
+      <Route path='/more' element={<More />} />
       <Route path='/categories/catinfo/info/:pid' element={<Info />} />
       <Route path='/info/:pid' element={<Info />} />
       <Route path='/shipping-policy' element={<Shipping />} />
       <Route path='/categories/catinfo' element={<CatInfo />} />
       <Route path='/more/moreinfo' element={<MoreInfo />} />
       <Route path='/*' element={<ErrorPage />} />
-
     </Routes>
   )
 }

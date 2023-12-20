@@ -27,6 +27,7 @@ export default function Home() {
             alignItems: "center"
         }}>
             <Carousel
+                infiniteLoop
                 autoPlay
                 swipeable={true}
                 showThumbs={false}
@@ -78,7 +79,7 @@ export default function Home() {
                         }}>
                             <FlatList
                                 list={Features.bs.slice(0, 4)}
-                                renderItem={(item,index) => (
+                                renderItem={(item, index) => (
                                     <ProductCard key={index} cat={null} item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
@@ -99,8 +100,8 @@ export default function Home() {
                             justifyContent: mobile ? "space-evenly" : "normal"
                         }}>
                             <FlatList
-                                list={Features.ms.slice(0, 4)}
-                                renderItem={(item,index) => (
+                                list={Features.es.slice(0, 4)}
+                                renderItem={(item, index) => (
                                     <ProductCard key={index} cat={null} item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
@@ -129,7 +130,7 @@ export default function Home() {
                         }}>
                             <FlatList
                                 list={Features.ms.slice(0, 4)}
-                                renderItem={(item,index) => (
+                                renderItem={(item, index) => (
                                     <ProductCard key={index} cat={null} item={item} />
                                 )}
                                 renderWhenEmpty={() => <div>List is empty!</div>}
@@ -171,7 +172,7 @@ export default function Home() {
                                 }}>
                                     <FlatList
                                         list={Features.bs.slice(0, 2)}
-                                        renderItem={(item,index) => (
+                                        renderItem={(item, index) => (
                                             <ImageCard key={index} item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
@@ -201,8 +202,8 @@ export default function Home() {
                                     />
                                     <FlatList
                                         list={Features.bs.slice(2, 4)}
-                                        renderItem={(item,index) => (
-                                            <ImageCard  key={index} item={item} />
+                                        renderItem={(item, index) => (
+                                            <ImageCard key={index} item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
                                     />
@@ -226,9 +227,9 @@ export default function Home() {
                                 justifyContent: "space-evenly",
                             }}>
                                 <FlatList
-                                    list={[0, 1, 2, 3]}
-                                    renderItem={(item,index) => (
-                                        <ImageCard key={index} />
+                                    list={Features.es.slice(0, 4)}
+                                    renderItem={(item, index) => (
+                                        <ImageCard key={index} item={item} />
                                     )}
                                     renderWhenEmpty={() => <div>List is empty!</div>}
                                 />
@@ -273,7 +274,7 @@ export default function Home() {
                                 }}>
                                     <FlatList
                                         list={Features.ms.slice(0, 2)}
-                                        renderItem={(item,index) => (
+                                        renderItem={(item, index) => (
                                             <ImageCard key={index} item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
@@ -305,7 +306,7 @@ export default function Home() {
                                     />
                                     <FlatList
                                         list={Features.ms.slice(2, 4)}
-                                        renderItem={(item,index) => (
+                                        renderItem={(item, index) => (
                                             <ImageCard key={index} item={item} />
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}

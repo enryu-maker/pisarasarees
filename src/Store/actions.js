@@ -180,7 +180,6 @@ export const LoginAction = (setLoading, data, navigate) => {
                 payload: response.data.access,
             })
             setLoading(false);
-            navigate("/")
         } catch (error) {
             toast.error(error.response.data, {
                 position: "top-center",
@@ -197,7 +196,7 @@ export const LoginAction = (setLoading, data, navigate) => {
     }
 }
 
-export const RegisterAction = (setLoading, data) => {
+export const RegisterAction = (setLoading, data,navigate) => {
     return async dispatch => {
         setLoading(true);
         try {
@@ -213,7 +212,9 @@ export const RegisterAction = (setLoading, data) => {
                     progress: undefined,
                     theme: "light",
                 });
-                window.location.reload("/login")
+                setTimeout(()=>{
+                    navigate("/login")
+                },1500)
             }
             else {
                 toast.error(response?.data?.msg, {
@@ -325,7 +326,11 @@ export const getFeatured = () => {
                 type: "bestselling"
             }
         })
-        // let es = await axios.get(baseURL + '/getfeatured/?type=exclusive')
+        let es = await axios.get(baseURL + '/getfeatured/',{
+            params: {
+                type: "exclusive"
+            }
+        })
         let ms = await axios.get(baseURL + '/getfeatured/', {
             params: {
                 type: "bestvalue"
@@ -333,7 +338,7 @@ export const getFeatured = () => {
         })
         data = {
             "bs": bs.data,
-            // "es": es,
+            "es": es.data,
             "ms": ms.data
         }
         dispatch({
@@ -496,27 +501,11 @@ export const getProductInfo = (id, setProduct, setLoading) => {
 
 export const OrderStart = (data, setLoading) => {
     setLoading(true)
+    console.log(data)
     return async dispatch => {
         await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
-            console.log(resp)
-            axios.post('https://api.phonepe.com/apis/hermes/pg/v1/pay', {
-                request: resp?.data?.payload
-            }
-                , {
-                    headers: {
-                        accept: 'text/plain',
-                        'Content-Type': 'application/json',
-                        'X-VERIFY': resp?.data?.header,
-                    }
-                }
-            ).then((res) => {
-                window.open(res?.data?.instrumentResponse?.redirectInfo?.url)
-                console.log(res)
-            }).catch((err) => {
-                console.log(err)
-            })
+            window.open(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
             setLoading(false)
-
         }).catch((error) => {
             console.log(error)
             setLoading(false)

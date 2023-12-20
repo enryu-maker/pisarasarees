@@ -11,6 +11,7 @@ export default function Checkout() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     const { state } = useLocation()
+    const [orderData,setOrderData] = React.useState(state)
     const toFindDuplicates = arry => arry?.filter((item, index) => arry?.indexOf(item) !== index)
     const [data, setData] = React.useState(state)
     const [loading, setLoading] = React.useState(false)
@@ -47,16 +48,14 @@ export default function Checkout() {
                 alignItems: "center"
             }}>
                 <p style={{
-                    fontFamily: "Black",
-                    fontSize: 20,
+                    fontFamily: "Bold",
                     letterSpacing: 1,
                     marginBlock: 0
                 }}>
-                    Total Payable Amount
+                    Total Payable Amount :
                 </p>
                 <p style={{
-                    fontFamily: "Black",
-                    fontSize: 20,
+                    fontFamily: "Bold",
                     letterSpacing: 1,
                     marginBlock: 0
                 }}>
@@ -98,11 +97,24 @@ export default function Checkout() {
             />
             <button
                 onClick={() => {
-                    data["address_id"] = activeAddress?.id
-                    data["payment_mode"] = "ONLINE"
-                    data["delivery_mode"] = 1
+                    if(orderData?.single){
+                        orderData["address_id"] = activeAddress?.id
+                        orderData["payment_mode"] = "ONLINE"
+                        orderData["delivery_mode"] = 1
+                        delete orderData['single']
+                        dispatch(OrderStart(data, setLoading))
+                    }
+                    else{
+                        orderData["address_id"] = activeAddress?.id
+                        orderData["payment_mode"] = "ONLINE"
+                        orderData["delivery_mode"] = 1
+                        dispatch(OrderStart(data, setLoading))
+                    }
+                    // data["address_id"] = activeAddress?.id
+                    // data["payment_mode"] = "ONLINE"
+                    // data["delivery_mode"] = 1
                     // console.log(data)
-                    dispatch(OrderStart(data, setLoading))
+                    // dispatch(OrderStart(data, setLoading))
                 }}
                 style={{
                     display:"flex",

@@ -226,8 +226,9 @@ export default function Info() {
                                         navigate('/checkout', {
                                             state: {
                                                     items:[state?.item?.id],
+                                                    single:true,
                                                     total:product?.discounted_price,
-                                                    subtotal:JSON.stringify(state?.item?.id + `:` + product?.discounted_price )
+                                                    subtotal:`{${state?.item?.id } : ${product?.discounted_price} }`
                                             }
                                         })
                                     }}
@@ -249,7 +250,6 @@ export default function Info() {
                                     onClick={() => {
                                         product["id"] = state?.item?.id
                                         dispatch(addCart(cart, product))
-                                        window.location.reload()
                                     }}
                                     style={{
                                         backgroundColor: product?.quantity <= 0?colors.Primary3 : colors.Primary2,

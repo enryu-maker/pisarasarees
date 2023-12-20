@@ -10,7 +10,8 @@ const initialState = {
     profile: {},
     location: {},
     tempaddress: {},
-    blogs: []
+    blogs: [],
+    orderData: {}
 };
 export default (state = initialState, action) => {
     switch (action.type) {
