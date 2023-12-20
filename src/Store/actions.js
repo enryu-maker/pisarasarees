@@ -180,6 +180,7 @@ export const LoginAction = (setLoading, data, navigate) => {
                 payload: response.data.access,
             })
             setLoading(false);
+            navigate("/")
         } catch (error) {
             toast.error(error.response.data, {
                 position: "top-center",
