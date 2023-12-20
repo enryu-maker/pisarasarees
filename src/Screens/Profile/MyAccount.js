@@ -130,8 +130,14 @@ export default function MyAccount() {
                     </p>
                 </div>
                 <div style={{
+                    height:"auto",
+                    width:2,
+                    backgroundColor:colors.darkGrey
+                }}/>
+                <div style={{
                     width: "80vw",
-                    borderInlineStart: `3px solid ${colors.darkGrey}`
+                    height:"auto",
+                    marginBlockEnd:120
                 }}>
                     {switchActive(active)}
                 </div>

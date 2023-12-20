@@ -227,7 +227,7 @@ export default function Info() {
                                             state: {
                                                     items:[state?.item?.id],
                                                     single:true,
-                                                    total:product?.discounted_price,
+                                                    total:parseInt(product?.discounted_price),
                                                     subtotal:`{${state?.item?.id } : ${product?.discounted_price} }`
                                             }
                                         })

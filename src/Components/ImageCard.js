@@ -25,12 +25,12 @@ export default function ImageCard({
                 alignItems: "center",
                 height: mobile ? "auto" : "300px",
                 width: 220,
-                backgroundColor: "white",
+                backgroundColor: colors.Primary1,
                 margin: 10,
                 borderRadius: 10,
                 boxShadow: "5px 5px 10px #88888850",
                 fontFamily: "Bold",
-                cursor:"pointer"
+                cursor: "pointer",
             }}
 
         >
@@ -38,11 +38,9 @@ export default function ImageCard({
                 alt={item?.name}
                 src={baseURL + item?.image}
                 style={{
-                    width: "95%",
-                    height: "85%",
-                    borderRadius: 10,
-                    borderRight: 10,
-                    objectFit:"fill"
+                    width: 210,
+                    height: "88%",
+                    marginInline: 10,
                 }} />
             <p style={{
                 fontSize: 18,

@@ -57,19 +57,14 @@ export default function Home() {
             {
                 mobile ?
                     <>
-                        <Textra
-                            style={{
-                                width: "90%",
-                                fontFamily: "Black",
-                                fontSize: 25,
-                                marginBlockStart: 10,
-                                letterSpacing: 2,
-                            }}
-                            data={["Best Selling Sarees"]}
-                            effect="leftRight"
-                            duration={3000}
-                            stopDuration={2000}
-                        />
+                        <p style={{
+                            fontFamily: "Black",
+                            fontSize: 25,
+                            letterSpacing: 2,
+                        }}>
+                            Best Selling Sarees .
+                        </p>
+
                         <div style={{
                             width: mobile ? "90vw" : "65vw",
                             display: "flex",
@@ -107,20 +102,13 @@ export default function Home() {
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
                         </div>
-                        <Textra
-                            style={{
-                                width: "90%",
-                                fontFamily: "Black",
-                                fontSize: 25,
-                                marginBlockStart: 10,
-                                letterSpacing: 2,
-
-                            }}
-                            data={["Best Value Sarees"]}
-                            effect="leftRight"
-                            duration={3000}
-                            stopDuration={1500}
-                        />
+                        <p style={{
+                            fontFamily: "Black",
+                            fontSize: 25,
+                            letterSpacing: 2,
+                        }}>
+                            Best Value Sarees .
+                        </p>
                         <div style={{
                             width: mobile ? "90vw" : "65vw",
                             display: "flex",

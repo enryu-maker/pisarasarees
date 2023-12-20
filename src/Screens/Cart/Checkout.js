@@ -12,60 +12,37 @@ export default function Checkout() {
     const mobile = useMediaQuery('(max-width: 768px)');
     const { state } = useLocation()
     const [orderData, setOrderData] = React.useState(state)
-    const toFindDuplicates = arry => arry?.filter((item, index) => arry?.indexOf(item) !== index)
-    const [data, setData] = React.useState(state)
     const [loading, setLoading] = React.useState(false)
     const activeAddress = useSelector(state => state.Reducers.activeAddress)
     const dispatch = useDispatch()
     React.useEffect(() => {
         dispatch(getActiveAddress())
     }, [])
+
     return (
         <div style={{
             display: "flex",
             flexDirection: "column",
-            height: 550,
-            width: mobile ? "90%" : "50%",
+            height: "auto",
+            width: mobile ? "95%" : "45%",
             marginBlock: 50,
-            borderRadius: 10,
+            borderRadius: 8,
             boxShadow: "5px 5px 10px #88888850",
             justifyContent: "space-evenly",
             alignItems: "center",
+            paddingBlock: 10
         }}>
             <p style={{
                 fontFamily: "Black",
                 fontSize: 30,
                 letterSpacing: 1,
-                marginBlock: 0
+                marginBlock: 5
             }}>
                 Checkout
             </p>
             <div style={{
                 display: "flex",
                 width: mobile ? "95%" : "75%",
-                height: 50,
-                justifyContent: "space-between",
-                alignItems: "center"
-            }}>
-                <p style={{
-                    fontFamily: "Bold",
-                    letterSpacing: 1,
-                    marginBlock: 0
-                }}>
-                    Total Payable Amount :
-                </p>
-                <p style={{
-                    fontFamily: "Bold",
-                    letterSpacing: 1,
-                    marginBlock: 0
-                }}>
-                    ₹ {state?.total}
-                </p>
-            </div>
-            <div style={{
-                display: "flex",
-                width: mobile ? "95%" : "75%",
-                height: 50,
                 justifyContent: "space-between",
                 alignItems: "center"
             }}>
@@ -73,28 +50,202 @@ export default function Checkout() {
                     fontFamily: "Black",
                     fontSize: 20,
                     letterSpacing: 1,
-                    marginBlock: 0
+                    marginBlock: 10
                 }}>
-                    Address
+                    Delivery Address
                 </p>
-                <FaArrowRight onClick={() => {
-                    navigate("/more/moreinfo", {
-                        state: {
-                            id: 1,
-                            name: "Address"
-                        }
-                    })
-                }}
-                    color={colors.Primary2}
-                    size={25} />
+                <p onClick={() => {
+                        navigate(mobile?"/more/moreinfo":"account", {
+                            state: {
+                                id: 1,
+                                name: "Address"
+                            }
+                        })
+                }} style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 10,
+                    color: colors.Primary2,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                    {
+                        mobile ?
+                            <>
+                                Change
+                                <FaArrowRight
+                                    color={colors.Primary2}
+                                    style={{
+                                        marginInline: 5
+                                    }}
+                                />
+                            </>
+                            :
+                            <>
+                                Change Address
+                                <FaArrowRight
+                                    color={colors.Primary2}
+                                    style={{
+                                        marginInline: 5
+                                    }}
+                                />
+                            </>
+                    }
+
+                </p>
+
             </div>
             <AddressCard
                 containerStyle={{
-                    width: mobile ? "88%" : "75%"
+                    width: mobile ? "88%" : "75%",
+                    marginTop: 0
                 }}
-                activeAddress={activeAddress}
+                // activeAddress={activeAddress}
                 item={activeAddress}
             />
+            <div style={{
+                height: 2,
+                width: mobile ? "88%" : "75%",
+                backgroundColor: "lightgray",
+                marginBlock: 20
+            }} />
+            <p style={{
+                fontFamily: "Black",
+                fontSize: 20,
+                letterSpacing: 1,
+                marginBlock: 10,
+                textAlign: "left",
+                width: mobile ? "95%" : "75%",
+            }}>
+                Order Summary
+            </p>
+            <div style={{
+                display: "flex",
+                width: mobile ? "88%" : "75%",
+                height: 50,
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    Subtotal :
+                </p>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    ₹ {state?.total}
+                </p>
+            </div>
+            <div style={{
+                display: "flex",
+                width: mobile ? "88%" : "75%",
+                height: 50,
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    Delivery Charges :
+                </p>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    ₹ 100
+                </p>
+            </div>
+            <div style={{
+                display: "flex",
+                width: mobile ? "88%" : "75%",
+                height: 50,
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    Total :
+                </p>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    ₹ {state?.total + 100}
+                </p>
+            </div>
+            <div style={{
+                display: "flex",
+                width: mobile ? "88%" : "75%",
+                height: 50,
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    Promotion Applied :
+                </p>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5
+                }}>
+                    - ₹ 100
+                </p>
+            </div>
+            <div style={{
+                height: 2,
+                width: mobile ? "88%" : "75%",
+                backgroundColor: "lightgray",
+                marginBlock: 20
+            }} />
+            <div style={{
+                display: "flex",
+                width: mobile ? "88%" : "75%",
+                height: 50,
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5,
+                    fontSize: 25,
+                    color: colors.Primary2
+                }}>
+                    Order Total :
+                </p>
+                <p style={{
+                    fontFamily: "Bold",
+                    letterSpacing: 1,
+                    marginBlock: 5,
+                    fontSize: 25,
+                    color: colors.Primary2
+                }}>
+                    ₹ {state?.total} /-
+                </p>
+            </div>
+            <div style={{
+                height: 2,
+                width: mobile ? "88%" : "75%",
+                backgroundColor: "lightgray",
+                marginBlock: 20
+            }} />
             <button
                 onClick={() => {
                     if (orderData?.single) {
@@ -103,7 +254,7 @@ export default function Checkout() {
                         orderData["delivery_mode"] = 1
                         orderData["total"] = orderData["total"] * 100
                         console.log(orderData)
-                        dispatch(OrderStart(data, setLoading))
+                        dispatch(OrderStart(orderData, setLoading, navigate))
                     }
                     else {
                         orderData["address_id"] = activeAddress?.id
@@ -111,19 +262,13 @@ export default function Checkout() {
                         orderData["delivery_mode"] = 1
                         orderData["total"] = orderData["total"] * 100
                         console.log(orderData)
-                        dispatch(OrderStart(data, setLoading))
+                        dispatch(OrderStart(orderData, setLoading, navigate))
                     }
-                    // data["address_id"] = activeAddress?.id
-                    // data["payment_mode"] = "ONLINE"
-                    // data["delivery_mode"] = 1
-                    // console.log(data)
-                    // dispatch(OrderStart(data, setLoading))
                 }}
                 style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    border: "none",
                     backgroundColor: colors.Primary2,
                     padding: 10,
                     fontFamily: "Bold",
@@ -141,10 +286,26 @@ export default function Checkout() {
                             color={colors.Primary1}
                         />
                         :
-                        "Pay Now"
+                        "Place Your Order"
                 }
 
             </button>
+            <p style={{
+                fontFamily:"Regular",
+                fontSize:12,
+                width: mobile ? "88%" : "75%",
+                textAlign:"justify"
+            }}>
+                By placing your order, you agree to <span onClick={()=>{
+                    navigate("/privacy-policy")
+                }} style={{
+                    color:colors.Primary2
+                }}>Pisara's privacy policy</span> and <span onClick={()=>{
+                    navigate("/terms&condition")
+                }} style={{
+                    color:colors.Primary2
+                }}>conditions</span> of use.
+            </p>
         </div>
     )
 }

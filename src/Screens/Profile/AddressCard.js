@@ -54,7 +54,10 @@ export default function AddressCard({
                         <p
                             style={{
                                 fontFamily: "Regular",
+                                fontSize:14,
                                 marginBlock: 0,
+                                width:"100%",
+                                textAlign:"justify"
                             }}>
                             {`${item?.address_line_1 + item?.address_line_2},${item?.city}, ${item?.state}, ${item?.state}, ${item?.country}, ${item?.pin_code}`}
                         </p>

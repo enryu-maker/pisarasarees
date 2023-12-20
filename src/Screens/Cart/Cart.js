@@ -125,8 +125,7 @@ export default function Cart() {
                       flexDirection: "row",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      // height: 100,
-                      paddingBlock:10,
+                      paddingBlock:15,
                       width: "85vw",
                     }}>
                       <div style={{
@@ -141,13 +140,6 @@ export default function Cart() {
                           marginBlock: 0
                         }}>
                           {` Qty : ${qty} Pieces`}
-                        </p>
-                        <p style={{
-                          fontFamily: "Regular",
-                          fontSize: 18,
-                          marginBlock: 0
-                        }}>
-                          Delivery : Free
                         </p>
                         <p style={{
                           fontFamily: "Regular",
@@ -184,31 +176,24 @@ export default function Cart() {
                         fontFamily: "Black",
                         fontSize: 30,
                         letterSpacing: 2,
+                        marginBlock:0
                       }}>
                         Cart Overview
                       </p>
                       <p style={{
-                        fontFamily: "Bold",
-                        fontSize: 20,
-                      }}>
-                        {`Subtotal : ₹ ${price}`}
-                      </p>
-                      <p style={{
-                        fontFamily: "Bold",
-                        fontSize: 20,
-                        textAlign: "justify"
-                      }}>
-                        Delivery Charges : <span style={{
-                          color: colors.green
-                        }}> Free</span>
-                      </p>
-                      <p style={{
-                        fontFamily: "Bold",
-                        fontSize: 20,
-                        textAlign: "justify"
-                      }}>
-                        {`Total : ₹ ${price}`}
-                      </p>
+                          fontFamily: "Bold",
+                          fontSize: 18,
+                          marginBlock:10
+                        }}>
+                          {` Qty : ${qty} Pieces`}
+                        </p>
+                        <p style={{
+                          fontFamily: "Bold",
+                          fontSize: 18,
+                          marginBlock:10
+                        }}>
+                          {`Total : ₹ ${price}`}
+                        </p>
                       <button
                         onClick={() => {
                           navigate("checkout",{
@@ -221,7 +206,6 @@ export default function Cart() {
                           })
                         }}
                         style={{
-                          border: "none",
                           backgroundColor: colors.Primary2,
                           padding: 10,
                           fontFamily: "Bold",
@@ -248,7 +232,6 @@ export default function Cart() {
           justifyContent: "center",
           alignItems: "center",
           alignSelf: "center",
-          // backgroundColor:"ActiveCaption"
         }}>
           <FlatList
             list={cart}

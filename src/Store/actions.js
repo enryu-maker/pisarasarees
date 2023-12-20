@@ -500,14 +500,13 @@ export const getProductInfo = (id, setProduct, setLoading) => {
     }
 }
 
-export const OrderStart = (data, setLoading) => {
+export const OrderStart = (data, setLoading,) => {
     setLoading(true)
     console.log(data)
     return async dispatch => {
         await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
             console.log(resp)
-            window.open(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
-            setLoading(false)
+            window.location.replace(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
         }).catch((error) => {
             console.log(error)
             setLoading(false)

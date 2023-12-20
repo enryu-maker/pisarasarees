@@ -47,10 +47,9 @@ export default function CartCard({
                                 <img
                                     src={baseURL + item?.image}
                                     style={{
-                                        width: "100%",
-                                        height: "75%",
-                                        marginBlockStart: 10,
-                                        objectFit: "fill",
+                                        width: "95%",
+                    height: "82%",
+                    marginBlockStart: 10,
 
                                     }} />
                         }
@@ -76,7 +75,7 @@ export default function CartCard({
                                 flexDirection: "row",
                                 display: "flex",
                                 justifyContent: "space-between",
-                                alignItems: "flex-start",
+                                alignItems: "center",
                                 width: "100%",
                             }}>
 
@@ -104,8 +103,9 @@ export default function CartCard({
                                     color={colors.white}
                                     style={{
                                         backgroundColor: "red",
-                                        padding: 5,
-                                        borderRadius: 5
+                                        padding: 2,
+                                        borderRadius: 5,
+                                        marginBlockEnd:10
                                     }} size={22} />
                             </div>
                         </div>

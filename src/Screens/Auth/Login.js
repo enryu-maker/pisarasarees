@@ -145,10 +145,10 @@ export default function Login() {
                         color: colors.white,
                         width: 200,
                         borderRadius: 8,
-                        display:"flex",
-                        justifyContent:"center",
-                        alignItems:"center",
-                        cursor:"pointer"
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: "pointer"
                     }}
                     onClick={
                         handleSubmit((data) => {
@@ -173,6 +173,22 @@ export default function Login() {
                             /> : "LOGIN"
                     }
                 </button>
+                <p style={{
+                    fontFamily: "Regular",
+                    fontSize: 12,
+                    width: mobile ? "88%" : "75%",
+                    textAlign: "justify"
+                }}>
+                    By logging in, you agree to <span onClick={() => {
+                        navigate("/privacy-policy")
+                    }} style={{
+                        color: colors.Primary2
+                    }}>Pisara's privacy policy</span> and <span onClick={() => {
+                        navigate("/terms&condition")
+                    }} style={{
+                        color: colors.Primary2
+                    }}>conditions</span> of use.
+                </p>
             </div>
             <p style={{
                 fontFamily: "Regular",

@@ -27,9 +27,11 @@ export default function Pending() {
             <p style={{
                 fontFamily: "Regular",
                 letterSpacing: 1,
-                marginBlock: 10
+                marginBlock: 10,
+                width:"90%",
+                textAlign:"justify"
             }}>
-                Payment pending will update automatically if failed deducted amount will be deposited back to same account 
+                Payment pending will update automatically if failed any deducted amount will be deposited back to same account 
             </p>
             <Link to={'/'}
                 style={{
