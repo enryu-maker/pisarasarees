@@ -8,7 +8,7 @@ import FlatList from "flatlist-react/lib";
 import Modal from 'react-modal';
 import { AiOutlineClose, AiOutlineUserAdd } from 'react-icons/ai'
 import { Oval } from "react-loader-spinner";
-import { getAddress, getProfile, getTempAddress, patchProfile, postAddressAction } from "../../Store/actions";
+import { getAddress, getLocation, getProfile, getTempAddress, patchProfile, postAddressAction } from "../../Store/actions";
 import { FaLocationCrosshairs } from "react-icons/fa6";
 export const AccountDetails = () => {
     const { handleSubmit, control, formState: { errors } } = useForm();
@@ -233,12 +233,13 @@ export const Address = () => {
     const AddModal = ({
     }) => {
         const [tempaddress, settempaddress] = React.useState({})
-        const [loading2, setLoading2] = React.useState(false)
-        const { handleSubmit, control, formState: { errors } } = useForm({
-            defaultValues: tempaddress
-        });
         const location = useSelector(state => state.Reducers.location)
 
+        const [loading2, setLoading2] = React.useState(false)
+        const { handleSubmit, control, formState: { errors } } = useForm();
+        // React.useEffect(()=>{
+        //     dispatch(getLocation())
+        // },[location])
         return (
             <Modal
                 isOpen={show}

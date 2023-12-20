@@ -11,7 +11,7 @@ export default function Checkout() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     const { state } = useLocation()
-    const [orderData,setOrderData] = React.useState(state)
+    const [orderData, setOrderData] = React.useState(state)
     const toFindDuplicates = arry => arry?.filter((item, index) => arry?.indexOf(item) !== index)
     const [data, setData] = React.useState(state)
     const [loading, setLoading] = React.useState(false)
@@ -81,7 +81,7 @@ export default function Checkout() {
                     navigate("/more/moreinfo", {
                         state: {
                             id: 1,
-                            name:"Address"
+                            name: "Address"
                         }
                     })
                 }}
@@ -97,17 +97,20 @@ export default function Checkout() {
             />
             <button
                 onClick={() => {
-                    if(orderData?.single){
+                    if (orderData?.single) {
                         orderData["address_id"] = activeAddress?.id
                         orderData["payment_mode"] = "ONLINE"
                         orderData["delivery_mode"] = 1
-                        delete orderData['single']
+                        orderData["total"] = orderData["total"] * 100
+                        console.log(orderData)
                         dispatch(OrderStart(data, setLoading))
                     }
-                    else{
+                    else {
                         orderData["address_id"] = activeAddress?.id
                         orderData["payment_mode"] = "ONLINE"
                         orderData["delivery_mode"] = 1
+                        orderData["total"] = orderData["total"] * 100
+                        console.log(orderData)
                         dispatch(OrderStart(data, setLoading))
                     }
                     // data["address_id"] = activeAddress?.id
@@ -117,9 +120,9 @@ export default function Checkout() {
                     // dispatch(OrderStart(data, setLoading))
                 }}
                 style={{
-                    display:"flex",
-                    justifyContent:"center",
-                    alignItems:"center",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     border: "none",
                     backgroundColor: colors.Primary2,
                     padding: 10,
