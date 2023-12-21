@@ -39,7 +39,7 @@ export default function ProductCard({
                 src={baseURL + item?.image}
                 style={{
                     width: "100%",
-                    height: "82%",
+                    height: "78%",
                     marginBlockStart: 10,
                     // objectFit:"fill",
                 }} />

@@ -8,8 +8,10 @@ import FlatList from "flatlist-react/lib";
 import Modal from 'react-modal';
 import { AiOutlineClose, AiOutlineUserAdd } from 'react-icons/ai'
 import { Oval } from "react-loader-spinner";
-import { getAddress, getLocation, getProfile, getTempAddress, patchProfile, postAddressAction } from "../../Store/actions";
-import { FaLocationCrosshairs } from "react-icons/fa6";
+import { getAddress, getProfile, patchProfile, postAddressAction } from "../../Store/actions";
+import Invoice from "../../Components/Invoice";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 export const AccountDetails = () => {
     const { handleSubmit, control, formState: { errors } } = useForm();
     const mobile = useMediaQuery('(max-width: 768px)');
@@ -773,6 +775,14 @@ export const Address = () => {
     )
 }
 export const OrderHistory = () => {
+    const printDocument = () => {
+        html2canvas(document.querySelector("#capture")).then((canvas) => {
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF();
+          pdf.addImage(imgData, "JPEG", 0, 0);
+          pdf.save(`${document.getElementById('content').textContent}.pdf`);
+        });
+      };
     return (
         <div style={{
             display: "flex",
@@ -795,6 +805,9 @@ export const OrderHistory = () => {
                     Orders
                 </p>
             </div>
+            <Invoice/>
+            <button style={{
+            }} onClick={printDocument}>Print</button>
         </div>
     )
 }

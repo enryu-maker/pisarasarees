@@ -39,7 +39,7 @@ export default function ImageCard({
                 src={baseURL + item?.image}
                 style={{
                     width: 210,
-                    height: "88%",
+                    height: "78%",
                     marginInline: 10,
                 }} />
             <p style={{

@@ -48,8 +48,8 @@ export default function CartCard({
                                     src={baseURL + item?.image}
                                     style={{
                                         width: "95%",
-                    height: "82%",
-                    marginBlockStart: 10,
+                                        height: "78%",
+                                        marginBlockStart: 10,
 
                                     }} />
                         }
@@ -105,7 +105,7 @@ export default function CartCard({
                                         backgroundColor: "red",
                                         padding: 2,
                                         borderRadius: 5,
-                                        marginBlockEnd:10
+                                        marginBlockEnd: 10
                                     }} size={22} />
                             </div>
                         </div>

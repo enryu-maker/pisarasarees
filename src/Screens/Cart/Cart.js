@@ -211,11 +211,10 @@ export default function Cart() {
                           fontFamily: "Bold",
                           fontSize: 18,
                           color: colors.white,
-                          width: 200,
                           borderRadius: 8,
                           cursor: "pointer"
                         }}>
-                        Checkout
+                       { `Proceed with ${qty} Items `}
                       </button>
                     </>
                 }

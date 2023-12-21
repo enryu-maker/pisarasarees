@@ -9,4 +9,5 @@ export const images = {
     checked: require('./Images/checked.png'),
     cancle: require('./Images/cancel.png'),
     expired: require('./Images/expired.png'),
+    sign: require('./Images/sign.png'),
 }
