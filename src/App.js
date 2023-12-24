@@ -6,7 +6,7 @@ import Index from './Nav/Index'
 import { colors } from './Assets/Theme'
 import Tab from './Components/Tab'
 import useMediaQuery from './Components/useMediaQuery'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Init, getBannerAction, getBlogs, getFeatured, getHomeBanner, getLocation, getProduct } from './Store/actions'
 import { Oval } from 'react-loader-spinner'
 import { ToastContainer } from 'react-toastify'
@@ -25,6 +25,7 @@ export default function App() {
     await dispatch(getBlogs())
     setLoading(false)
   }
+  const cart = useSelector(state => state.Reducers.cart)
   React.useEffect(() => {
     init()
   }, []);
@@ -67,7 +68,7 @@ export default function App() {
         <Footer />
         {
           mobile ?
-            <Tab />
+            <Tab cart={cart} />
             :
             null
         }

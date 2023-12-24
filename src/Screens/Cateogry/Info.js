@@ -9,6 +9,7 @@ import { baseURL } from '../../Helper/Helper'
 import useMediaQuery from '../../Components/useMediaQuery'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Oval } from 'react-loader-spinner'
 export default function Info() {
     const { state } = useLocation()
     React.useEffect(() => {
@@ -29,7 +30,7 @@ export default function Info() {
     }, [])
     function calcPercentage(x, y) {
         return ((x - y) / y) * 100;
-      }
+    }
     return (
         <div style={{
             display: "flex",
@@ -106,114 +107,130 @@ export default function Info() {
 
 
             </div>
-            <div style={{
-                display: "flex",
-                flexDirection: mobile ? "column" : "row",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                width: "90vw",
-                marginBlock: mobile ? 0 : 50
-            }}>
-                <img
-                    src={baseURL + product?.image}
-                    style={{
-                        height: 550,
-                        width: mobile ? "100%" : "35%",
-                        borderRadius: 10,
-                        objectFit: "contain"
-                    }} />
-                <div style={{
-                    height: 550,
-                    width: mobile ? "95%" : "60%",
-                    borderRadius: 10,
-                    alignSelf: "center"
-                }}>
-                    <p style={{
-                        fontFamily: "Regular",
-                        fontSize: 20,
-                        marginBlock: 0
-                    }}>
-                        {product?.name}
-                    </p>
-                    {
-                        product?.description?.split('|').map(str => <p style={{
-                            fontFamily: "Regular",
-                            fontSize: 14,
-                            marginBlock: 0,
-                            textAlign: "justify"
-                        }}>{str.trim()}</p>)
-                    }
-                    <div style={{
-                        display: "flex",
-                        marginBlock: 5
-                    }}>
-                        <p style={{
-                            fontFamily: "Regular",
-                            letterSpacing: 2,
-                            marginBlock: 0
-                        }}>
-                            4.5
-                        </p>
-                        <Rating style={{
-                            marginInline: 10
-                        }} size={20} readonly initialValue={4} />
-                        <p style={{
-                            fontFamily: "Regular",
-                            letterSpacing: 2,
-                            marginBlock: 0
-                        }}>
-                            31 Rating
-                        </p>
-                    </div>
-                    <div style={{
-                        display: "flex",
-                        marginBlock: 5
-                    }}>
-                        <p style={{
-                            fontFamily: "Regular",
-                            letterSpacing: 2,
-                            fontSize: 22,
-                            marginBlock: 0
-                        }}>
-                            <span style={{
-                                color: "red"
-                            }}>{`-${calcPercentage(product?.mrp,product?.discounted_price)}%`}</span> &nbsp; ₹ {product?.discounted_price} /-
-                        </p>
+            {
+                loading ?
+                    <Oval
+                        height={mobile ? 50 : 80}
+                        width={mobile ? 50 : 80}
+                        color={colors.Primary2}
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel='oval-loading'
+                        secondaryColor={colors.Primary2}
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
+                    />
+                    :
 
-                    </div>
-                    <p style={{
-                        fontFamily: "Regular",
-                        letterSpacing: 2,
-                        marginBlock: 0
+                    <div style={{
+                        display: "flex",
+                        flexDirection: mobile ? "column" : "row",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        width: "90vw",
+                        marginBlock: mobile ? 0 : 50
                     }}>
-                        MRP  : <span style={{ textDecorationLine: "line-through" }}>
-                            ₹ {product?.mrp}
-                        </span>
-                    </p>
-                    <p style={{
-                        fontFamily: "Regular",
-                        marginBlock: 0,
-                        color: "lightgrey"
-                    }}>
-                        Inclusive of all taxes
-                    </p>
-                    <div style={{ height: 1, width: "100%", backgroundColor: "lightgrey" }} />
-                    <p style={{
-                        fontFamily: "Regular",
-                    }}>
-                        Available Quantities : <span
-                        style={{
-                            fontFamily: "Bold",
-                            color: product?.quantity <= 0 ? "red" : colors.darkGrey,
-                        }}
-                        >{product?.quantity <= 0 ? "Out Of Stock" : product?.quantity}</span> 
-                    </p>
-                    <p style={{
-                        fontFamily: "Regular",
-                    }}>
-                        Products Code : {product?.product_code}
-                    </p>
-                    <div style={{ height: 1, width: "100%", backgroundColor: "lightgrey" }} />
+                        <img
+                            src={baseURL + product?.image}
+                            style={{
+                                height: 550,
+                                width: mobile ? "100%" : "35%",
+                                borderRadius: 10,
+                                objectFit: "contain"
+                            }} />
+                        <div style={{
+                            height: 550,
+                            width: mobile ? "95%" : "60%",
+                            borderRadius: 10,
+                            alignSelf: "center"
+                        }}>
+                            <p style={{
+                                fontFamily: "Regular",
+                                fontSize: 20,
+                                marginBlock: 0
+                            }}>
+                                {product?.name}
+                            </p>
+                            {
+                                product?.description?.split('|').map(str => <p style={{
+                                    fontFamily: "Regular",
+                                    fontSize: 14,
+                                    marginBlock: 0,
+                                    textAlign: "justify"
+                                }}>{str.trim()}</p>)
+                            }
+                            <div style={{
+                                display: "flex",
+                                marginBlock: 5
+                            }}>
+                                <p style={{
+                                    fontFamily: "Regular",
+                                    letterSpacing: 2,
+                                    marginBlock: 0
+                                }}>
+                                    4.5
+                                </p>
+                                <Rating style={{
+                                    marginInline: 10
+                                }} size={20} readonly initialValue={4} />
+                                <p style={{
+                                    fontFamily: "Regular",
+                                    letterSpacing: 2,
+                                    marginBlock: 0
+                                }}>
+                                    31 Rating
+                                </p>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                marginBlock: 5
+                            }}>
+                                <p style={{
+                                    fontFamily: "Regular",
+                                    letterSpacing: 2,
+                                    fontSize: 22,
+                                    marginBlock: 0
+                                }}>
+                                    <span style={{
+                                        color: "red"
+                                    }}>{`-${calcPercentage(product?.mrp, product?.discounted_price)}%`}</span> &nbsp; ₹ {product?.discounted_price} /-
+                                </p>
+
+                            </div>
+                            <p style={{
+                                fontFamily: "Regular",
+                                letterSpacing: 2,
+                                marginBlock: 0
+                            }}>
+                                MRP  : <span style={{ textDecorationLine: "line-through" }}>
+                                    ₹ {product?.mrp}
+                                </span>
+                            </p>
+                            <p style={{
+                                fontFamily: "Regular",
+                                marginBlock: 0,
+                                color: "lightgrey"
+                            }}>
+                                Inclusive of all taxes
+                            </p>
+                            <div style={{ height: 1, width: "100%", backgroundColor: "lightgrey" }} />
+                            <p style={{
+                                fontFamily: "Regular",
+                            }}>
+                                Available Quantities : <span
+                                    style={{
+                                        fontFamily: "Bold",
+                                        color: product?.quantity <= 0 ? "red" : colors.darkGrey,
+                                    }}
+                                >{product?.quantity <= 0 ? "Out Of Stock" : product?.quantity}</span>
+                            </p>
+                            <p style={{
+                                fontFamily: "Regular",
+                            }}>
+                                Products Code : {product?.product_code}
+                            </p>
+                            <div style={{ height: 1, width: "100%", backgroundColor: "lightgrey" }} />
                             <div style={{
                                 display: "flex",
                                 marginBlockStart: 20,
@@ -221,19 +238,19 @@ export default function Info() {
                                 justifyContent: "space-between"
                             }}>
                                 <button
-                                    disabled={product?.quantity <= 0?true:false}
+                                    disabled={product?.quantity <= 0 ? true : false}
                                     onClick={() => {
                                         navigate('/checkout', {
                                             state: {
-                                                    items:[state?.item?.id],
-                                                    single:true,
-                                                    total:parseInt(product?.discounted_price),
-                                                    subtotal:`{${state?.item?.id } : ${product?.discounted_price} }`
+                                                items: [state?.item?.id],
+                                                single: true,
+                                                total: parseInt(product?.discounted_price),
+                                                subtotal: `{${state?.item?.id} : ${product?.discounted_price} }`
                                             }
                                         })
                                     }}
                                     style={{
-                                        backgroundColor:product?.quantity <= 0?colors.Primary3 : colors.Primary2,
+                                        backgroundColor: product?.quantity <= 0 ? colors.Primary3 : colors.Primary2,
                                         height: 50,
                                         width: mobile ? 120 : 250,
                                         color: colors.Primary1,
@@ -246,13 +263,16 @@ export default function Info() {
                                     Buy Now
                                 </button>
                                 <button
-                                    disabled={product?.quantity <= 0?true:false}
+                                    disabled={product?.quantity <= 0 ? true : false}
                                     onClick={() => {
                                         product["id"] = state?.item?.id
-                                        dispatch(addCart(cart, product))
+                                        dispatch({
+                                            type: "ADD_TO_CART",
+                                            payload: product
+                                        })
                                     }}
                                     style={{
-                                        backgroundColor: product?.quantity <= 0?colors.Primary3 : colors.Primary2,
+                                        backgroundColor: product?.quantity <= 0 ? colors.Primary3 : colors.Primary2,
                                         height: 50,
                                         width: mobile ? 120 : 250,
                                         color: colors.Primary1,
@@ -265,8 +285,9 @@ export default function Info() {
                                     Add to Cart
                                 </button>
                             </div>
-                </div>
-            </div>
+                        </div>
+                    </div>
+            }
         </div>
     )
 }

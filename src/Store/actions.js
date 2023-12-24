@@ -55,7 +55,7 @@ export const getLocation = () => {
         } else {
             toast.error("Geolocation is not available in your browser.", {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -82,7 +82,7 @@ export const getTempAddress = (setLoading, setAddress) => {
         } else {
             toast.error("Geolocation is not available in your browser.", {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -104,7 +104,7 @@ export const postAddressAction = (setLoading, data, setShow) => {
             if (response.status === 201) {
                 toast.error("Address Added Sucessfully", {
                     position: "top-center",
-                    autoClose: 2000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -117,7 +117,7 @@ export const postAddressAction = (setLoading, data, setShow) => {
             else {
                 toast.error(response.data.msg, {
                     position: "top-center",
-                    autoClose: 2000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -132,7 +132,7 @@ export const postAddressAction = (setLoading, data, setShow) => {
             setLoading(false);
             toast.error(error.response.data.msg, {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -184,7 +184,7 @@ export const LoginAction = (setLoading, data, navigate) => {
         } catch (error) {
             toast.error(error.response.data, {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -205,7 +205,7 @@ export const RegisterAction = (setLoading, data, navigate) => {
             if (response.status === 201) {
                 toast.success('Account Created Sucessfully', {
                     position: "top-center",
-                    autoClose: 2000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -220,7 +220,7 @@ export const RegisterAction = (setLoading, data, navigate) => {
             else {
                 toast.error(response?.data?.msg, {
                     position: "top-center",
-                    autoClose: 2000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -233,7 +233,7 @@ export const RegisterAction = (setLoading, data, navigate) => {
         } catch (error) {
             toast.error(error?.response?.data?.msg, {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -294,7 +294,7 @@ export const setActiveAddress = (id, setLoading) => {
         if (response.status === 200) {
             toast.success('Active Address Changed Sucessfully', {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -306,7 +306,7 @@ export const setActiveAddress = (id, setLoading) => {
         else {
             toast.error('Something Went Wrong', {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -350,14 +350,15 @@ export const getFeatured = () => {
     }
 }
 
-export const addCart = (cart, data) => {
+export const addCart = (cart, data,setLoading) => {
+    setLoading(true)
     return async dispatch => {
         if (cart.length > 0) {
             cart?.map((item) => {
                 if (item.product_code === data.product_code) {
                     toast.success('Added to Cart', {
                         position: "top-center",
-                        autoClose: 2000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -365,11 +366,6 @@ export const addCart = (cart, data) => {
                         progress: undefined,
                         theme: "light",
                     });
-
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 1000)
-
                 }
                 else {
                     cart.push(data)
@@ -377,10 +373,11 @@ export const addCart = (cart, data) => {
                         type: 'ADD_TO_CART',
                         payload: cart,
                     })
+                    console.log(cart)
                     localStorage.setItem("cart", JSON.stringify(cart))
                     toast.success('Added to Cart', {
                         position: "top-center",
-                        autoClose: 2000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -388,12 +385,9 @@ export const addCart = (cart, data) => {
                         progress: undefined,
                         theme: "light",
                     });
-                    setTimeout(() => {
-                        window.location.reload()
-
-                    }, 1000)
                 }
             })
+            setLoading(false)
         }
         else {
             cart.push(data)
@@ -401,10 +395,11 @@ export const addCart = (cart, data) => {
                 type: 'ADD_TO_CART',
                 payload: cart,
             })
+            console.log(cart)
             localStorage.setItem("cart", JSON.stringify(cart))
             toast.success('Added to Cart', {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -412,11 +407,7 @@ export const addCart = (cart, data) => {
                 progress: undefined,
                 theme: "light",
             });
-            setTimeout(() => {
-
-                window.location.reload()
-
-            }, 1000)
+            setLoading(false)
         }
     }
 }
@@ -430,7 +421,7 @@ export const removeCart = (cart, data, setLoading) => {
         await localStorage.setItem("cart", JSON.stringify(new_cart))
         toast.success('Updated from Cart', {
             position: "top-center",
-            autoClose: 2000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -487,7 +478,7 @@ export const getProductInfo = (id, setProduct, setLoading) => {
         catch {
             toast.error("Something Went Wrong", {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -522,7 +513,7 @@ export const patchProfile = (data, setLoading) => {
             let response = await axiosIns.patch(baseURL + `/updateuserdetails/`, data);
             toast.success(response.data.msg, {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -534,7 +525,7 @@ export const patchProfile = (data, setLoading) => {
         catch {
             toast.error("Something Went Wrong", {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

@@ -26,7 +26,6 @@ export default function Cart() {
     data.map((item) => {
       p = p + parseInt(item?.discounted_price)
       q = q + parseInt(item?.quantity)
-      console.log(item)
       if (item?.id in id){
       }
       else{
@@ -34,7 +33,6 @@ export default function Cart() {
       }
       subtotal[item?.id] = item?.discounted_price
     })
-    console.log(tid)
     setPrice(p)
     setQty(q)
     setId(tid)
@@ -45,8 +43,8 @@ export default function Cart() {
       behavior: "smooth"
     })
     getTotal(cart)
-  }, [])
-  console.log(id)
+  }, [cart])
+
   return (
     <div style={{
       display: "flex",
@@ -55,7 +53,6 @@ export default function Cart() {
       alignItems: "center",
       width: "100%"
     }}>
-
       <div style={{
         width: "88%",
         display: "flex",

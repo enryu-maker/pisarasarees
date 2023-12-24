@@ -2,13 +2,12 @@ import React from 'react'
 import { colors } from '../Assets/Theme'
 import { TfiMore } from "react-icons/tfi";
 import { Link, useLocation } from 'react-router-dom';
-import { IoIosMore } from "react-icons/io";
 import { CiShoppingCart, CiHome, CiMenuBurger } from "react-icons/ci";
 import { useSelector } from 'react-redux';
-export default function Tab() {
+export default function Tab({
+    cart
+}) {
     const location = useLocation()
-    const cart = useSelector(state => state.Reducers.cart)
-    console.log(cart)
     return (
         <div
             style={{
@@ -78,7 +77,7 @@ export default function Tab() {
                     top: 0,
                 }}
                 >
-                    {cart.length}
+                    {cart?.length}
                 </p>
                 <CiShoppingCart size={32} color={colors.Primary1} />
                 <p
