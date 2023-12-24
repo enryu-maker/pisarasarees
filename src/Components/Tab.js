@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 export default function Tab() {
     const location = useLocation()
     const cart = useSelector(state => state.Reducers.cart)
+    console.log(cart)
     return (
         <div
             style={{

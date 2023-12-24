@@ -13,10 +13,13 @@ export default function Checkout() {
     const { state } = useLocation()
     const [orderData, setOrderData] = React.useState(state)
     const [loading, setLoading] = React.useState(false)
+    const [total, setTotal] = React.useState(0)
+
     const activeAddress = useSelector(state => state.Reducers.activeAddress)
     const dispatch = useDispatch()
     React.useEffect(() => {
         dispatch(getActiveAddress())
+        setTotal(orderData?.total)
     }, [])
     const [active, setActive] = React.useState({
         "address": false,
@@ -26,6 +29,12 @@ export default function Checkout() {
 
     const [index, setIndex] = React.useState(0)
     function Address() {
+        React.useEffect(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }, [])
         return (
             <>
                 <p style={{
@@ -133,6 +142,12 @@ export default function Checkout() {
     }
 
     function CheckoutSection() {
+        React.useEffect(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }, [])
         return (
             <>
                 <p style={{
@@ -358,6 +373,12 @@ export default function Checkout() {
         )
     }
     function Order() {
+        React.useEffect(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }, [])
         return (
             <>
                 <div style={{
@@ -383,7 +404,7 @@ export default function Checkout() {
                         fontSize: 25,
                         color: colors.Primary2
                     }}>
-                        ₹ {state?.total} /-
+                        ₹ {total} /-
                     </p>
                 </div>
                 <button

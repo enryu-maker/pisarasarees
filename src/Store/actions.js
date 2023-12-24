@@ -55,7 +55,7 @@ export const getLocation = () => {
         } else {
             toast.error("Geolocation is not available in your browser.", {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -82,7 +82,7 @@ export const getTempAddress = (setLoading, setAddress) => {
         } else {
             toast.error("Geolocation is not available in your browser.", {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -104,7 +104,7 @@ export const postAddressAction = (setLoading, data, setShow) => {
             if (response.status === 201) {
                 toast.error("Address Added Sucessfully", {
                     position: "top-center",
-                    autoClose: 5000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -117,7 +117,7 @@ export const postAddressAction = (setLoading, data, setShow) => {
             else {
                 toast.error(response.data.msg, {
                     position: "top-center",
-                    autoClose: 5000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -132,7 +132,7 @@ export const postAddressAction = (setLoading, data, setShow) => {
             setLoading(false);
             toast.error(error.response.data.msg, {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -180,11 +180,11 @@ export const LoginAction = (setLoading, data, navigate) => {
                 payload: response.data.access,
             })
             setLoading(false);
-            navigate("/")
+            window.location.reload()
         } catch (error) {
             toast.error(error.response.data, {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -197,7 +197,7 @@ export const LoginAction = (setLoading, data, navigate) => {
     }
 }
 
-export const RegisterAction = (setLoading, data,navigate) => {
+export const RegisterAction = (setLoading, data, navigate) => {
     return async dispatch => {
         setLoading(true);
         try {
@@ -205,7 +205,7 @@ export const RegisterAction = (setLoading, data,navigate) => {
             if (response.status === 201) {
                 toast.success('Account Created Sucessfully', {
                     position: "top-center",
-                    autoClose: 5000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -213,14 +213,14 @@ export const RegisterAction = (setLoading, data,navigate) => {
                     progress: undefined,
                     theme: "light",
                 });
-                setTimeout(()=>{
+                setTimeout(() => {
                     navigate("/login")
-                },1500)
+                }, 1500)
             }
             else {
                 toast.error(response?.data?.msg, {
                     position: "top-center",
-                    autoClose: 5000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -233,7 +233,7 @@ export const RegisterAction = (setLoading, data,navigate) => {
         } catch (error) {
             toast.error(error?.response?.data?.msg, {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -294,7 +294,7 @@ export const setActiveAddress = (id, setLoading) => {
         if (response.status === 200) {
             toast.success('Active Address Changed Sucessfully', {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -306,7 +306,7 @@ export const setActiveAddress = (id, setLoading) => {
         else {
             toast.error('Something Went Wrong', {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -327,7 +327,7 @@ export const getFeatured = () => {
                 type: "bestselling"
             }
         })
-        let es = await axios.get(baseURL + '/getfeatured/',{
+        let es = await axios.get(baseURL + '/getfeatured/', {
             params: {
                 type: "exclusive"
             }
@@ -357,7 +357,7 @@ export const addCart = (cart, data) => {
                 if (item.product_code === data.product_code) {
                     toast.success('Added to Cart', {
                         position: "top-center",
-                        autoClose: 5000,
+                        autoClose: 2000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -365,6 +365,11 @@ export const addCart = (cart, data) => {
                         progress: undefined,
                         theme: "light",
                     });
+
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000)
+
                 }
                 else {
                     cart.push(data)
@@ -375,7 +380,7 @@ export const addCart = (cart, data) => {
                     localStorage.setItem("cart", JSON.stringify(cart))
                     toast.success('Added to Cart', {
                         position: "top-center",
-                        autoClose: 5000,
+                        autoClose: 2000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -383,6 +388,10 @@ export const addCart = (cart, data) => {
                         progress: undefined,
                         theme: "light",
                     });
+                    setTimeout(() => {
+                        window.location.reload()
+
+                    }, 1000)
                 }
             })
         }
@@ -395,7 +404,7 @@ export const addCart = (cart, data) => {
             localStorage.setItem("cart", JSON.stringify(cart))
             toast.success('Added to Cart', {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -403,6 +412,11 @@ export const addCart = (cart, data) => {
                 progress: undefined,
                 theme: "light",
             });
+            setTimeout(() => {
+
+                window.location.reload()
+
+            }, 1000)
         }
     }
 }
@@ -416,7 +430,7 @@ export const removeCart = (cart, data, setLoading) => {
         await localStorage.setItem("cart", JSON.stringify(new_cart))
         toast.success('Updated from Cart', {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -429,20 +443,6 @@ export const removeCart = (cart, data, setLoading) => {
             payload: new_cart,
         })
         setLoading(false)
-        // cart?.map((item) => {
-        //     if (item.product_code === data.product_code) {
-        //         toast.success('Added to Cart', {
-        //             position: "top-center",
-        //             autoClose: 5000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //             progress: undefined,
-        //             theme: "light",
-        //         });
-        //     }
-        // })
     }
 }
 
@@ -487,7 +487,7 @@ export const getProductInfo = (id, setProduct, setLoading) => {
         catch {
             toast.error("Something Went Wrong", {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -522,7 +522,7 @@ export const patchProfile = (data, setLoading) => {
             let response = await axiosIns.patch(baseURL + `/updateuserdetails/`, data);
             toast.success(response.data.msg, {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -534,7 +534,7 @@ export const patchProfile = (data, setLoading) => {
         catch {
             toast.error("Something Went Wrong", {
                 position: "top-center",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

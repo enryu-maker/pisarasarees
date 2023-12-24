@@ -18,8 +18,8 @@ export default function Invoice({
         <div id='capture' style={{
             display: "flex",
             flexDirection: "column",
-            height: "8in",
-            width: "5in",
+            height: "6in",
+            width: "4in",
             justifyContent: "space-evenly",
             alignItems: "center",
             backgroundColor: "white",
