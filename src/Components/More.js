@@ -4,7 +4,7 @@ import useMediaQuery from './useMediaQuery';
 import { Link } from 'react-router-dom';
 import { colors } from '../Assets/Theme';
 import { useDispatch, useSelector } from 'react-redux';
-import { Logout } from '../Store/actions';
+import { Logout, getOrders } from '../Store/actions';
 export default function More() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');

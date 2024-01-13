@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { colors } from '../../Assets/Theme'
 import { Rating } from 'react-simple-star-rating'
 import { useDispatch, useSelector } from 'react-redux'
-import { addCart, getProductInfo } from '../../Store/actions'
+import { addCart, checkPincode, getProductInfo } from '../../Store/actions'
 import { baseURL } from '../../Helper/Helper'
 import useMediaQuery from '../../Components/useMediaQuery'
 import { toast } from 'react-toastify';
@@ -20,16 +20,19 @@ export default function Info() {
     }, [])
     const mobile = useMediaQuery('(max-width: 768px)');
     const [product, setProduct] = React.useState({})
+    const [id, setId] = React.useState(state?.item?.id)
     const [loading, setLoading] = React.useState(false)
     const navigate = useNavigate()
+    const [message, setMessage] = React.useState("")
     const [rating, setRating] = React.useState(4)
     const dispatch = useDispatch()
-    const cart = useSelector(state => state.Reducers.cart)
+    const location = useSelector(state => state.Reducers.location)
     React.useEffect(() => {
         dispatch(getProductInfo(state?.item?.id, setProduct, setLoading))
+        // dispatch(checkPincode(location?.pincode, setLoading, setMessage))
     }, [])
     function calcPercentage(x, y) {
-        return ((x - y) / y) * 100;
+        return Math.round(((x - y) / y) * 100);
     }
     return (
         <div style={{
@@ -171,6 +174,18 @@ export default function Info() {
                                 }}>
                                     4.5
                                 </p>
+                                
+                                {
+                                    message === "" ? null :
+                                        <p style={{
+                                            fontFamily: "Regular",
+                                            letterSpacing: 2,
+                                            marginBlock: 0
+                                        }}>
+                                            {message}
+                                        </p>
+                                }
+
                                 <Rating style={{
                                     marginInline: 10
                                 }} size={20} readonly initialValue={4} />
@@ -240,12 +255,15 @@ export default function Info() {
                                 <button
                                     disabled={product?.quantity <= 0 ? true : false}
                                     onClick={() => {
+                                        var item = {}
+                                        item[JSON.stringify(`${state?.item?.id}`)] = 1
                                         navigate('/checkout', {
                                             state: {
                                                 items: [state?.item?.id],
                                                 single: true,
                                                 total: parseInt(product?.discounted_price),
-                                                subtotal: `{${state?.item?.id} : ${product?.discounted_price} }`
+                                                subtotal: `{${state?.item?.id} : ${product?.discounted_price} }`,
+                                                subtotal_qty: item
                                             }
                                         })
                                     }}

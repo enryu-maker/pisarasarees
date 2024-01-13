@@ -7,6 +7,7 @@ import AddressCard from '../Profile/AddressCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { OrderStart, getActiveAddress } from '../../Store/actions';
 import { Oval } from 'react-loader-spinner';
+import { object } from 'prop-types';
 export default function Checkout() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
@@ -14,7 +15,7 @@ export default function Checkout() {
     const [orderData, setOrderData] = React.useState(state)
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
-
+    const [payment_mode, setPaymentMode] = React.useState("COD")
     const activeAddress = useSelector(state => state.Reducers.activeAddress)
     const dispatch = useDispatch()
     React.useEffect(() => {
@@ -172,7 +173,11 @@ export default function Checkout() {
                     accentColor: colors.Primary2,
                     height: 20,
                     width: 20
-                }} defaultChecked type='radio' name="payment_mode" value="ONLINE"></input>ONLINE</label>
+                }} disabled={true}  
+                onChange={()=>{
+                    setPaymentMode("ONLINE")
+                }}
+                type='radio' name="payment_mode" value="ONLINE"></input>ONLINE (Coming Soon)</label>
                 <label style={{
                     textAlign: "left",
                     width: mobile ? "88%" : "75%",
@@ -184,7 +189,10 @@ export default function Checkout() {
                     accentColor: colors.Primary2,
                     height: 20,
                     width: 20
-                }} disabled={true} type='radio' name="payment_mode" value="COD"></input>COD (Not Available)</label>
+                }} defaultChecked 
+                onChange={()=>{
+                    setPaymentMode("COD")
+                }}  type='radio' name="payment_mode" value="COD"></input>COD</label>
                 <div style={{
                     height: 2,
                     width: mobile ? "88%" : "75%",
@@ -412,15 +420,16 @@ export default function Checkout() {
                         setActive({...active, checkout: true })
                         if (orderData?.single) {
                             orderData["address_id"] = activeAddress?.id
-                            orderData["payment_mode"] = "ONLINE"
+                            orderData["payment_mode"] = payment_mode
                             orderData["delivery_mode"] = 1
                             orderData["total"] = orderData["total"] * 100
+                            
                             console.log(orderData)
                             dispatch(OrderStart(orderData, setLoading, navigate))
                         }
                         else {
                             orderData["address_id"] = activeAddress?.id
-                            orderData["payment_mode"] = "ONLINE"
+                            orderData["payment_mode"] = payment_mode
                             orderData["delivery_mode"] = 1
                             orderData["total"] = orderData["total"] * 100
                             console.log(orderData)

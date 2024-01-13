@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { colors } from '../../Assets/Theme';
 import { AccountDetails, Address, OrderHistory } from './AccountSection';
 import { useDispatch } from 'react-redux';
-import { Logout, getActiveAddress, getAddress, getProfile } from '../../Store/actions';
+import { Logout, getActiveAddress, getAddress, getOrders, getProfile } from '../../Store/actions';
+import { useSelector } from 'react-redux';
 export default function MyAccount() {
     const {state}=useLocation()
     const [active, setActive] = React.useState(state?.id)
@@ -29,6 +30,7 @@ export default function MyAccount() {
         dispatch(getProfile())
         dispatch(getAddress())
         dispatch(getActiveAddress())
+        // dispatch(getOrders())
     }, [])
     return (
         <div style={{

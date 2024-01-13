@@ -12,7 +12,8 @@ const initialState = {
     location: {},
     tempaddress: {},
     blogs: [],
-    orderData: {}
+    orderData: {},
+    order:[],
 };
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -30,6 +31,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 blogs: action.payload,
+            };
+        case "ORDER":
+            return {
+                ...state,
+                order: action.payload,
             };
         case "GET_LOCATION":
             return {

@@ -16,6 +16,7 @@ export default function Cart() {
   const [qty, setQty] = React.useState(0)
   const [id, setId] = React.useState([])
   const [subtotal, setSubtotal] = React.useState({})
+  const [subtotal_qty, setSubtotal_qty] = React.useState({})
   const toFindDuplicates = arry => arry?.filter((item, index) => arry?.indexOf(item) !== index)
 
 
@@ -32,6 +33,7 @@ export default function Cart() {
         tid.push(item?.id)
       }
       subtotal[item?.id] = item?.discounted_price
+      subtotal_qty[item?.id] = item?.quantity
     })
     setPrice(p)
     setQty(q)
@@ -160,7 +162,9 @@ export default function Cart() {
                             state:{
                               "total":price,
                               "items":id,
-                              "subtotal":JSON.stringify(subtotal)
+                              "subtotal":JSON.stringify(subtotal),
+                              "subtotal_qty":subtotal_qty,
+                              "single":false
                             }
                           })
                         }}
@@ -198,6 +202,7 @@ export default function Cart() {
                               "total":price,
                               "items":id,
                               "subtotal":JSON.stringify(subtotal),
+                              "subtotal_qty":subtotal_qty,
                               "single":false
                             }
                           })

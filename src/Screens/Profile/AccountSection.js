@@ -8,10 +8,12 @@ import FlatList from "flatlist-react/lib";
 import Modal from 'react-modal';
 import { AiOutlineClose, AiOutlineUserAdd } from 'react-icons/ai'
 import { Oval } from "react-loader-spinner";
-import { getAddress, getProfile, patchProfile, postAddressAction } from "../../Store/actions";
+import { getAddress, getOrders, getProfile, patchProfile, postAddressAction } from "../../Store/actions";
 import Invoice from "../../Components/Invoice";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import OrderCard from "./OrderCard";
+import OrderInfo from "./OrderInfo";
 export const AccountDetails = () => {
     const { handleSubmit, control, formState: { errors } } = useForm();
     const mobile = useMediaQuery('(max-width: 768px)');
@@ -195,9 +197,9 @@ export const AccountDetails = () => {
                                 })
                             }
                             style={{
-                                display:"flex",
-                                justifyContent:"center",
-                                alignItems:"center",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
                                 border: "none",
                                 backgroundColor: colors.Primary2,
                                 padding: 10,
@@ -747,7 +749,7 @@ export const Address = () => {
             }}>
                 <FlatList
                     list={address}
-                    renderItem={(item,index) => (
+                    renderItem={(item, index) => (
                         <AddressCard key={index} activeAddress={activeAddress} item={item} />
                     )}
                     renderWhenEmpty={() => <div
@@ -775,14 +777,12 @@ export const Address = () => {
     )
 }
 export const OrderHistory = () => {
-    const printDocument = () => {
-        html2canvas(document.querySelector("#capture")).then((canvas) => {
-          const imgData = canvas.toDataURL("image/png");
-          const pdf = new jsPDF();
-          pdf.addImage(imgData, "JPEG", 0, 0);
-          pdf.save(`${document.getElementById('content').textContent}.pdf`);
-        });
-      };
+    const dispatch = useDispatch()
+    const [data, setData] = React.useState([])
+    const mobile = useMediaQuery('(max-width: 768px)');
+    React.useEffect(() => {
+        dispatch(getOrders(setData))
+    }, [])
     return (
         <div style={{
             display: "flex",
@@ -795,7 +795,7 @@ export const OrderHistory = () => {
                 display: "flex",
                 width: "90%",
                 justifyContent: "flex-start",
-                alignItems:"center"
+                alignItems: "center"
             }}>
                 <p style={{
                     fontFamily: "Bold",
@@ -805,9 +805,38 @@ export const OrderHistory = () => {
                     Orders
                 </p>
             </div>
-            <Invoice/>
-            <button style={{
-            }} onClick={printDocument}>Print</button>
+            <div style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: mobile ? "center" : "space-between",
+                alignItems: "center",
+                height: 100,
+                width: "90%",
+            }}>
+                <FlatList
+                    list={data?.created}
+                    renderItem={(item, index) => (
+                        <OrderCard items={item} key={index} />
+                    )}
+                    renderWhenEmpty={() => <div
+                        style={{
+                            display: "flex",
+                            width: "90%",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <p style={{
+                            fontFamily: "Black",
+                            fontSize: 30,
+                            alignSelf: "center",
+                            letterSpacing: 2
+                        }}>
+                            No Orders
+                        </p>
+                    </div>}
+                />
+            </div>
         </div>
     )
 }

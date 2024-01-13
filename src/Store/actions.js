@@ -67,6 +67,39 @@ export const getLocation = () => {
     }
 }
 
+export const checkPincode = (pincode, setLoading,setMessage) => {
+    return async dispatch =>{
+        setLoading(true)
+        try{
+            let response = await axios.post("http://smarttrack.ctbsplus.dtdc.com/ratecalapi/PincodeApiCall",{
+                "orgPincode": '422011',
+                "desPincode": pincode
+            });
+            if(response?.SERV_LIST[0]?.b2C_SERVICEABLE==="YES"){
+                setMessage("")
+            }
+            else{
+                setMessage("Delivery Not Available")
+            }
+            setLoading(false)
+        }
+        catch{
+            toast.error("Something Went Wrong", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setLoading(false)
+        }
+
+    }
+}
+
 export const getTempAddress = (setLoading, setAddress) => {
     return async dispatch => {
         setLoading(true)
@@ -180,7 +213,7 @@ export const LoginAction = (setLoading, data, navigate) => {
                 payload: response.data.access,
             })
             setLoading(false);
-            window.location.reload()
+            navigate("/")
         } catch (error) {
             toast.error(error.response.data, {
                 position: "top-center",
@@ -350,7 +383,7 @@ export const getFeatured = () => {
     }
 }
 
-export const addCart = (cart, data,setLoading) => {
+export const addCart = (cart, data, setLoading) => {
     setLoading(true)
     return async dispatch => {
         if (cart.length > 0) {
@@ -491,17 +524,54 @@ export const getProductInfo = (id, setProduct, setLoading) => {
     }
 }
 
-export const OrderStart = (data, setLoading,) => {
+export const OrderStart = (data, setLoading,navigate) => {
     setLoading(true)
     console.log(data)
     return async dispatch => {
-        await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
-            console.log(resp)
-            window.location.replace(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
-        }).catch((error) => {
-            console.log(error)
-            setLoading(false)
+        if (data?.payment_mode === "COD") {
+            await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
+                setLoading(false)
+                toast.success('Order Placed Sucessfully', {
+                    position: "top-center",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                localStorage.removeItem("cart")
+                dispatch({
+                    type: 'CART',
+                    payload: [],
+                })
+                navigate('/success')
+            }).catch((error) => {
+                console.log(error)
+                setLoading(false)
 
+            })
+        }
+        else {
+            await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
+                window.location.replace(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
+            }).catch((error) => {
+                console.log(error)
+                setLoading(false)
+            })
+        }
+
+    }
+}
+
+export const getOrders = (setData) => {
+    return async dispatch => {
+        let response = await axiosIns.get(baseURL + '/listcreateorder/')
+        setData(response.data)
+        dispatch({
+            type: 'ORDERS',
+            payload: response.data,
         })
     }
 }

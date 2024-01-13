@@ -21,16 +21,17 @@ export default function Success() {
                 fontFamily: "Black",
                 fontSize: 30,
                 letterSpacing: 1,
-                marginBlock: 0
+                marginBlock: 0,
+                textAlign: "center",
             }}>
-                Payment Successful
+                Order Placed Successfully
             </p>
             <p style={{
                 fontFamily: "Regular",
                 letterSpacing: 1,
                 marginBlock: 10
             }}>
-                Payment Successful order placed
+                Your order will be delivered soon
             </p>
             <Link to={'/'}
                 style={{

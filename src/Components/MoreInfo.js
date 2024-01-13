@@ -3,8 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { colors } from '../Assets/Theme'
 import useMediaQuery from './useMediaQuery'
 import { AccountDetails, Address, OrderHistory } from '../Screens/Profile/AccountSection'
-import { getActiveAddress, getAddress, getProfile } from '../Store/actions'
+import { getActiveAddress, getAddress, getOrders, getProfile } from '../Store/actions'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 export default function MoreInfo() {
   const { state } = useLocation()
   const navigate = useNavigate()
@@ -38,7 +39,7 @@ export default function MoreInfo() {
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
-      height:"100%"
+      height: "100%"
     }}>
       <div style={{
         width: "88%",
@@ -87,10 +88,10 @@ export default function MoreInfo() {
         <p>{state?.name}</p>
       </div>
       <div style={{
-        height:"100vh",
-        width:"100vw"
+        height: "100vh",
+        width: "100vw"
       }}>
-      {switchActive(state?.id)}
+        {switchActive(state?.id)}
       </div>
     </div>
   )
