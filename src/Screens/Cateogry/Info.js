@@ -256,7 +256,7 @@ export default function Info() {
                                     disabled={product?.quantity <= 0 ? true : false}
                                     onClick={() => {
                                         var item = {}
-                                        item[JSON.stringify(`${state?.item?.id}`)] = 1
+                                        item[state?.item?.id] = 1
                                         navigate('/checkout', {
                                             state: {
                                                 items: [state?.item?.id],

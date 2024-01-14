@@ -12,6 +12,7 @@ export default function Checkout() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     const { state } = useLocation()
+    console.log(state)
     const [orderData, setOrderData] = React.useState(state)
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
@@ -131,7 +132,7 @@ export default function Checkout() {
                     }}
                         onClick={() => {
                             setIndex(1)
-                            setActive({...active, address: true })
+                            setActive({ ...active, address: true })
                         }}
                     >
                         Next
@@ -173,11 +174,11 @@ export default function Checkout() {
                     accentColor: colors.Primary2,
                     height: 20,
                     width: 20
-                }} disabled={true}  
-                onChange={()=>{
-                    setPaymentMode("ONLINE")
-                }}
-                type='radio' name="payment_mode" value="ONLINE"></input>ONLINE (Coming Soon)</label>
+                }} disabled={true}
+                    onChange={() => {
+                        setPaymentMode("ONLINE")
+                    }}
+                    type='radio' name="payment_mode" value="ONLINE"></input>ONLINE (Coming Soon)</label>
                 <label style={{
                     textAlign: "left",
                     width: mobile ? "88%" : "75%",
@@ -189,10 +190,10 @@ export default function Checkout() {
                     accentColor: colors.Primary2,
                     height: 20,
                     width: 20
-                }} defaultChecked 
-                onChange={()=>{
-                    setPaymentMode("COD")
-                }}  type='radio' name="payment_mode" value="COD"></input>COD</label>
+                }} defaultChecked
+                    onChange={() => {
+                        setPaymentMode("COD")
+                    }} type='radio' name="payment_mode" value="COD"></input>COD</label>
                 <div style={{
                     height: 2,
                     width: mobile ? "88%" : "75%",
@@ -350,7 +351,7 @@ export default function Checkout() {
                     }}
                         onClick={() => {
                             setIndex(0)
-                            setActive({...active, address: false })
+                            setActive({ ...active, address: false })
                         }}
                     >
                         Back
@@ -371,7 +372,7 @@ export default function Checkout() {
                     }}
                         onClick={() => {
                             setIndex(2)
-                            setActive({...active, payment: true })
+                            setActive({ ...active, payment: true })
                         }}
                     >
                         Next
@@ -417,24 +418,12 @@ export default function Checkout() {
                 </div>
                 <button
                     onClick={() => {
-                        setActive({...active, checkout: true })
-                        if (orderData?.single) {
-                            orderData["address_id"] = activeAddress?.id
-                            orderData["payment_mode"] = payment_mode
-                            orderData["delivery_mode"] = 1
-                            orderData["total"] = orderData["total"] * 100
-                            
-                            console.log(orderData)
-                            dispatch(OrderStart(orderData, setLoading, navigate))
-                        }
-                        else {
-                            orderData["address_id"] = activeAddress?.id
-                            orderData["payment_mode"] = payment_mode
-                            orderData["delivery_mode"] = 1
-                            orderData["total"] = orderData["total"] * 100
-                            console.log(orderData)
-                            dispatch(OrderStart(orderData, setLoading, navigate))
-                        }
+                        setActive({ ...active, checkout: true })
+                        orderData["address_id"] = activeAddress?.id
+                        orderData["payment_mode"] = payment_mode
+                        orderData["delivery_mode"] = 1
+                        orderData["total"] = orderData["total"] * 100
+                        dispatch(OrderStart(orderData, setLoading, navigate))
                     }}
                     style={{
                         display: "flex",
