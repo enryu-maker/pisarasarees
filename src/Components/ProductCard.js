@@ -4,12 +4,20 @@ import { colors } from '../Assets/Theme';
 import useMediaQuery from './useMediaQuery';
 import { useNavigate } from 'react-router-dom';
 import { baseURL } from '../Helper/Helper';
+import { useDispatch } from 'react-redux';
+import { getProductInfo } from '../Store/actions';
 export default function ProductCard({
     item,
     cat
 }) {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
+    const [loading, setLoading] = React.useState(false)
+    const [product, setProduct] = React.useState({})
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(getProductInfo(item?.id, setProduct, setLoading))
+    }, [])
     return (
         <div
             style={{
@@ -41,6 +49,7 @@ export default function ProductCard({
                     width: "100%",
                     height: "78%",
                     marginBlockStart: 10,
+                    opacity: product?.quantity > 0 ? 1 : 0.5,
                     // objectFit:"fill",
                 }} />
             <div
@@ -67,22 +76,35 @@ export default function ProductCard({
                     alignItems: "flex-start",
                     width: "100%",
                 }}>
-                    <p style={{
-                        fontFamily: "Bold",
-                        fontSize: mobile ? 14 : 20,
-                        marginBlock: 0,
-                        textAlign: "center",
-                        color: colors.Primary2
-                    }}>
-                        ₹ {item?.discounted_price} <span style={{
-                            textDecorationLine: "line-through",
-                            fontFamily: "Regular",
-                            fontSize: mobile ? 12 : 18,
-                            color: colors.darkGrey
-                        }}>
-                            ₹ {item?.mrp}
-                        </span>
-                    </p>
+                    {
+                        product?.quantity > 0 ?
+                            <p style={{
+                                fontFamily: "Bold",
+                                fontSize: mobile ? 14 : 20,
+                                marginBlock: 0,
+                                textAlign: "center",
+                                color: colors.Primary2
+                            }}>
+                                ₹ {item?.discounted_price} <span style={{
+                                    textDecorationLine: "line-through",
+                                    fontFamily: "Regular",
+                                    fontSize: mobile ? 12 : 18,
+                                    color: colors.darkGrey
+                                }}>
+                                    ₹ {item?.mrp}
+                                </span>
+                            </p>
+                            :
+                            <p style={{
+                                fontFamily: "Bold",
+                                fontSize: mobile ? 14 : 20,
+                                marginBlock: 0,
+                                textAlign: "center",
+                                color: "red"
+                            }}>
+                                Out of Stock
+                            </p>
+                    }
                 </div>
             </div>
         </div>
