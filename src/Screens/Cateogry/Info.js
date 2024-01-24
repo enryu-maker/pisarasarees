@@ -10,8 +10,9 @@ import useMediaQuery from '../../Components/useMediaQuery'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Oval } from 'react-loader-spinner'
+import { FaLink } from "react-icons/fa6";
 export default function Info() {
-    const { state } = useLocation()
+    const { state, pathname } = useLocation()
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -20,15 +21,14 @@ export default function Info() {
     }, [])
     const mobile = useMediaQuery('(max-width: 768px)');
     const [product, setProduct] = React.useState({})
-    const [id, setId] = React.useState(state?.item?.id)
     const [loading, setLoading] = React.useState(false)
+    const [loading1, setLoading1] = React.useState(false)
     const navigate = useNavigate()
     const [message, setMessage] = React.useState("")
     const [rating, setRating] = React.useState(4)
     const dispatch = useDispatch()
-    const location = useSelector(state => state.Reducers.location)
     React.useEffect(() => {
-        dispatch(getProductInfo(state?.item?.id, setProduct, setLoading))
+        dispatch(getProductInfo(pathname.split('/').slice(-1)[0], setProduct, setLoading))
         // dispatch(checkPincode(location?.pincode, setLoading, setMessage))
     }, [])
     function calcPercentage(x, y) {
@@ -41,7 +41,7 @@ export default function Info() {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <div style={{
+            {/* <div style={{
                 width: "88%",
                 display: "flex",
                 flexDirection: "row",
@@ -66,8 +66,8 @@ export default function Info() {
                 >
                     Home
                 </Link>
-                <p>/</p>
-                {
+                <p>/</p> */}
+                {/* {
                     state.cat === null ? null :
                         <>
                             <p
@@ -106,10 +106,10 @@ export default function Info() {
                             <p>/</p>
                         </>
                 }
-                <p>{product?.product_code}</p>
+                <p>{product?.product_code}</p> */}
 
 
-            </div>
+            {/* </div> */}
             {
                 loading ?
                     <Oval
@@ -149,11 +149,46 @@ export default function Info() {
                             alignSelf: "center"
                         }}>
                             <p style={{
+                                display: "flex",
+                                alignItems: "center",
                                 fontFamily: "Regular",
                                 fontSize: 20,
                                 marginBlock: 0
                             }}>
                                 {product?.name}
+                                {
+                                    loading ?
+                                        <Oval
+                                            height={20}
+                                            width={20}
+                                        />
+                                        :
+                                        <FaLink
+                                            onClick={() => {
+                                                setLoading1(true)
+                                                setTimeout(async () => {
+                                                    navigator.clipboard.writeText("www.pisarasarees.in/#" + pathname)
+                                                }, 3000)
+                                                toast.success("Link Copied", {
+                                                    position: "top-center",
+                                                    autoClose: 1000,
+                                                    hideProgressBar: false,
+                                                    closeOnClick: true,
+                                                    pauseOnHover: true,
+                                                    draggable: true,
+                                                    progress: undefined,
+                                                    theme: "light",
+                                                });
+                                                setLoading1(false)
+
+                                            }}
+                                            size={20}
+                                            style={{
+                                                paddingInline: 10,
+                                            }}
+                                        />
+                                }
+
                             </p>
                             {
                                 product?.description?.split('|').map(str => <p style={{
@@ -174,7 +209,7 @@ export default function Info() {
                                 }}>
                                     4.5
                                 </p>
-                                
+
                                 {
                                     message === "" ? null :
                                         <p style={{
