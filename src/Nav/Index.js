@@ -23,6 +23,7 @@ import Success from '../Screens/Cart/Success'
 import Fail from '../Screens/Cart/Fail'
 import Faild from '../Screens/Cart/Faild'
 import Pending from '../Screens/Cart/Pending'
+import ViewAll from '../Screens/Home/ViewAll'
 
 export default function Index() {
   const access = useSelector(state => state.Reducers.access)
@@ -32,6 +33,7 @@ export default function Index() {
       <Route path='/login' element={access === null ? <Login /> : <ErrorPage />} />
       <Route path='/register' element={access === null ? <Register /> : <ErrorPage />} />
       <Route path='/cart' element={<Cart />} />
+      <Route path='/viewall' element={<ViewAll />} />
       <Route path='/blog' element={<Blog />} />
       <Route path='/account' element={access === null ? <Login /> : <MyAccount />} />
       <Route path='/account/more/:pid' element={access === null ? <Login /> : <MyAccount />} />
@@ -50,6 +52,7 @@ export default function Index() {
       <Route path='/more' element={<More />} />
       <Route path='/categories/catinfo/info/:pid' element={<Info />} />
       <Route path='/info/:pid' element={<Info />} />
+      <Route path='/viewall/info/:pid' element={<Info />} />
       <Route path='/shipping-policy' element={<Shipping />} />
       <Route path='/categories/catinfo' element={<CatInfo />} />
       <Route path='/more/moreinfo' element={<MoreInfo />} />

@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Init, getBannerAction, getBlogs, getFeatured, getHomeBanner, getLocation, getProduct } from './Store/actions'
 import { Oval } from 'react-loader-spinner'
 import { ToastContainer } from 'react-toastify'
+import Maintain from './Screens/Home/Maintain'
 export default function App() {
   const mobile = useMediaQuery('(max-width: 768px)');
   const [loading, setLoading] = React.useState(true)

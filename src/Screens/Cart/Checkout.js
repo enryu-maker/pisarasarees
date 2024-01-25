@@ -174,7 +174,8 @@ export default function Checkout() {
                     accentColor: colors.Primary2,
                     height: 20,
                     width: 20
-                }} disabled={true}
+                }} 
+                    disabled={true}
                     onChange={() => {
                         setPaymentMode("ONLINE")
                     }}

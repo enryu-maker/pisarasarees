@@ -14,6 +14,7 @@ export default function Cat() {
         })
     }, [])
     const categories = useSelector(state => state.Reducers.cat)
+    // console.log(categories[0].value.data)
     return (
         <div style={{
             display: "flex",

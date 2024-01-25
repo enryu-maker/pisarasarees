@@ -167,7 +167,7 @@ export default function Info() {
                                             onClick={() => {
                                                 setLoading1(true)
                                                 setTimeout(async () => {
-                                                    navigator.clipboard.writeText("www.pisarasarees.in/#" + pathname)
+                                                    await navigator.clipboard.writeText("www.pisarasarees.in/#" + pathname)
                                                 }, 3000)
                                                 toast.success("Link Copied", {
                                                     position: "top-center",

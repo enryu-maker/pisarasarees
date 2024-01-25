@@ -6,6 +6,8 @@ import { colors } from '../../Assets/Theme'
 import useMediaQuery from '../../Components/useMediaQuery'
 export default function CatInfo() {
     const mobile = useMediaQuery('(max-width: 768px)');
+    const [sorted,setSorted] = React.useState([])
+
     const navigate = useNavigate()
     const { state } = useLocation()
     React.useEffect(() => {
@@ -13,6 +15,11 @@ export default function CatInfo() {
             top: 0,
             behavior: "smooth"
         })
+        var data = state?.item?.value?.data
+        data.sort(function (a, b) {
+            return a.discounted_price - b.discounted_price;
+        });
+        setSorted(data)
     }, [])
     return (
         <div style={{
@@ -89,7 +96,7 @@ export default function CatInfo() {
                 justifyContent: mobile ? "space-evenly" : "center",
             }}>
                 <FlatList
-                    list={state?.item?.value?.data}
+                    list={sorted}
                     renderItem={(item,index) => (
                         <ProductCard item={item} key={index} cat={state?.item?.name} />
                     )}

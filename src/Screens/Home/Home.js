@@ -8,7 +8,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { useSelector } from 'react-redux'
 import { baseURL } from '../../Helper/Helper'
+import { colors } from '../../Assets/Theme'
+import { useNavigate } from 'react-router-dom'
 export default function Home() {
+    const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     const Banner = useSelector(state => state.Reducers.banner)
     const Features = useSelector(state => state.Reducers.featured)
@@ -35,7 +38,7 @@ export default function Home() {
                 showArrows={false}
                 showStatus={false}
                 interval={3500}
-                transitionTime={2500}
+                transitionTime={2000}
 
             >
                 {
@@ -57,13 +60,39 @@ export default function Home() {
             {
                 mobile ?
                     <>
-                        <p style={{
-                            fontFamily: "Black",
-                            fontSize: 25,
-                            letterSpacing: 2,
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            alignSelf: "center"
                         }}>
-                            Best Selling Sarees .
-                        </p>
+                            <p style={{
+                                fontFamily: "Regular",
+                                fontSize: 20,
+                                letterSpacing: 2,
+                                textTransform: "capitalize"
+                            }}>
+                                BEST SELLING SAREES .
+                            </p>
+                            <button
+                                onClick={() => {
+                                    navigate('/viewall')
+                                }}
+                                style={{
+                                    backgroundColor: "transparent",
+                                    height: 50,
+                                    width: mobile ? 120 : 250,
+                                    color: colors.Primary2,
+                                    fontFamily: "Bold",
+                                    fontSize: mobile ? 16 : 20,
+                                    borderRadius: 10,
+                                    cursor: "pointer",
+                                    border: "none"
+                                }}
+                            >
+                                View All
+                            </button>
+                        </div>
 
                         <div style={{
                             width: mobile ? "90vw" : "65vw",
@@ -80,13 +109,38 @@ export default function Home() {
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
                         </div>
-                        <p style={{
-                            fontFamily: "Black",
-                            fontSize: 25,
-                            letterSpacing: 2,
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center"
                         }}>
-                            Exclusive Sarees .
-                        </p>
+                            <p style={{
+                                fontFamily: "Regular",
+                                fontSize: 20,
+                                letterSpacing: 2,
+                                textTransform: "capitalize"
+                            }}>
+                                EXCLUSIVE SAREES .
+                            </p>
+                            <button
+                                onClick={() => {
+                                    navigate('/viewall')
+                                }}
+                                style={{
+                                    backgroundColor: "transparent",
+                                    height: 50,
+                                    width: mobile ? 120 : 250,
+                                    color: colors.Primary2,
+                                    fontFamily: "Bold",
+                                    fontSize: mobile ? 16 : 20,
+                                    borderRadius: 10,
+                                    cursor: "pointer",
+                                    border: "none"
+                                }}
+                            >
+                                View All
+                            </button>
+                        </div>
                         <div style={{
                             width: mobile ? "90vw" : "65vw",
                             display: "flex",
@@ -102,13 +156,39 @@ export default function Home() {
                                 renderWhenEmpty={() => <div>List is empty!</div>}
                             />
                         </div>
-                        <p style={{
-                            fontFamily: "Black",
-                            fontSize: 25,
-                            letterSpacing: 2,
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center"
                         }}>
-                            Best Value Sarees .
-                        </p>
+                            <p style={{
+                                fontFamily: "Regular",
+                                fontSize: 20,
+                                letterSpacing: 2,
+                                textTransform: "capitalize"
+                            }}>
+                                BEST VALUE SAREES .
+                            </p>
+                            <button
+                                onClick={() => {
+                                    navigate('/viewall')
+                                }}
+                                style={{
+                                    backgroundColor: "transparent",
+                                    height: 50,
+                                    width: mobile ? 120 : 250,
+                                    color: colors.Primary2,
+                                    fontFamily: "Bold",
+                                    fontSize: mobile ? 16 : 20,
+                                    borderRadius: 10,
+                                    cursor: "pointer",
+                                    border: "none"
+                                }}
+                            >
+                                View All
+                            </button>
+                        </div>
+
                         <div style={{
                             width: mobile ? "90vw" : "65vw",
                             display: "flex",
@@ -174,20 +254,35 @@ export default function Home() {
                                     justifyContent: "space-evenly",
                                     alignItems: "center"
                                 }}>
-                                    <Textra
-                                        style={{
-                                            width: "30%",
-                                            fontFamily: "Black",
-                                            fontSize: 35,
-                                            marginBlockStart: 10,
+                                    <div style={{
+                                    }}>
+                                        <p style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 20,
                                             letterSpacing: 2,
-
-                                        }}
-                                        data={["Best Selling Sarees ."]}
-                                        effect="leftRight"
-                                        duration={3000}
-                                        stopDuration={2000}
-                                    />
+                                            textTransform: "capitalize"
+                                        }}>
+                                            BEST SELLING SAREES .
+                                        </p>
+                                        <button
+                                            onClick={() => {
+                                                navigate('/viewall')
+                                            }}
+                                            style={{
+                                                backgroundColor: "transparent",
+                                                height: 50,
+                                                width: mobile ? 120 : 250,
+                                                color: colors.Primary2,
+                                                fontFamily: "Bold",
+                                                fontSize: mobile ? 16 : 20,
+                                                borderRadius: 10,
+                                                cursor: "pointer",
+                                                border: "none"
+                                            }}
+                                        >
+                                            View All
+                                        </button>
+                                    </div>
                                     <FlatList
                                         list={Features.bs.slice(2, 4)}
                                         renderItem={(item, index) => (
@@ -195,8 +290,8 @@ export default function Home() {
                                         )}
                                         renderWhenEmpty={() => <div>List is empty!</div>}
                                     />
-                                </div>
 
+                                </div>
                             </div>
                         </div>
 
@@ -207,7 +302,6 @@ export default function Home() {
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
-
                             <div style={{
                                 width: "90%",
                                 display: "flex",
@@ -222,14 +316,38 @@ export default function Home() {
                                     renderWhenEmpty={() => <div>List is empty!</div>}
                                 />
                             </div>
-                            <p style={{
-                                fontFamily: "Black",
-                                fontSize: 40,
-                                letterSpacing: 2,
-                                alignSelf: "left"
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
                             }}>
-                                Exclusive Sarees .
-                            </p>
+                                <p style={{
+                                    fontFamily: "Regular",
+                                    fontSize: 20,
+                                    letterSpacing: 2,
+                                    textTransform: "capitalize"
+                                }}>
+                                    EXCLUSIVE SAREES .
+                                </p>
+                                <button
+                                    onClick={() => {
+                                        navigate('/viewall')
+                                    }}
+                                    style={{
+                                        backgroundColor: "transparent",
+                                        height: 50,
+                                        width: mobile ? 120 : 250,
+                                        color: colors.Primary2,
+                                        fontFamily: "Bold",
+                                        fontSize: mobile ? 16 : 20,
+                                        borderRadius: 10,
+                                        cursor: "pointer",
+                                        border: "none"
+                                    }}
+                                >
+                                    View All
+                                </button>
+                            </div>
                         </div>
                         <div style={{
                             display: "flex",
@@ -278,20 +396,35 @@ export default function Home() {
                                     justifyContent: "space-evenly",
                                 }}>
 
-                                    <Textra
-                                        style={{
-                                            width: "30%",
-                                            fontFamily: "Black",
-                                            fontSize: 35,
-                                            marginBlockStart: 10,
+                                    <div style={{
+                                    }}>
+                                        <p style={{
+                                            fontFamily: "Regular",
+                                            fontSize: 20,
                                             letterSpacing: 2,
-
-                                        }}
-                                        data={["Best Value Sarees ."]}
-                                        effect="leftRight"
-                                        duration={3000}
-                                        stopDuration={1500}
-                                    />
+                                            textTransform: "capitalize"
+                                        }}>
+                                            BEST VALUE SAREES .
+                                        </p>
+                                        <button
+                                            onClick={() => {
+                                                navigate('/viewall')
+                                            }}
+                                            style={{
+                                                backgroundColor: "transparent",
+                                                height: 50,
+                                                width: mobile ? 120 : 250,
+                                                color: colors.Primary2,
+                                                fontFamily: "Bold",
+                                                fontSize: mobile ? 16 : 20,
+                                                borderRadius: 10,
+                                                cursor: "pointer",
+                                                border: "none"
+                                            }}
+                                        >
+                                            View All
+                                        </button>
+                                    </div>
                                     <FlatList
                                         list={Features.ms.slice(2, 4)}
                                         renderItem={(item, index) => (

@@ -555,7 +555,7 @@ export const OrderStart = (data, setLoading,navigate) => {
         }
         else {
             await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
-                window.location.replace(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
+                window.open(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
             }).catch((error) => {
                 console.log(error)
                 setLoading(false)
