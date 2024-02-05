@@ -41,75 +41,6 @@ export default function Info() {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            {/* <div style={{
-                width: "88%",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                color: colors.darkGrey,
-                fontFamily: "Bold",
-                fontSize: 16
-            }}>
-                <Link
-                    to="/"
-                    style={{
-                        textDecoration: "none",
-                        color: colors.darkGrey,
-                    }}
-                    onMouseEnter={(e) => {
-                        e.target.style.color = colors.Primary2;
-                    }}
-                    onMouseLeave={(e) => {
-                        e.target.style.color = colors.darkGrey;
-                    }}
-                >
-                    Home
-                </Link>
-                <p>/</p> */}
-                {/* {
-                    state.cat === null ? null :
-                        <>
-                            <p
-                                onClick={() => {
-                                    navigate(-2)
-                                }}
-                                style={{
-                                    textDecoration: "none",
-                                    color: colors.darkGrey,
-                                    cursor: "pointer"
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.target.style.color = colors.Primary2;
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.target.style.color = colors.darkGrey;
-                                }}
-                            >Categories</p>
-                            <p>/</p>
-                            <p
-                                onClick={() => {
-                                    navigate(-1)
-                                }}
-                                style={{
-                                    textDecoration: "none",
-                                    color: colors.darkGrey,
-                                    cursor: "pointer"
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.target.style.color = colors.Primary2;
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.target.style.color = colors.darkGrey;
-                                }}
-                            >{state.cat}</p>
-                            <p>/</p>
-                        </>
-                }
-                <p>{product?.product_code}</p> */}
-
-
-            {/* </div> */}
             {
                 loading ?
                     <Oval
@@ -157,10 +88,14 @@ export default function Info() {
                             }}>
                                 {product?.name}
                                 {
-                                    loading ?
+                                    loading1 ?
                                         <Oval
-                                            height={20}
-                                            width={20}
+                                            height={15}
+                                            width={15}
+                                            color={colors.Primary2}
+                                            wrapperStyle={{
+                                                marginInline: 10
+                                            }}
                                         />
                                         :
                                         <FaLink
@@ -168,19 +103,18 @@ export default function Info() {
                                                 setLoading1(true)
                                                 setTimeout(async () => {
                                                     await navigator.clipboard.writeText("www.pisarasarees.in/#" + pathname)
+                                                    toast.success("Link Copied", {
+                                                        position: "top-center",
+                                                        autoClose: 1000,
+                                                        hideProgressBar: false,
+                                                        closeOnClick: true,
+                                                        pauseOnHover: true,
+                                                        draggable: true,
+                                                        progress: undefined,
+                                                        theme: "light",
+                                                    });
+                                                    setLoading1(false)
                                                 }, 3000)
-                                                toast.success("Link Copied", {
-                                                    position: "top-center",
-                                                    autoClose: 1000,
-                                                    hideProgressBar: false,
-                                                    closeOnClick: true,
-                                                    pauseOnHover: true,
-                                                    draggable: true,
-                                                    progress: undefined,
-                                                    theme: "light",
-                                                });
-                                                setLoading1(false)
-
                                             }}
                                             size={20}
                                             style={{
