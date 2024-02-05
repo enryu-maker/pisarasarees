@@ -28,7 +28,7 @@ export default function ViewAll() {
         }}>
             <div style={{
                 width: "100vw",
-                height: 200,
+                height: 100,
                 backgroundColor: colors.Primary2,
                 display: "flex",
                 justifyContent: "center",
@@ -36,8 +36,8 @@ export default function ViewAll() {
             }}
             >
                 <p style={{
-                    fontFamily: "Black",
-                    fontSize: 50,
+                    fontFamily: "Bold",
+                    fontSize: 30,
                     letterSpacing: 2,
                     color: colors.Primary1,
                 }}>

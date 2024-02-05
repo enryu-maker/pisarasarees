@@ -25,13 +25,13 @@ export default function ProductCard({
                 flexDirection: "column",
                 justifyContent: "space-between",
                 alignItems: "center",
-                height: mobile ? "220px" : "400px",
+                // height: mobile ? "220px" : "400px",
                 width: mobile ? 170 : 300,
-                backgroundColor: "white",
+                // backgroundColor: "white",
                 marginBlockEnd: 10,
                 marginInline: mobile ? 0 : 5,
                 borderRadius: 10,
-                boxShadow: "5px 5px 10px #88888850",
+                // boxShadow: "5px 5px 10px #88888850",
                 cursor: "pointer"
             }}
             onClick={() => {

@@ -25,10 +25,10 @@ export default function ImageCard({
                 alignItems: "center",
                 height: mobile ? "auto" : "300px",
                 width: 220,
-                backgroundColor: colors.Primary1,
+                // backgroundColor: colors.Primary1,
                 margin: 10,
                 borderRadius: 10,
-                boxShadow: "5px 5px 10px #88888850",
+                // boxShadow: "5px 5px 10px #88888850",
                 fontFamily: "Bold",
                 cursor: "pointer",
             }}

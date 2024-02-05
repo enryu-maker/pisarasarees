@@ -67,23 +67,23 @@ export const getLocation = () => {
     }
 }
 
-export const checkPincode = (pincode, setLoading,setMessage) => {
-    return async dispatch =>{
+export const checkPincode = (pincode, setLoading, setMessage) => {
+    return async dispatch => {
         setLoading(true)
-        try{
-            let response = await axios.post("http://smarttrack.ctbsplus.dtdc.com/ratecalapi/PincodeApiCall",{
+        try {
+            let response = await axios.post("http://smarttrack.ctbsplus.dtdc.com/ratecalapi/PincodeApiCall", {
                 "orgPincode": '422011',
                 "desPincode": pincode
             });
-            if(response?.SERV_LIST[0]?.b2C_SERVICEABLE==="YES"){
+            if (response?.SERV_LIST[0]?.b2C_SERVICEABLE === "YES") {
                 setMessage("")
             }
-            else{
+            else {
                 setMessage("Delivery Not Available")
             }
             setLoading(false)
         }
-        catch{
+        catch {
             toast.error("Something Went Wrong", {
                 position: "top-center",
                 autoClose: 1000,
@@ -524,7 +524,7 @@ export const getProductInfo = (id, setProduct, setLoading) => {
     }
 }
 
-export const OrderStart = (data, setLoading,navigate) => {
+export const OrderStart = (data, setLoading, navigate) => {
     setLoading(true)
     console.log(data)
     return async dispatch => {
@@ -555,7 +555,7 @@ export const OrderStart = (data, setLoading,navigate) => {
         }
         else {
             await axiosIns.post(baseURL + "/listcreateorder/", data).then((resp) => {
-                window.open(resp?.data?.payment_data?.data?.instrumentResponse?.redirectInfo?.url)
+                console.log(resp.data)
             }).catch((error) => {
                 console.log(error)
                 setLoading(false)

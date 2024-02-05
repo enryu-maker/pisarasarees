@@ -67,8 +67,8 @@ export default function Home() {
                             alignSelf: "center"
                         }}>
                             <p style={{
-                                fontFamily: "Regular",
-                                fontSize: 20,
+                                fontFamily: "Bold",
+                                fontSize: mobile ? 16 : 20,
                                 letterSpacing: 2,
                                 textTransform: "capitalize"
                             }}>
@@ -115,8 +115,8 @@ export default function Home() {
                             alignItems: "center"
                         }}>
                             <p style={{
-                                fontFamily: "Regular",
-                                fontSize: 20,
+                                fontFamily: "Bold",
+                                fontSize: mobile ? 16 : 20,
                                 letterSpacing: 2,
                                 textTransform: "capitalize"
                             }}>
@@ -162,8 +162,8 @@ export default function Home() {
                             alignItems: "center"
                         }}>
                             <p style={{
-                                fontFamily: "Regular",
-                                fontSize: 20,
+                                fontFamily: "Bold",
+                                fontSize: mobile ? 16 : 20,
                                 letterSpacing: 2,
                                 textTransform: "capitalize"
                             }}>
