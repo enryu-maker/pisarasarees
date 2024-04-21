@@ -17,7 +17,7 @@ export default function CatInfo() {
         })
         var data = state?.item?.value?.data
         data.sort(function (a, b) {
-            return a.discounted_price - b.discounted_price;
+            return b.discounted_price - a.discounted_price;
         });
         setSorted(data)
     }, [])
