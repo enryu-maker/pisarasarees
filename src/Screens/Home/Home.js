@@ -14,13 +14,18 @@ export default function Home() {
     const navigate = useNavigate()
     const mobile = useMediaQuery('(max-width: 768px)');
     const Banner = useSelector(state => state.Reducers.banner)
-    const Features = useSelector(state => state.Reducers.featured)
-    const homebanner = useSelector(state => state.Reducers.homebanner)
+    const categories = useSelector(state => state.Reducers.cat)
+    const [sorted,setSorted] = React.useState([])
     React.useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         })
+        var data = categories[0]?.value?.data
+        data.sort(function (a, b) {
+            return b.discounted_price - a.discounted_price;
+        });
+        setSorted(data)
     }, [])
     return (
         <div style={{
@@ -56,8 +61,42 @@ export default function Home() {
                 }
 
             </Carousel>
+            <div style={{
+                width: "100vw",
+                height: 100,
+                backgroundColor: colors.Primary2,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}
+            >
+                <p style={{
+                    fontFamily: "Bold",
+                    fontSize: 30,
+                    letterSpacing: 2,
+                    color: colors.Primary1,
+                }}>
+                    Sarees .
+                </p>
+            </div>
+            <div style={{
+                width: mobile ? "95%" : "90%",
+                display: "flex",
+                marginTop: 10,
+                flexWrap: "wrap",
+                alignSelf: "center",
+                justifyContent: mobile ? "space-evenly" : "center",
+            }}>
+                <FlatList
+                    list={sorted}
+                    renderItem={(item, index) => (
+                        <ProductCard item={item} key={index} cat={"Sarees"} />
+                    )}
+                    renderWhenEmpty={() => <div>List is empty!</div>}
+                />
+            </div>
 
-            {
+            {/* {
                 mobile ?
                     <>
                         <div style={{
@@ -436,7 +475,7 @@ export default function Home() {
                             </div>
                         </div>
                     </>
-            }
+            } */}
         </div>
     )
 }
