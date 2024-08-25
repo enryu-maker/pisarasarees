@@ -22,8 +22,8 @@ export default function App() {
     await dispatch(getBannerAction())
     await dispatch(getFeatured())
     await dispatch(getProduct())
-    await dispatch(getLocation())
-    await dispatch(getBlogs())
+    // await dispatch(getLocation())
+    // await dispatch(getBlogs())
     setLoading(false)
   }
   const cart = useSelector(state => state.Reducers.cart)

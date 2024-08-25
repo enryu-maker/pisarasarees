@@ -30,7 +30,7 @@ export default function Index() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/login' element={access === null ? <Login /> : <ErrorPage />} />
+{/* <Route path='/login' element={access === null ? <Login /> : <ErrorPage />} />
       <Route path='/register' element={access === null ? <Register /> : <ErrorPage />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/viewall' element={<ViewAll />} />
@@ -50,12 +50,12 @@ export default function Index() {
       <Route path='/error' element={access === null ? <Login /> : <Faild />} />
       <Route path='/pending' element={access === null ? <Login /> : <Pending />} />
       <Route path='/more' element={<More />} />
-      <Route path='/categories/catinfo/info/:pid' element={<Info />} />
+      <Route path='/categories/catinfo/info/:pid' element={<Info />} /> */}
       <Route path='/info/:pid' element={<Info />} />
-      <Route path='/viewall/info/:pid' element={<Info />} />
+      {/* <Route path='/viewall/info/:pid' element={<Info />} />
       <Route path='/shipping-policy' element={<Shipping />} />
       <Route path='/categories/catinfo' element={<CatInfo />} />
-      <Route path='/more/moreinfo' element={<MoreInfo />} />
+      <Route path='/more/moreinfo' element={<MoreInfo />} /> */}
       <Route path='/*' element={<ErrorPage />} />
     </Routes>
   )

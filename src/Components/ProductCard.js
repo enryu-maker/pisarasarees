@@ -25,7 +25,7 @@ export default function ProductCard({
                 flexDirection: "column",
                 justifyContent: "space-between",
                 alignItems: "center",
-                // height: mobile ? "220px" : "400px",
+                height: mobile ? "220px" : "500px",
                 width: mobile ? 170 : 300,
                 // backgroundColor: "white",
                 marginBlockEnd: 10,
@@ -47,10 +47,10 @@ export default function ProductCard({
                 src={baseURL + item?.image}
                 style={{
                     width: "100%",
-                    height: "78%",
-                    marginBlockStart: 10,
+                borderRadius: 10,
+                    height: "400px",
+                    // marginBlockStart: 10,
                     opacity: product?.quantity > 0 ? 1 : 0.5,
-                    // objectFit:"fill",
                 }} />
             <div
                 style={{

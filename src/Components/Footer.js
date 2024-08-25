@@ -62,60 +62,6 @@ export default function Footer() {
             }}>
             Home
           </Link>
-          {
-            access === null ?
-              <Link
-                to={'/login'}
-                style={{
-                  fontFamily: "Regular",
-                  fontSize: 20,
-                  color: colors.Primary1,
-                  textDecoration: "none",
-                }}>
-                Login
-              </Link>
-              :
-              <Link
-                to={mobile ? "/more" : '/account'}
-                style={{
-                  fontFamily: "Regular",
-                  fontSize: 20,
-                  color: colors.Primary1,
-                  textDecoration: "none",
-                }}>
-                My Account
-              </Link>
-          }
-          <Link
-            to={'/cart'}
-            style={{
-              fontFamily: "Regular",
-              fontSize: 20,
-              color: colors.Primary1,
-              textDecoration: "none",
-            }}>
-            Cart
-          </Link>
-          <Link
-            to={"/categories"}
-            style={{
-              fontFamily: "Regular",
-              fontSize: 20,
-              color: colors.Primary1,
-              textDecoration: "none",
-            }}>
-            Categories
-          </Link>
-          <Link
-            to={"/blog"}
-            style={{
-              fontFamily: "Regular",
-              fontSize: 20,
-              color: colors.Primary1,
-              textDecoration: "none",
-            }}>
-            Blog
-          </Link>
         </div>
         <div style={{
           color: colors.Primary1,
