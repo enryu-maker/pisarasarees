@@ -16,7 +16,7 @@ export default function CatInfo() {
             behavior: "smooth"
         })
         var data = state?.item?.value?.data
-        data.sort(function (a, b) {
+        data?.sort(function (a, b) {
             return b.discounted_price - a.discounted_price;
         });
         setSorted(data)

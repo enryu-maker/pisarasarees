@@ -14,8 +14,8 @@ export default function ViewAll() {
             behavior: "smooth"
         })
         var data = categories[0]?.value?.data
-        data.sort(function (a, b) {
-            return b.discounted_price - a.discounted_price;
+        data?.sort(function (a, b) {
+            return b?.discounted_price - a?.discounted_price;
         });
         setSorted(data)
     }, [])

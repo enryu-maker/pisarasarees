@@ -1,9 +1,9 @@
 import axios from 'axios';
-export const baseURL = 'https://apipbsarees.pythonanywhere.com'
+export const baseURL = 'https://api-nerdtech.pisarasarees.in'
 
 let headers = {};
 const axiosIns = axios.create({
-    baseURL: 'https://apipbsarees.pythonanywhere.com',
+    baseURL: 'https://api-nerdtech.pisarasarees.in',
     headers,
 });
 axiosIns.interceptors.request.use(
