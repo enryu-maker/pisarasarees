@@ -26,7 +26,7 @@ export default function ProductCard({
                 justifyContent: "space-between",
                 alignItems: "center",
                 height: mobile ? "220px" : "500px",
-                width: mobile ? 170 : 300,
+                width: mobile ? '170px' : '300px',
                 // backgroundColor: "white",
                 marginBlockEnd: 10,
                 marginInline: mobile ? 0 : 5,

@@ -92,7 +92,11 @@ export default function Home() {
                     renderItem={(item, index) => (
                         <ProductCard item={item} key={index} cat={"Sarees"} />
                     )}
-                    renderWhenEmpty={() => <div>List is empty!</div>}
+                    renderWhenEmpty={() => <div style={{
+                        fontFamily: "Bold",
+                    fontSize: 30,
+                    letterSpacing: 2,
+                    }}>No Sarees Available</div>}
                 />
             </div>
 
