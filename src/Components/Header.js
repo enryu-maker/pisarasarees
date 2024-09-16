@@ -42,7 +42,7 @@ export default function Header() {
                         width: "110px",
                         cursor: "pointer"
                     }} />
-                {
+                {/* {
                     mobile ?
                         <CiSearch
                             style={{
@@ -150,7 +150,7 @@ export default function Header() {
                                 </div>
                             </div>
                         </>
-                }
+                } */}
             </div>
         </div>
     )

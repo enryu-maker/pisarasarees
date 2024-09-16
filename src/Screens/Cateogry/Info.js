@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Oval } from 'react-loader-spinner'
 import { FaLink } from "react-icons/fa6";
+import { images } from '../../Assets/Image'
 export default function Info() {
     const { state, pathname } = useLocation()
     React.useEffect(() => {
@@ -163,7 +164,7 @@ export default function Info() {
                                     letterSpacing: 2,
                                     marginBlock: 0
                                 }}>
-                                    31 Rating
+                                    {Math.floor(Math.random() * 100) + 1} Rating
                                 </p>
                             </div>
                             <div style={{
@@ -224,17 +225,7 @@ export default function Info() {
                                 <button
                                     disabled={product?.quantity <= 0 ? true : false}
                                     onClick={() => {
-                                        var item = {}
-                                        item[state?.item?.id] = 1
-                                        navigate('/checkout', {
-                                            state: {
-                                                items: [state?.item?.id],
-                                                single: true,
-                                                total: parseInt(product?.discounted_price),
-                                                subtotal: `{${state?.item?.id} : ${product?.discounted_price} }`,
-                                                subtotal_qty: item
-                                            }
-                                        })
+                                        window.open(`https://wa.me/+918007446531?text=I am interested in ${product?.name} with product id ${pathname.split('/').slice(-1)[0]}`)
                                     }}
                                     style={{
                                         backgroundColor: product?.quantity <= 0 ? colors.Primary3 : colors.Primary2,
@@ -244,32 +235,20 @@ export default function Info() {
                                         fontFamily: "Bold",
                                         fontSize: mobile ? 16 : 20,
                                         borderRadius: 10,
-                                        cursor: "pointer"
+                                        cursor: "pointer",
+                                        alignItems: "center",
+                                        display: "flex",
+                                        justifyContent:"center"
                                     }}
                                 >
-                                    Buy Now
-                                </button>
-                                <button
-                                    disabled={product?.quantity <= 0 ? true : false}
-                                    onClick={() => {
-                                        product["id"] = state?.item?.id
-                                        dispatch({
-                                            type: "ADD_TO_CART",
-                                            payload: product
-                                        })
+                                    <img src={images.whatsapp}
+                                        style={{
+                                            height: 20,
+                                            width: 20,
+                                            marginInline:5
                                     }}
-                                    style={{
-                                        backgroundColor: product?.quantity <= 0 ? colors.Primary3 : colors.Primary2,
-                                        height: 50,
-                                        width: mobile ? 120 : 250,
-                                        color: colors.Primary1,
-                                        fontFamily: "Bold",
-                                        fontSize: mobile ? 16 : 20,
-                                        borderRadius: 10,
-                                        cursor: "pointer"
-                                    }}
-                                >
-                                    Add to Cart
+                                    />
+                                    Order Now
                                 </button>
                             </div>
                         </div>

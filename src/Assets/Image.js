@@ -10,4 +10,6 @@ export const images = {
     cancle: require('./Images/cancel.png'),
     expired: require('./Images/expired.png'),
     sign: require('./Images/sign.png'),
+    whatsapp: require('./logo-5.png'),
+
 }
