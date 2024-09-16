@@ -67,12 +67,6 @@ export default function App() {
         <Header />
         <Index />
         <Footer />
-        {
-          mobile ?
-            <Tab cart={cart} />
-            :
-            null
-        }
       </div>
     )
   }
